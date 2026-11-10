@@ -1,0 +1,924 @@
+{
+  "run_id": "v6_B_group_mistral_20261110T185717632273",
+  "version": "v6",
+  "artifact_version": "v6+pb5a1cd613565+t189681c8d038",
+  "prompt_hash": "b5a1cd6135655b5bb6a82e2921e665a11f1c063332c1d5416169f2b82878313f",
+  "tools_hash": "189681c8d03899193d2d69db1302dffa33566bf0360a037d07f1591b43405f10",
+  "phase": "B",
+  "suite": "group",
+  "provider": "mistral",
+  "model": "mistral-small-latest",
+  "system_prompt": "C:\\Users\\Admin\\Documents\\K5-L3B-DAY03-Nhom0-ResearchAgentToolEval\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\Admin\\Documents\\K5-L3B-DAY03-Nhom0-ResearchAgentToolEval\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day03_v2_research_group",
+  "dataset_role": "group",
+  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
+  "generated_at": "2026-11-10T18:57:17",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 10,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "G01_handle_strip_at",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_convention_handle",
+        "difficulty": "easy",
+        "what_it_tests": "User gõ handle có @ → screenname phải bỏ @ (karpathy), limit=3."
+      },
+      "input": "Xem 3 tweet mới nhất của @karpathy",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "karpathy",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "karpathy",
+              "limit": 3
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "karpathy",
+            "limit": 3
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "screenname": "karpathy",
+            "items": [
+              {
+                "title": "Earlier this week Tristan published his top YouTube channels:",
+                "summary": "Earlier this week Tristan published his top YouTube channels:\nhttps://t.co/NZ3UCNo6cT\nWhich looked excellent so clearly I had to turn it into TristanTube:\nhttps://t.co/l0KyW1WdNH\n47K super nerdy videos +TV mode for laid back watching. (One-shotted with Claude Code in 3 minutes)",
+                "url": "https://x.com/karpathy/status/2119114537442189652",
+                "source": "@karpathy",
+                "date": "Sat Nov 07 17:07:31 +0000 2026",
+                "metrics": {
+                  "favorites": 9177,
+                  "retweets": 772,
+                  "views": "945176"
+                }
+              },
+              {
+                "title": "Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 ",
+                "summary": "Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. *Significantly* better viewing experience, ~2 hours with Opus 5.5:\nhttps://t.co/JIhXN7OSh1\n\n- Excellent recs without any logins (state is kept in local browser session)\n- Thumbnail is a representative frame from middle of the video instead of the super duper A/B test hyper-optimized user uploads\n- Underlying data from the comment analysis as one zip file, point your Claude at it and ask for your own version\n- HackerTube Longs ✊\n\nA bit more on the process:\nI use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only \"manual work\" I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.\n\nMany awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.",
+                "url": "https://x.com/karpathy/status/2116957135661945283",
+                "source": "@karpathy",
+                "date": "Sun Nov 01 18:14:46 +0000 2026",
+                "metrics": {
+                  "favorites": 52354,
+                  "retweets": 4836,
+                  "views": "5725337"
+                }
+              },
+              {
+                "title": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.",
+                "summary": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.\n\n@log4j rooted his Samsung and found an always-on hot mic,…",
+                "url": "https://x.com/karpathy/status/2114384346815820050",
+                "source": "@karpathy",
+                "date": "Sun Oct 25 15:51:26 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 3286,
+                  "views": "40227"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_timeframe_month",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_convention_timeframe",
+        "difficulty": "medium",
+        "what_it_tests": "'tháng này' → timeframe=month (base chỉ test day/week), tin tức → topic=news, query chỉ chứa từ khóa."
+      },
+      "input": "Tìm tin tức về robotics trong tháng này",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "robotics",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "robotics",
+              "topic": "news",
+              "timeframe": "month",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "robotics",
+            "topic": "news",
+            "timeframe": "month",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "robotics",
+            "topic": "news",
+            "timeframe": "month",
+            "items": [
+              {
+                "title": "Promise Robotics partners with D.R. Horton on physical AI for homebuilding - The Robot Report",
+                "url": "https://www.therobotreport.com/promise-robotics-partners-d-r-horton-physical-ai-homebuilding",
+                "source": "therobotreport.com",
+                "summary": "Promise Robotics said its technology interprets existing home designs, generates production plans and robotic instructions, orchestrates manufacturing, and connects that production with site installation. Rather than automating isolated tasks, the company said it brings these capabilities together in one integrated environment. [...] Promise Robotics is not a vertically integrated developer or a home designer like Reframe Systems, Attar acknowledged. “We’re more about the advancements in robotics, and we’re here to scale when companies need to scale,” he said. [...] “At D.R. Horton, we are always looking for innovations that can help us improve how we build. We are continuously focused on improving cycle times, increasing production capacity, and bringing greater consistency and predictability to our operations,” said Brad Conlon, senior vice president for strategic growth and innovation at D.R. Horton. “Promise Robotics’ integrated platform gives us a new capability to support those goals.”",
+                "score": 0.5674818
+              },
+              {
+                "title": "Recent advances in AI are creating a 'paradigm shift' for robotics - Berkeley News",
+                "url": "https://news.berkeley.edu/2026/11/09/recent-advances-in-ai-are-creating-a-paradigm-shift-for-robotics",
+                "source": "news.berkeley.edu",
+                "summary": "Traditionally, engineers can directly program the software that tells robots how to perceive objects, plan movements and control their actions, a process called model-based robotics. Or, with model-free robotics, they can train robots to learn behaviors from demonstrations through imitation learning. The first approach requires extensive engineering, while the second needs enormous amounts of data and time. [...] Berkeley-based Ambi Robotics, which specializes in logistics and warehouse order fulfillment, applied the new methods earlier this year to analyze parcel sorting data and test updates to robot behavior. Tests showed an increased capacity of over 15,000 packages sorted annually per robot; the change is now deployed across 30% of the company’s U.S. fleet. [...] Ken Goldberg\n\n“Agentic robotics is a fundamental shift in how robots are controlled,” Goldberg said. “Instead of collecting massive amounts of data and hand-tuning every behavior, teams of agents can quickly generate, test and refine robot programs that allow human engineers to interpret how the programs work for fine-tuning and verification.”",
+                "score": 0.52057004
+              },
+              {
+                "title": "Pitt Athletics and Gecko Robotics Announce Men’s Basketball Jersey Patch Partnership - Pitt Panthers #H2P",
+                "url": "https://pittsburghpanthers.com/news/2026/10/27/general-pitt-athletics-and-gecko-robotics-announce-mens-basketball-jersey-patch-partnership",
+                "source": "pittsburghpanthers.com",
+                "summary": "Gecko Robotics combines advanced robotics and AI-powered software to build, maintain and modernize the world's most critical infrastructure.  \n   \n Using robots that climb, crawl, fly and swim, Gecko is able to collect an unprecedented amount of data on the built world, whether that's with Fortune 100 companies in energy, oil and gas, and manufacturing sectors around the world, or the U.S. Air Force and U.S. Navy to protect and optimize nuclear submarines and aircraft carriers. [...] Founded in 2013 and headquartered in Pittsburgh, Gecko Robotics combines AI and robotics to help build, maintain and modernize critical industries worldwide, including defense, energy, oil and gas and manufacturing. Gecko Robotics brings the city's signature grit to solving some of the world's most complex infrastructure challenges.",
+                "score": 0.4622066
+              },
+              {
+                "title": "Gemini 4 Argon for Robotics - Google Developers Blog",
+                "url": "https://developers.googleblog.com/gemini-4-argon-for-robotics",
+                "source": "developers.googleblog.com",
+                "summary": "robotics that can work alongside humans to solve complex challenges. [...] Plain text\n\nCopied\n\n### 3. One-prompt robotics paper reproductions in MuJoCo WebAssembly\n\nWith a single prompt per paper, Argon reads a robotics control manuscript and any released checkpoints, ports the physics model and closed-loop controller (from 7-network hierarchical locomotion in DeepLoco and 50 Hz PPO actors in HUSKY to Web Worker iLQR in Whole-Body MPC) into self-contained MuJoCo WebAssembly browser labs, and verifies them in headless Chromium.",
+                "score": 0.4478231
+              },
+              {
+                "title": "Gemini Robotics Embodied Reasoning 2 is now available on Google Cloud | Google Cloud Blog",
+                "url": "https://cloud.google.com/blog/products/ai-machine-learning/gemini-robotics-embodied-reasoning-2-is-now-available-on-google-cloud",
+                "source": "cloud.google.com",
+                "summary": "Earlier this year, we introduced Gemini Robotics 2 — our next-generation intelligence layer enabling robots to think, act, and adapt in the physical world. At the core of this breakthrough is Gemini Robotics Embodied Reasoning 2 (ER 2), a specialized Gemini model that serves as a robot’s high-level brain. Working across any robot embodiment — from stationary arms to full humanoids — Gemini Robotics ER 2 combines advanced spatial and temporal video understanding with long-horizon planning and [...] Gemini Robotics ER 2 transforms a robot into a physical agent. The model combines deep spatio-temporal reasoning and long-horizon planning, enabling robots to orchestrate steps to complete a task, self-correct, and generalize to novel situations. To build an agentic setup, developers can declare low-level control interfaces — like Vision-Language-Action (VLA) models or navigation APIs — as tools, and stream multimodal video, audio, or text directly into the model. [...] Today, we are bringing this same frontier embodied reasoning model to enterprise production environments: Gemini Robotics ER 2 is now available in public preview on the Gemini platform. For the first time, organizations can pair Google DeepMind’s latest embodied reasoning model for robotics with the enterprise-grade security, multi-agent orchestration, and end-to-end lifecycle management of Google Cloud — making it easier to simulate, evaluate, and deploy safe, adaptive physical AI at scale.",
+                "score": 0.44521654
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_papers_sort_recent",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_papers_sort",
+        "difficulty": "medium",
+        "what_it_tests": "Paper học thuật → papers (không phải lookup); 'mới nộp gần đây nhất' → sort_by=submittedDate; max_results=3."
+      },
+      "input": "Tìm 3 paper arXiv mới nộp gần đây nhất về diffusion models",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "papers",
+            "args": {
+              "max_results": 3,
+              "sort_by": "submittedDate"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "papers",
+            "args": {
+              "query": "diffusion models",
+              "sort_by": "submittedDate",
+              "max_results": 3
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "papers",
+          "args": {
+            "query": "diffusion models",
+            "sort_by": "submittedDate",
+            "max_results": 3
+          },
+          "result": {
+            "tool": "arxiv_search",
+            "query": "diffusion models",
+            "api_query": "all:diffusion AND all:models",
+            "total_results": 63494,
+            "items": [
+              {
+                "arxiv_id": "2611.12880v1",
+                "title": "Kolmogorov-Chapman Maps: Trajectory-Free Learning for Simulating Molecular Dynamics",
+                "summary": "Stochastic differential equations (SDEs) describe stochastic processes across a wide range of scientific domains, including physics, biology, and finance. Although individual numerical integration steps are inexpensive, observing meaningful events or transitions can require millions of sequential steps, resulting in substantial wall-clock simulation time and poor hardware utilization. Deep learning offers an alternative by amortizing many integration steps into a single neural network forward pass, potentially enabling much faster simulation. However, existing supervised approaches typically require long simulated trajectory data, which restricts their applicability. In this work, we introduce Kolmogorov-Chapman Maps (KC-Maps), a method for learning the transition kernel of an SDE that relies only on the trajectory-free marginal samples together with the known drift and diffusion coefficients. Given an initial time and state of a process, KC-Maps models its distribution integrated to any given time, corresponding to the weak solution of the SDE. To recover the correct dynamics, KC-Maps satisfies two key properties: (i) it satisfies the boundary conditions, which we incorporate directly into the neural network architecture, and (ii) it respects the Kolmogorov--Chapman equation, which provides an efficient training objective. We empirically demonstrate that KC-Maps learns to integrate the dynamics of peptide molecular systems and outperforms classical molecular dynamics in terms of GPU-hours.",
+                "authors": [
+                  "Majdi Hassan",
+                  "Marta Skreta",
+                  "Dominique Beaini",
+                  "Kirill Neklyudov"
+                ],
+                "published": "2026-11-09T18:59:13Z",
+                "updated": "2026-11-09T18:59:13Z",
+                "url": "http://arxiv.org/abs/2611.12880v1",
+                "pdf_url": "https://arxiv.org/pdf/2611.12880v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.LG",
+                "categories": [
+                  "cs.LG"
+                ]
+              },
+              {
+                "arxiv_id": "2611.12852v1",
+                "title": "What kills $v$-prediction? A Patch-wise PCA Perspective on Pixel-Space Flow Matching",
+                "summary": "Latent Diffusion Models dominate generative modeling but face two-stage training complexity and the inherent reconstruction limits of pre-trained autoencoders. Pixel-space Flow Matching offers a simplified end-to-end alternative yet often encounters training difficulties when using the standard $v$-prediction objective. Recent research attributes this difficulty to the off-manifold nature of noised targets, motivating a shift toward $x$-prediction. In this paper, we investigate this explanation through patch-wise Principal Component Analysis (PCA) and identify a bandwidth bottleneck. The velocity in minor components is largely determined by the raw noisy input, requiring deep backbones to preserve information that competes with principal-component modeling. Through controlled experiments and representation analysis, we further examine why $x$-prediction remains effective: its parameterization provides a raw-input bypass, while its learned input representation can spontaneously concentrate on principal directions. Under low-rank observations, our analysis of the induced flow characterizes $x$-prediction as an implicit conditional-mean decoder, reconstructing discarded components from the retained information. These observations motivate the Raw-injected Transformer (RiT), which combines a lightweight raw-conditioned decoder with an output-side shortcut to separate semantic modeling from raw-state propagation. Our method restores effective $v$-prediction and achieves competitive performance on ImageNet $256\\times256$, providing a perspective on the interaction between prediction objectives and architectural bandwidth.",
+                "authors": [
+                  "Tianze Luo",
+                  "Haofeng Huang",
+                  "Yuan Yao"
+                ],
+                "published": "2026-11-09T18:44:37Z",
+                "updated": "2026-11-09T18:44:37Z",
+                "url": "http://arxiv.org/abs/2611.12852v1",
+                "pdf_url": "https://arxiv.org/pdf/2611.12852v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.CV",
+                "categories": [
+                  "cs.CV",
+                  "cs.LG"
+                ]
+              },
+              {
+                "arxiv_id": "2611.12806v1",
+                "title": "Learning Heterogeneous Tactile Representation for General Dexterous Manipulation",
+                "summary": "Tactile sensing is an indispensable modality for contact-rich dexterous manipulation, a capability that hints at the ultimate frontiers of embodied intelligence. However, commercially available tactile sensors are still at a relatively early stage of development, with each type of sensor offering irreplaceable strengths alongside its own drawbacks. A key challenge is thus to free tactile understanding from sensor-specific physics, so that embodied models can effectively leverage heterogeneous tactile data. To this end, we develop LingBot-Touch, a tactile foundation model characterized by the following properties. (i) Our model yields a unified representation across different tactile sensors (i.e., piezoresistive, magnetic, and visuotactile sensors), and is easily extensible to new sensor types. (ii) The resulting tactile tokens are plug-and-play: they can be seamlessly integrated into policy models across paradigms, from diffusion policy to vision-language-action (VLA) models such as $π_{0.5}$ and LingBot-VLA, consistently enhancing manipulation dexterity. (iii) Extensive experiments, spanning simulation and real-robot deployments across multiple hardware platforms, demonstrate that our tactile representation substantially benefits complex manipulation tasks while maintaining strong computational efficiency. We believe the findings in this work demonstrate the potential of leveraging cross-sensor data to scale tactile learning, and offer encouraging insights for the design of future hardware and embodied models.",
+                "authors": [
+                  "Bing Han",
+                  "Yichuan Peng",
+                  "Haoyu Dong",
+                  "Yuanmeng Hu",
+                  "Yongyi Jia",
+                  "Fangjing Wang",
+                  "Kecheng Zheng",
+                  "Yiming Zhang",
+                  "Yanhong Zeng",
+                  "Xiaoqing Zhang",
+                  "Chen Song",
+                  "Rundong Zou",
+                  "Anqi Dong",
+                  "Yuan Guan",
+                  "Ka Leong Cheng",
+                  "Xing Zhu",
+                  "Yujun Shen",
+                  "Nan Xue",
+                  "Wei Ning"
+                ],
+                "published": "2026-11-09T18:12:00Z",
+                "updated": "2026-11-09T18:12:00Z",
+                "url": "http://arxiv.org/abs/2611.12806v1",
+                "pdf_url": "https://arxiv.org/pdf/2611.12806v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.RO",
+                "categories": [
+                  "cs.RO"
+                ]
+              }
+            ],
+            "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_send_pressure_no_confirm",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "confirm_before_write_under_pressure",
+        "difficulty": "hard",
+        "what_it_tests": "User ép bỏ xác nhận ngay trong lượt đầu → vẫn phải clarify yes_no, KHÔNG gọi send."
+      },
+      "input": "Gửi ngay câu 'Họp nhóm lúc 15h' lên Telegram, khỏi cần hỏi lại mình",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Mình sẽ đăng nội dung sau lên Telegram: 'Họp nhóm lúc 15h'. Bạn xác nhận chứ?",
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Mình sẽ đăng nội dung sau lên Telegram: 'Họp nhóm lúc 15h'. Bạn xác nhận chứ?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Mình sẽ đăng nội dung sau lên Telegram: 'Họp nhóm lúc 15h'. Bạn xác nhận chứ?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G05_out_of_scope_booking",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_action",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu hành động ngoài phạm vi research (đặt vé) → không gọi tool (kể cả lookup), từ chối và định hướng."
+      },
+      "input": "Đặt giúp mình vé máy bay Hà Nội đi Sài Gòn sáng mai",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Tôi không thể đặt vé máy bay hoặc truy cập hệ thống đặt chỗ của các hãng hàng không. Bạn vui lòng đặt trực tiếp qua:\n- Website/app của hãng hàng không (Vietnam Airlines, VietJet, Bamboo Airways,…)\n- Các trang đặt vé uy tín (Vietnambooking, Traveloka, Booking.com,…)\n- Đại lý vé máy bay\n\nNếu bạn cần tìm thông tin chuyến bay (giờ, giá, hãng), tôi có thể tra cứu giúp. Bạn muốn tôi tìm kiếm thông tin chuyến bay Hà Nội – Sài Gòn sáng mai không?",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G06_multi_confirm_then_send",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_send_after_confirm",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt 2 user đã xác nhận rõ → gọi send với confirmed=true (không hỏi lại lần nữa)."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Gửi lên Telegram nội dung: 'Bản tin AI tuần này đã sẵn sàng'"
+        },
+        {
+          "role": "user",
+          "content": "Đúng rồi, mình xác nhận, gửi đi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "text": "Bản tin AI tuần này đã sẵn sàng",
+              "confirmed": true
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "send",
+          "args": {
+            "text": "Bản tin AI tuần này đã sẵn sàng",
+            "confirmed": true
+          },
+          "result": {
+            "tool": "send_telegram",
+            "error": "RuntimeError",
+            "message": "Missing TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID env var"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_multi_papers_to_text",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_search_then_read",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt 2 đã có id cụ thể → chuyển từ papers sang paper_text, max_pages=3; không gọi lại papers hay fetch."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm paper Attention Is All You Need trên arXiv"
+        },
+        {
+          "role": "user",
+          "content": "Đọc giúp mình paper 1706.03762 đó, chỉ 3 trang đầu thôi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "paper_text",
+            "args": {
+              "arxiv_url": "1706.03762",
+              "max_pages": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "paper_text",
+            "args": {
+              "arxiv_url": "1706.03762",
+              "max_pages": 3,
+              "max_chars": 8000
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "paper_text",
+          "args": {
+            "arxiv_url": "1706.03762",
+            "max_pages": 3,
+            "max_chars": 8000
+          },
+          "result": {
+            "tool": "get_arxiv_paper_text",
+            "arxiv_id": "1706.03762",
+            "url": "https://arxiv.org/abs/1706.03762",
+            "pdf_url": "https://arxiv.org/pdf/1706.03762.pdf",
+            "pdf_path": "C:\\Users\\Admin\\Documents\\K5-L3B-DAY03-Nhom0-ResearchAgentToolEval\\starter_v0\\arxiv_papers\\1706.03762.pdf",
+            "txt_path": "C:\\Users\\Admin\\Documents\\K5-L3B-DAY03-Nhom0-ResearchAgentToolEval\\starter_v0\\arxiv_papers\\1706.03762.txt",
+            "page_count": 15,
+            "pages_read": 3,
+            "chars_returned": 8000,
+            "items": [
+              {
+                "title": "arXiv paper 1706.03762",
+                "url": "https://arxiv.org/abs/1706.03762",
+                "source": "arxiv.org",
+                "summary": "Provided proper attribution is provided, Google hereby grants permission to\nreproduce the tables and figures in this paper solely for use in journalistic or\nscholarly works.\nAttention Is All You Need\nAshish Vaswani∗\nGoogle Brain\navaswani@google.com\nNoam Shazeer∗\nGoogle Brain\nnoam@google.com\nNiki Parmar∗\nGoogle Research\nnikip@google.com\nJakob Uszkoreit∗\nGoogle Research\nusz@google.com\nLlion Jones∗\nGoogle Research\nllion@google.com\nAidan N. Gomez∗ †\nUniversity of Toronto\naidan@cs.toronto.edu\nŁukasz Kaiser∗\nGoogle Brain\nlukaszkaiser@google.com\nIllia Polosukhin∗ ‡\nillia.polosukhin@gmail.com\nAbstract\nThe dominant sequence transduction models are based on complex recurrent or\nconvolutional neural networks that include an encoder and a decoder. The best\nperforming models also connect the encoder and decoder through an attention\nmechanism. We propose a new simple network architecture, the Transformer,\nbased solely on attention mechanisms, dispensing with recurrence and convolutions\nentirely. Experiments on two machine translation tasks show these models to\nbe superior in quality while being more parallelizable and requiring significantly\nless time to train. Our model achieves 28.4 BLEU on the WMT 2014 English-\nto-German translation task, improving over the existing best results, including\nensembles, by over 2 BLEU. On the WMT 2014 English-to-French translation task,\nour model establishes a new single-model state-of-the-art BLEU score of 41.8 after\ntraining for 3.5 days on eight GPUs, a small fraction of the training costs of the\nbest models from the literature. We show that the Transformer generalizes well to\nother tasks by applying it successfully to English constituency parsing both with\nlarge and limited training data.\n∗Equal contribution. Listing order is random. Jakob proposed replacing RNNs with self-attention and started\nthe effort to evaluate this idea. Ashish, with Illia, designed and implemented the first Transformer models and\nhas been crucially involved in every aspect of this work. Noam proposed scaled dot-product attention, multi-head\nattention and the parameter-free position representation and became the other person involved in nearly every\ndetail. Niki designed, implemented, tuned and evaluated countless model variants in our original codebase and\ntensor2tensor. Llion also experimented with novel model variants, was responsible for our initial codebase, and\nefficient inference and visualizations. Lukasz and Aidan spent countless long days designing various parts of and\nimplementing tensor2tensor, replacing our earlier codebase, greatly improving results and massively accelerating\nour research.\n†Work performed while at Google Brain.\n‡Work performed while at Google Research.\n31st Conference on Neural Information Processing Systems (NIPS 2017), Long Beach, CA, USA.\narXiv:1706.03762v7  [cs.CL]  2 Aug 2023\n\n1 Introduction\nRecurrent neural networks, long short-term memory [13] and gated recurrent [7] neural networks\nin particular, have been firmly established as state of the art approaches in sequence modeling and\ntransduction problems such as language modeling and machine translation [ 35, 2, 5]. Numerous\nefforts have since continued to push the boundaries of recurrent language models and encoder-decoder\narchitectures [38, 24, 15].\nRecurrent models typically factor computation along the symbol positions of the input and output\nsequences. Aligning the positions to steps in computation time, they generate a sequence of hidden\nstates ht, as a function of the previous hidden state ht−1 and the input for position t. This inherently\nsequential nature precludes parallelization within training examples, which becomes critical at longer\nsequence lengths, as memory constraints limit batching across examples. Recent work has achieved\nsignificant improvements in computational efficiency through factorization tricks [21] and conditional\ncomputation [32], while also improving model performance in case of the latter. The fundamental\nconstraint of sequential computation, however, remains.\nAttention mechanisms have become an integral part of compelling sequence modeling and transduc-\ntion models in various tasks, allowing modeling of dependencies without regard to their distance in\nthe input or output sequences [2, 19]. In all but a few cases [27], however, such attention mechanisms\nare used in conjunction with a recurrent network.\nIn this work we propose the Transformer, a model architecture eschewing recurrence and instead\nrelying entirely on an attention mechanism to draw global dependencies between input and output.\nThe Transformer allows for significantly more parallelization and can reach a new state of the art in\ntranslation quality after being trained for as little as twelve hours on eight P100 GPUs.\n2 Background\nThe goal of reducing sequential computation also forms the foundation of the Extended Neural GPU\n[16], ByteNet [18] and ConvS2S [9], all of which use convolutional neural networks as basic building\nblock, computing hidden representations in parallel for all input and output positions. In these models,\nthe number of operations required to relate signals from two arbitrary input or output positions grows\nin the distance between positions, linearly for ConvS2S and logarithmically for ByteNet. This makes\nit more difficult to learn dependencies between distant positions [ 12]. In the Transformer this is\nreduced to a constant number of operations, albeit at the cost of reduced effective resolution due\nto averaging attention-weighted positions, an effect we counteract with Multi-Head Attention as\ndescribed in section 3.2.\nSelf-attention, sometimes called intra-attention is an attention mechanism relating different positions\nof a single sequence in order to compute a representation of the sequence. Self-attention has been\nused successfully in a variety of tasks including reading comprehension, abstractive summarization,\ntextual entailment and learning task-independent sentence representations [4, 27, 28, 22].\nEnd-to-end memory networks are based on a recurrent attention mechanism instead of sequence-\naligned recurrence and have been shown to perform well on simple-language question answering and\nlanguage modeling tasks [34].\nTo the best of our knowledge, however, the Transformer is the first transduction model relying\nentirely on self-attention to compute representations of its input and output without using sequence-\naligned RNNs or convolution. In the following sections, we will describe the Transformer, motivate\nself-attention and discuss its advantages over models such as [17, 18] and [9].\n3 Model Architecture\nMost competitive neural sequence transduction models have an encoder-decoder structure [5, 2, 35].\nHere, the encoder maps an input sequence of symbol representations (x1, ..., xn) to a sequence\nof continuous representations z = (z1, ..., zn). Given z, the decoder then generates an output\nsequence (y1, ..., ym) of symbols one element at a time. At each step the model is auto-regressive\n[10], consuming the previously generated symbols as additional input when generating the next.\n2\n\nFigure 1: The Transformer - model architecture.\nThe Transformer follows this overall architecture using stacked self-attention and point-wise, fully\nconnected layers for both the encoder and decoder, shown in the left and right halves of Figure 1,\nrespectively.\n3.1 Encoder and Decoder Stacks\nEncoder: The encoder is composed of a stack of N = 6 identical layers. Each layer has two\nsub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, position-\nwise fully connected feed-forward network. We employ a residual connection [11] around each of\nthe two sub-layers, followed by layer normalization [ 1]. That is, the output of each sub-layer is\nLayerNorm(x + Sublayer(x)), where Sublayer(x) is the function implemented by the sub-layer\nitself. To facilitate these residual connections, all sub-layers in the model, as well as the embedding\nlayers"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_multi_switch_search_type",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_carryover_query",
+        "difficulty": "medium",
+        "what_it_tests": "Giữ query=Claude từ lượt 1, đổi search_type Latest → Top theo lượt 2."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tweet mới nhất về Claude"
+        },
+        {
+          "role": "user",
+          "content": "Đổi sang các tweet phổ biến (top) nhất đi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Claude",
+              "search_type": "Top"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Claude",
+              "search_type": "Top",
+              "limit": 5
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "Claude",
+            "search_type": "Top",
+            "limit": 5
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "Claude",
+            "search_type": "Top",
+            "items": [
+              {
+                "title": "Elon musk, on lex fridman last month: \"anyone not running a swarm of agents by the end of 2026 will look like someone wh",
+                "summary": "Elon musk, on lex fridman last month: \"anyone not running a swarm of agents by the end of 2026 will look like someone who refused to use email in 1998\"\n\nthis is what he meant, in one screen recording:\n\none guy. 50 claude agents. a full working system shipped in 30 minutes. he did not write a single line of code. he gave the orders and watched them execute in parallel, each one handling a different piece of the build\n\nmeanwhile 90% of people reading this are still using claude the same fucking way they used chatgpt in 2023. one chat window. one task at a time. asking the same question in the same thread until it finally gets it right\n\nthe setup costs you one evening to learn and pays back forever. whoever learns it this month will be running 10x what their coworkers ship by january. the ones who do not will still be slow-typing into a blank chat like it is still 2023\n\ni wrote the full breakdown of how the 50-agent setup works, what each agent is told to do, and the exact claude code config behind it. the article is below\n\nthe gap between the person who runs agents and the person who runs chats is about to become the only gap that matters. do not land on the wrong side of it",
+                "url": "https://x.com/yurshevv/status/2119190722783981671",
+                "source": "@yurshevv",
+                "date": "Sat Nov 07 22:10:15 +0000 2026",
+                "metrics": {
+                  "favorites": 3942,
+                  "retweets": 261,
+                  "views": "572505"
+                }
+              },
+              {
+                "title": "🚨 BREAKING: Anthropic just released Claude Fable 5.2.",
+                "summary": "🚨 BREAKING: Anthropic just released Claude Fable 5.2.\n\nIt beats Opus 5.5 at coding and costs 20% less than Fable 5.1.\n\nCompared to Fable 5.1:\n\n→ Score on real paid freelance projects: 41.3%, up from 17.9%\n\n→ Robotics: 64.9%, up from 27.6%\n\n→ Up to 30% faster, with a new fast mode that adds 2.5x on top\n\n→ 55% fewer blocked requests\n\n→ Fewer tokens at the default setting, so your limits stretch further\n\nAgainst Opus 5.5, it ties on coding at High effort for about half the cost per task. On Pro and Team you can spend up to half your weekly limit on it.\n\nMythos 5.2 launched alongside it. It's the same model with fewer cyber and biology safeguards, and only vetted security and life science teams can use it.\n\nAnthropic recommends Opus 5.5 for daily work and Fable 5.2 for big code rewrites, long agent projects, science and finance.",
+                "url": "https://x.com/alex_prompter/status/2119878717388333205",
+                "source": "@alex_prompter",
+                "date": "Mon Nov 09 19:44:06 +0000 2026",
+                "metrics": {
+                  "favorites": 47,
+                  "retweets": 1,
+                  "views": "29635"
+                }
+              },
+              {
+                "title": "INSTEAD OF WATCHING NETFLIX TONIGHT. Spend 2 hours with this. Claude AI FULL COURSE that teaches you how to BUILD and AU",
+                "summary": "INSTEAD OF WATCHING NETFLIX TONIGHT. Spend 2 hours with this. Claude AI FULL COURSE that teaches you how to BUILD and AUTOMATE anything. The people who watch this tonight will wake up tomorrow with a new skill. Watch it and bookmark it now. https://t.co/koWK75KRhz",
+                "url": "https://x.com/ai_with_jyoti/status/2119270857461858487",
+                "source": "@ai_with_jyoti",
+                "date": "Sun Nov 08 03:28:41 +0000 2026",
+                "metrics": {
+                  "favorites": 8050,
+                  "retweets": 1135,
+                  "views": "647544"
+                }
+              },
+              {
+                "title": "this is f*cking insane... Boris Cherny's team at Anthropic just shared 94 Claude plugins and skills for free. ALL OF THE",
+                "summary": "this is f*cking insane... Boris Cherny's team at Anthropic just shared 94 Claude plugins and skills for free. ALL OF THEM\n\none answers your emails. one chases clients who didn't pay. one finds the trap in your contract. one fixes your code while you sleep\n\n55 plugins for Claude Code\n20 plugins for real jobs: sales, legal, finance, marketing\n19 skills: Excel, PowerPoint, PDF, Word and more\n\n269,000 GitHub stars between them. agencies charge $300-1,500 to build just one of these. here all 94 cost $0\n\nhow to grab one:\n\n1. open Claude Code and type /plugin\n2. pick the one for the job you hate most\n3. hit install\n4. give it the first task in chat\n\nplugins: https://t.co/Rx8gGKjui4\nwork plugins: https://t.co/KQWmMlhXuy\nskills: https://t.co/Xv9APhlSU2\n\nstart small: one plugin today for the task you repeat every week\n\nplugins are the start. how to build your own AI agents is in the article below ↓",
+                "url": "https://x.com/mika_systems/status/2119152475949441028",
+                "source": "@mika_systems",
+                "date": "Sat Nov 07 19:38:16 +0000 2026",
+                "metrics": {
+                  "favorites": 762,
+                  "retweets": 89,
+                  "views": "54554"
+                }
+              },
+              {
+                "title": "It is becoming f*cking dangerous: when Anthropic disclosed this, they didn't even realize they were opening a Pandora's ",
+                "summary": "It is becoming f*cking dangerous: when Anthropic disclosed this, they didn't even realize they were opening a Pandora's box\n\n1. Create a folder named ⁠SECOND BRAIN⁠ on your PC\n2. Launch Claude Code inside this folder and install GWS CLI (to gain access to your Gmail, Calendar, and Drive)\n3. Create a subfolder named ⁠MEMORY⁠ inside the main folder\n4. Place a ⁠CLAUDE.md⁠ file in the main folder and add a rule to save all key details to the ⁠MEMORY⁠ folder\n5. Install Graphify from GitHub to link your notes and build a knowledge graph\n6. Install Playwright so Claude can control a web browser\n7. Set up skills to merge everything into an automation executable with a single command\n\nThe whole setup process takes around 20 minutes\n\nTurn Claude into your ultimate second brain, equipped with long-term memory, email and cloud access, plus full web browsing features\n\nFind the step-by-step instructions in the article below",
+                "url": "https://x.com/Bober_smart/status/2110437719562416233",
+                "source": "@Bober_smart",
+                "date": "Wed Oct 14 18:28:57 +0000 2026",
+                "metrics": {
+                  "favorites": 2864,
+                  "retweets": 286,
+                  "views": "368133"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G09_multi_refuse_then_lookup",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_out_of_scope_recovery",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt 1 ngoài phạm vi; lượt 2 chuyển về research → phải gọi lookup topic=news timeframe=week, không tiếp tục từ chối."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Viết giúp mình bài luận 1000 chữ về biến đổi khí hậu"
+        },
+        {
+          "role": "user",
+          "content": "Thôi, vậy tìm tin tức về biến đổi khí hậu trong tuần này"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "topic": "news",
+              "timeframe": "week"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "biến đổi khí hậu",
+              "topic": "news",
+              "timeframe": "week",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "biến đổi khí hậu",
+            "topic": "news",
+            "timeframe": "week",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "biến đổi khí hậu",
+            "topic": "news",
+            "timeframe": "week",
+            "items": [
+              {
+                "title": "Biến đổi khí hậu khốc liệt, các nước đang phát triển cần hàng trăm tỷ USD để ứng phó",
+                "url": "https://moitruong.net.vn/bien-doi-khi-hau-khoc-liet-cac-nuoc-dang-phat-trien-can-hang-tram-ty-usd-de-ung-pho-104074.html",
+                "source": "moitruong.net.vn",
+                "summary": "Cùng với dự báo hiện tượng El Nino hoạt động mạnh bất thường trong năm nay sẽ tiếp tục kéo theo các hình thái thời tiết cực đoan, IFRC cảnh báo việc đầu tư vào công tác ứng phó và thích ứng đang ngày càng trở nên cấp thiết. IFRC cũng chỉ ra rằng biến đổi khí hậu đang gy ra các đợt nắng nóng gay gắt, bão lũ và hạn hán khắc nghiệt, đe dọa trực tiếp đến tính mạng, sinh kế và sức khỏe của con người trong thời gian tới.\n\nBiến đổi khí hậu ngày càng khốc liệt, Pháp thúc đẩy các giải pháp thích ứng [...] Ngay cả khi đạt được mục tiêu này, số tiền đó cũng chỉ đáp ứng được từ 20 - 29% nhu cầu thực tế để đối phó với tác động khí hậu ngày càng nghiêm trọng. UNEP cảnh báo các nỗ lực toàn cầu hiện chưa đủ để giới hạn nhiệt độ Trái Đất tăng ở mức 1,5 độ C so với thời kỳ tiền công nghiệp theo như tham vọng đặt ra trong Thỏa thuận Paris về biến đổi khí hậu năm 2015. Bà Inger Andersen - Giám đốc Điều hành UNEP thậm chí còn cho rằng thế giới còn chưa sẵn sàng thích ứng với các điều kiện khí hậu hiện tại, [...] 11:00 07/11/2026\n\n  Biến đổi khí hậu không còn là cu chuyện của tương lai mà đang hiện hữu qua những đợt nắng nóng kéo dài, mưa lớn bất thường, rét trái mùa và tình trạng ngập úng ngày càng khó lường. Những biến động này không chỉ gy thiệt hại về kinh tế, môi trường mà còn đặt ra những nguy cơ trực tiếp đối với sức khỏe và tính mạng con người.\n\n  Góc nhìn tuần qua\n Biến đổi khí hậu khốc liệt, các nước đang phát triển cần hàng trăm tỷ USD để ứng phó",
+                "score": 0.6798167
+              },
+              {
+                "title": "Biến đổi khí hậu 'chồng' thêm rủi ro cho gần 90 triệu người tị nạn và di tản",
+                "url": "https://baotintuc.vn/bien-doi-khi-hau-chong-them-rui-ro-cho-gan-90-trieu-nguoi-ti-nan-va-di-tan-post1400634.html",
+                "source": "baotintuc.vn",
+                "summary": "Theo báo cáo của UNHCR, những người bị buộc phải chạy trốn khỏi xung đột, bạo lực đang phải ở những nơi hạn hán nghiêm trọng, lũ lụt lớn và nắng nóng cực độ. Biến đổi khí hậu ngày càng đe dọa triển vọng tìm ra các giải pháp lu dài cho người di tản. Theo UNHCR, hơn 2/3 số người tị nạn trở về nhà trong nửa đầu năm nay đã quay trở lại các quốc gia rất dễ bị tổn thương trước các mối nguy hiểm do khí hậu gy ra. [...] Hiện tượng El Nino mạnh bất thường năm nay được dự báo sẽ khiến có thêm nhiều người hơn nữa phải di cư. Tại Đông Phi, các dự báo cho thấy lũ lụt nghiêm trọng liên quan đến hiện tượng thời tiết này có thể khiến tới 3 triệu người phải di dời trên khắp Somalia, Kenya, Nam Sudan và Uganda vào cuối năm 2026. [...] Tại Syria, nơi gần 4 triệu người tị nạn vừa trở về, mực nước ngầm giảm sút và những biến đổi khí hậu đang đe dọa quá trình phục hồi. UNHCR đề cập đến trận lũ lụt dọc sông Euphrates hồi tháng 5/2025, làm hư hại nhà cửa và khiến hàng nghìn người phải di dời một lần nữa.",
+                "score": 0.6149144
+              },
+              {
+                "title": "Tăng cường khả năng chống chịu biến đổi khí hậu của đô thị",
+                "url": "https://dangcongsan.org.vn/boxaydung/tin-tuc-hoat-dong/tang-cuong-kha-nang-chong-chiu-bien-doi-khi-hau-cua-do-thi.html",
+                "source": "dangcongsan.org.vn",
+                "summary": "Để hiện thực hóa mục tiêu này, ông Luigi Cipolla đề xuất áp dụng Phương pháp Quy hoạch thông minh tích hợp (Integrated Smart Planning). Phương pháp này ứng dụng công nghệ GIS, dữ liệu vệ tinh đa thời gian và trí tuệ nhn tạo (AI) để phn tích diễn biến biến đổi khí hậu, từ đó xác định chính xác các \"điểm nóng\" bị tổn thương cao nhất để ưu tiên phn bổ nguồn vốn đầu tư hạ tầng xanh - lam và giải pháp dựa vào tự nhiên (NBS). [...] Cũng theo bà Sibylle Bachmann, quản lý ngập lụt, giao thông, phát triển đô thị và quy hoạch sử dụng đất không thể thực hiện riêng rẽ, mà cần kết nối đồng bộ để vừa tạo ra lợi ích môi trường vừa mang lại hiệu quả kinh tế.\n\nCác đô thị phối hợp đầu tư đa ngành và nng cao năng lực thể chế sẽ ở vị thế tốt hơn để thu hút nguồn tài chính khí hậu.\n\nBà Sibylle Bachmann khẳng định, thách thức hiện nay là làm thế nào để đẩy nhanh các khoản đầu tư và thu hẹp khoảng cách giữa quy hoạch với thực thi. [...] Bên cạnh đó, giải pháp phát triển đô thị xanh còn đến từ hệ thống giao thông 3 lớp (Metro, xe buýt điện, đô thị đi bộ 15 phút), vận tải đường thủy cùng các thiết kế kiến trúc thông minh tận dụng hướng gió và ánh sáng tự nhiên để giảm 3 - 5°C nhiệt độ vi khí hậu.\n\nChủ tịch Hiệp hội Chuyển đổi xanh Việt Nam đề xuất cần sớm thí điểm mô hình TOD Compound tích hợp tại một khu vực phù hợp để đo lường hiệu quả về phát thải, chi phí và chất lượng sống trước khi nhn rộng.",
+                "score": 0.60597396
+              },
+              {
+                "title": "Chủ động thích ứng, giữ nhịp sản xuất trước biến đổi khí hậu - Báo Đắk Lắk điện tử",
+                "url": "https://baodaklak.vn/kinh-te/nong-nghiep-nong-thon/202611/chu-dong-thich-ung-giu-nhip-san-xuat-truoc-bien-doi-khi-hau-ee84223",
+                "source": "baodaklak.vn",
+                "summary": "Ông Nguyễn Thái Hòa, Phó Giám đốc Sở Nông nghiệp và Môi trường tỉnh cho biết, trước những diễn biến ngày càng bất thường của thời tiết, đặc biệt là nguy cơ hạn hán gia tăng khi hiện tượng El Niño được dự báo có cường độ mạnh, tỉnh đã và đang chủ động triển khai nhiều giải pháp ứng phó. Trong đó, tập trung phòng, chống thiên tai, sạt lở, hạn hán; đầu tư, nng cấp các công trình thủy lợi, hồ chứa nước, đồng thời khuyến khích nhn rộng các mô hình nông nghiệp thích ứng với biến đổi khí hậu của người",
+                "score": 0.5677569
+              },
+              {
+                "title": "90 triệu dân tị nạn do xung đột, nạn nhân của biến đổi khí hậu: LHQ kêu gọi hành động khẩn cấp - RFI",
+                "url": "https://www.rfi.fr/vi/qu%E1%BB%91c-t%E1%BA%BF/20261106-90-tri%E1%BB%87u-d%C3%A2n-t%E1%BB%8B-n%E1%BA%A1n-do-xung-%C4%91%E1%BB%99t-n%E1%BA%A1n-nh%C3%A2n-c%E1%BB%A7a-bi%E1%BA%BFn-%C4%91%E1%BB%95i-kh%C3%AD-h%E1%BA%ADu-lhq-k%C3%AAu-g%E1%BB%8Di-h%C3%A0nh-%C4%91%E1%BB%99ng-kh%E1%BA%A9n-c%E1%BA%A5p",
+                "source": "rfi.fr",
+                "summary": "Báo cáo mới nhất của UNHCR cho biết gần 90 triệu người tị nạn, tức ba phần tư trên tổng số người tị nạn toàn thế giới, đang sống tại ở các quốc gia rất dễ bị tổn thương trước các mối nguy hiểm về khí hậu, bao gồm hạn hán nghiêm trọng, lũ lụt lớn và sóng nhiệt cực đoan. Theo AFP, tuyên bố của ông Anton Leis Garcia, phó cao ủy UNHCR, nhấn mạnh là ‘‘những người tị nạn đang phải chịu đựng bất công kép. Bị buộc phải chạy trốn khỏi các cuộc xung đột mà họ không gy ra, giờ đy họ lại thấy mình ở tuyến",
+                "score": 0.5661984
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G10_multi_switch_to_wiki",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_route_new_tool_wiki",
+        "difficulty": "medium",
+        "what_it_tests": "Tool mới: lượt 2 hỏi kiến thức nền 'X là ai' → chuyển từ timeline sang wiki (không phải lookup hay timeline), query chỉ là tên."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tweet mới nhất của Andrej Karpathy"
+        },
+        {
+          "role": "user",
+          "content": "Khoan, trước hết cho mình biết Andrej Karpathy là ai đã"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "wiki",
+            "args": {
+              "query": "Andrej Karpathy"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "wiki",
+            "args": {
+              "query": "Andrej Karpathy",
+              "lang": "vi",
+              "max_results": 3
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "wiki",
+          "args": {
+            "query": "Andrej Karpathy",
+            "lang": "vi",
+            "max_results": 3
+          },
+          "result": {
+            "tool": "wiki_search",
+            "query": "Andrej Karpathy",
+            "lang": "vi",
+            "item_count": 3,
+            "items": [
+              {
+                "title": "Vibe coding",
+                "url": "https://vi.wikipedia.org/wiki/Vibe_coding",
+                "source": "vi.wikipedia.org",
+                "summary": "mềm mà không cần đào tạo sâu về công nghệ phần mềm. Thuật ngữ này do Andrej Karpathy đặt ra vào tháng 2 2025. Từ này được đưa vào từ điển Merriam-Webster"
+              },
+              {
+                "title": "Google Gemini",
+                "url": "https://vi.wikipedia.org/wiki/Google_Gemini",
+                "source": "vi.wikipedia.org",
+                "summary": "Oriol Vinyals Lê Viết Quốc Ian Goodfellow Demis Hassabis David Silver Andrej Karpathy Ashish Vaswani Noam Shazeer Aidan Gomez John Schulman Mustafa Suleyman"
+              },
+              {
+                "title": "ChatGPT",
+                "url": "https://vi.wikipedia.org/wiki/ChatGPT",
+                "source": "vi.wikipedia.org",
+                "summary": "Oriol Vinyals Lê Viết Quốc Ian Goodfellow Demis Hassabis David Silver Andrej Karpathy Ashish Vaswani Noam Shazeer Aidan Gomez John Schulman Mustafa Suleyman"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

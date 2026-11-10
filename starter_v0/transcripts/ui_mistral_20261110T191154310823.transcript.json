@@ -1,0 +1,14 @@
+{
+  "transcript_id": "ui_mistral_20261110T191154310823",
+  "provider": "mistral",
+  "model": null,
+  "created_at": "2026-11-10T19:11:54",
+  "turns": [
+    {
+      "user": "fetch google.com",
+      "status": "provider_error",
+      "error": "Lỗi provider: RuntimeError: Missing API key env var: OPENROUTER_API_KEY"
+    }
+  ],
+  "updated_at": "2026-11-10T19:19:12"
+}

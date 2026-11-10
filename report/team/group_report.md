@@ -32,7 +32,9 @@ Cần `.env` có `MISTRAL_API_KEY`, `TAVILY_API_KEY`, `FIRECRAWL_API_KEY`, `RAPI
 
 **Link dùng thử (deploy):**
 
-> URL: _(đang deploy — Triệu Tuấn Minh cập nhật)_
+> URL: **https://k5-l3b-day03-nhom0-researchagenttooleval-e3h7zcwv24sllsjwahcte.streamlit.app/**
+>
+> Deploy trên Streamlit Community Cloud từ nhánh `main`, file `starter_v0/app.py`; API key đặt trong Streamlit Secrets (không commit). Tool `send` bị tắt trên bản demo công khai để người lạ không đăng được lên Telegram của nhóm.
 
 ### A2. Tool agent có
 
@@ -49,6 +51,9 @@ Cần `.env` có `MISTRAL_API_KEY`, `TAVILY_API_KEY`, `FIRECRAWL_API_KEY`, `RAPI
 | papers | Tìm paper arXiv theo từ khóa, sắp theo độ liên quan hoặc ngày nộp | không |
 | paper_text | Tải PDF một paper arXiv và trích text (giới hạn số trang/ký tự) | không |
 | **wiki** | Tra cứu Wikipedia (vi/en, không cần API key): định nghĩa, tiểu sử, kiến thức nền — "X là ai / X là gì" | **có** |
+| **hackernews** | Tìm story/thảo luận trên Hacker News (keyless), sắp theo liên quan hoặc mới đăng | **có** (bonus) |
+| **github** | Tìm repo open-source trên GitHub (keyless), lọc ngôn ngữ, sắp theo sao hoặc mới cập nhật | **có** (bonus) |
+| **hf_models** | Tìm model AI trên Hugging Face Hub (keyless), sắp theo downloads / likes / trending, lọc task | **có** (bonus) |
 
 ### A3. Câu hỏi mẫu để thử
 
@@ -93,6 +98,13 @@ Cần `.env` có `MISTRAL_API_KEY`, `TAVILY_API_KEY`, `FIRECRAWL_API_KEY`, `RAPI
 - Thêm **few-shot multi-turn** confirm-then-send trong prompt (lượt 1 → `clarify`, lượt 2 → `send`).
 - Viết cùng logic trạng thái vào description của `send` trong `tools.yaml`.
 
+**v6 — 3 tool bonus (`tools.yaml` + `system_prompt.md`)** — Hà Văn Khánh Đạt:
+
+- **`hackernews`** (Algolia HN API), **`github`** (GitHub repo search API), **`hf_models`** (Hugging Face Hub API) — cả ba keyless, có `TOOL.md`, đăng ký trong `tools/__init__.py`.
+- Mỗi tool có description theo khuôn **dùng khi / KHÔNG dùng khi (→ tool thay thế)**, chỉ rõ ranh giới với tool cũ: Hacker News ≠ Twitter (`social_search`), repo code ≠ model (`hf_models`) ≠ paper (`papers`).
+- Convention args: `github.language` tách khỏi `query`; `hackernews.sort=date` cho "mới đăng"; `hf_models.sort` = downloads / likes / trending.
+- Thêm 3 dòng routing vào prompt (không đổi phần nào khác của v5).
+
 ## 4. Kết quả — PHẦN B: Chi tiết và bằng chứng
 
 ### B1. Version Evidence
@@ -109,6 +121,7 @@ Provider/model: Mistral `mistral-small-latest`. Mọi run dưới đây có `pro
 | v3 | `tools.yaml` | Description mơ hồ gây lỗi routing/args; description tự chứa rule giúp model nhớ convention | 1.00 | **1.00 (20/20)** | [`v3_B_base_mistral_20261110T173901261398.json`](../../starter_v0/runs/v3_B_base_mistral_20261110T173901261398.json) |
 | v4 | `tools.yaml` + `system_prompt.md` (tool mới `wiki`) | Model nhỏ bám theo ví dụ tốt hơn theo rule → few-shot sửa lỗi không ổn định (trả text thay vì gọi tool, lặp tool call) | 1.00 | **1.00 (20/20)** | [`v4_B_base_mistral_20261110T182018442733.json`](../../starter_v0/runs/v4_B_base_mistral_20261110T182018442733.json) |
 | v5 | `system_prompt.md` + `tools.yaml` (fix G06) | Rule v4 "first response MUST clarify yes_no" bị áp cho cả lượt user đã đồng ý (G06 0/5) → rule theo trạng thái xác nhận + few-shot multi-turn sẽ sửa G06 mà không phá R12/G04 | base 1.00 / group 0.90 | **base 1.00 (20/20), group 1.00 (10/10)** | [`v5_B_base_mistral_20261110T183443778073.json`](../../starter_v0/runs/v5_B_base_mistral_20261110T183443778073.json), [`v5_B_group_mistral_20261110T183520849576.json`](../../starter_v0/runs/v5_B_group_mistral_20261110T183520849576.json) |
+| v6 | `tools.yaml` + `system_prompt.md` (3 tool bonus) | Tool mới có mô tả "dùng khi / KHÔNG dùng khi" + 1 rule routing mỗi tool sẽ được route đúng mà không làm hỏng routing cũ | base 1.00 / group 1.00 | **base 1.00 (20/20), group 1.00 (10/10), bonus 1.00 (6/6)** | [`v6_B_base_mistral_20261110T185643251885.json`](../../starter_v0/runs/v6_B_base_mistral_20261110T185643251885.json), [`v6_B_group_mistral_20261110T185717632273.json`](../../starter_v0/runs/v6_B_group_mistral_20261110T185717632273.json), [`v6_B_group_mistral_20261110T185514104087.json`](../../starter_v0/runs/v6_B_group_mistral_20261110T185514104087.json) (bonus) |
 
 Chi tiết theo metric:
 
@@ -120,6 +133,7 @@ Chi tiết theo metric:
 | v3 | 1.00 | 1.00 | 1.00 | 1.00 |
 | v4 | 1.00 | 1.00 | 1.00 | 1.00 |
 | v5 | 1.00 | 1.00 | 1.00 | 1.00 |
+| v6 | 1.00 | 1.00 | 1.00 | 1.00 |
 
 Ghi chú về v1: metric tổng không đổi (14/20) nhưng **thành phần lỗi thay đổi hoàn toàn** — v1 sửa được 5 case cũ (R10, R11, R13, M02 và hành vi tự `send` ở R12) nhưng làm hỏng 4 case mới (R01, R04, R07, M06) vì prompt v1 bảo "hỏi khi thiếu" mà không nói khi nào là "đủ". Đây là lý do v2 thêm danh sách "Do NOT clarify when…".
 
@@ -127,7 +141,7 @@ Ghi chú về v3: trong lúc sửa `tools.yaml` có 2 run trung gian đạt 19/2
 
 Ghi chú về v4: 4 run trung gian đạt 19/20 (`v4_B_base_mistral_20261110T174740…`, `…175839…`, `…180526…`, `…181545…`) trước khi bản chốt đạt 20/20; theo `version_log.csv`, probe riêng R12 đạt 8/8 và M06 đạt 3/3 với bản chốt.
 
-**Bộ group (10 case, xem B3):** v0 = 0.78 (7/9, chưa có G10), v3 = 1.00 (9/9, chưa có G10), v4 = 0.90 (9/10), **v5 = 1.00 (10/10)**.
+**Bộ group (10 case, xem B3):** v0 = 0.78 (7/9, chưa có G10), v3 = 1.00 (9/9, chưa có G10), v4 = 0.90 (9/10), v5 = 1.00 (10/10), **v6 = 1.00 (10/10)**.
 
 **Regression v3 → v4 trên G06 (đã sửa ở v5)** (user đã xác nhận ở lượt 2 → phải `send(confirmed=true)`): v4 vẫn gọi `clarify(yes_no, "Đúng nội dung này sẽ được đăng… Bạn xác nhận chứ?")`. Probe 5 lần mỗi bản bằng `scripts/probe_case.py`: **v3 5/5 PASS, v4 0/5 PASS** → lỗi ổn định, không phải ngẫu nhiên. Nguyên nhân: rule mới của v4 "For ANY request to send… the first response MUST be a `clarify` yes_no" — eval multi-turn gói các lượt trước làm context trong một message, nên model coi lượt xác nhận cũng là "first response". Bộ base không bắt được lỗi này vì chỉ test lượt đầu của yêu cầu gửi (R12); chỉ bộ group của nhóm (G06) bắt được. Giả thuyết cho v5: viết lại rule thành "nếu user **đã xác nhận rõ** nội dung ở lượt trước → `send(confirmed=true)`, không hỏi lại", và thêm một few-shot cho lượt xác nhận.
 
@@ -188,17 +202,24 @@ Bộ group bắt được lỗi ở **cả hai chiều**: G04/G08 bắt lỗi c�
 
 Lấy từ `starter_v0/transcripts/*.transcript.json`.
 
+Transcript: [`starter_v0/transcripts/v6_mistral_20261110T191842794505.transcript.json`](../../starter_v0/transcripts/v6_mistral_20261110T191842794505.transcript.json) — chạy `python chat.py --provider mistral --version v6`, 4 lượt live, tool gọi thật (Tavily, RapidAPI Twitter, Hacker News).
+
 | Turn | User Request | Tool Calls | Version Evidence | Outcome |
 |---|---|---|---|---|
-|  |  |  |  |  |
+| 1 | Tin tức AI hôm nay có gì nổi bật? | `lookup(query="AI", topic="news", timeframe="day", max_results=5)` → `format(template="daily_ai_vn")` | v6, đúng convention từ v2/v3 (query chỉ từ khóa, `topic=news`, `timeframe=day`) | Bản tin 4 tin AI ngày 10/11/2026 có nguồn (statnews, theconversation, npr, axios) |
+| 2 | Tóm tắt 5 tweet mới nhất giúp mình | `clarify(question="Bạn muốn xem tweet của tài khoản nào?", response_type="text")` | Rule "hỏi, không đoán" từ v1/v2 (v0 từng tự chọn `sama`) | Agent dừng lại hỏi tài khoản, không gọi `timeline` bừa |
+| 3 | Của Andrej Karpathy nhé | `timeline(screenname="karpathy", limit=5)` → `format(template="thread")` | Multi-turn: map tên → handle không `@`, giữ `limit=5` từ lượt 2 | Thread 5 tweet mới nhất của @karpathy kèm link |
+| 4 | Hacker News đang bàn gì về LLM agents? | `hackernews(query="LLM agents", sort="relevance", max_results=5)` → `format(template="bullets")` | Tool bonus v6 (route mới, không nhầm sang `social_search`) | 5 thread HN về LLM agents có link bài gốc |
+
+Ngoài ra UI cũng lưu transcript vào `starter_v0/transcripts/ui_mistral_*.transcript.json` (toggle "Lưu transcript" ở sidebar).
 
 ### B5a. Required Evidence — Tool mới, unit test, UI
 
 | Item | Evidence File | What Worked | Risk / Guardrail |
 |---|---|---|---|
 | Tool mới (`tools/wiki/`) | [`tools/wiki/tool.py`](../../starter_v0/tools/wiki/tool.py), [`TOOL.md`](../../starter_v0/tools/wiki/TOOL.md); đăng ký `tools/__init__.py` + `artifacts/tools.yaml` | Tra Wikipedia keyless; agent route đúng ở G10 (`wiki(query="Andrej Karpathy")`) | Không side effect; input xấu (query rỗng, `lang` ngoài enum, lỗi HTTP) trả error dict thay vì raise; `max_results` bị kẹp về khoảng hợp lệ |
-| Unit test tool mới (≥ 3 test/tool) | [`tests/test_tools_todo.py`](../../starter_v0/tests/test_tools_todo.py) — `pytest`: **86 passed, 0 skipped, 0 failed** | 5 test cho `wiki`: request đúng + map kết quả; query rỗng/xấu không gọi mạng; `lang` ngoài enum; kẹp `max_results`; lỗi HTTP trả error dict | Test chạy offline bằng `fake_http` (conftest chặn mạng thật) |
-| UI (lệnh chạy + link dùng thử) |  |  |  |
+| Unit test tool mới (≥ 3 test/tool) | [`tests/test_tools_todo.py`](../../starter_v0/tests/test_tools_todo.py) — `pytest`: **115 passed, 0 skipped, 0 failed** | 5 test cho `wiki`: request đúng + map kết quả; query rỗng/xấu không gọi mạng; `lang` ngoài enum; kẹp `max_results`; lỗi HTTP trả error dict | Test chạy offline bằng `fake_http` (conftest chặn mạng thật) |
+| UI (lệnh chạy + link dùng thử) | [`starter_v0/app.py`](../../starter_v0/app.py); `streamlit` trong `requirements.txt`; chạy `cd starter_v0 && streamlit run app.py`; link: https://k5-l3b-day03-nhom0-researchagenttooleval-e3h7zcwv24sllsjwahcte.streamlit.app/ | Dùng chung `run_model_tool_loop` của `chat.py` nên hành vi giống CLI/eval: hỏi lại bằng `clarify` thì dừng chờ user, chuỗi nhiều tool (vd `lookup` → `format`). Hiển thị từng tool call kèm args, số kết quả, link nguồn; danh sách tool đọc từ `tools.yaml`. Đã thử trên bản deploy: "Tin tức AI hôm nay" → `lookup` + `format` trả bản tin có nguồn | Key nằm trong Streamlit Secrets, không commit; `send` bị loại khỏi tool schema trên demo (`DISABLED_TOOLS`) — user xác nhận gửi thì agent báo đã tắt và đưa nội dung để copy ([`ui_mistral_20261110T191338474636.transcript.json`](../../starter_v0/transcripts/ui_mistral_20261110T191338474636.transcript.json)); lỗi provider/quota hiện thông báo thay vì crash |
 
 Tool unit tests: **5 test** cho `wiki`. Ví dụ lỗi unit test bắt được mà eval không bắt được: `test_wiki_http_error_returns_error_dict_not_raise` và `test_wiki_lang_outside_enum_returns_error_dict` — eval chỉ chấm model có **gọi** `wiki` với args đúng hay không, không bao giờ chạy code tool với input xấu hay mạng lỗi, nên nếu `wiki` raise exception khi Wikipedia trả 5xx thì eval vẫn 100% nhưng UI/chat thật sẽ crash.
 
@@ -209,9 +230,11 @@ Chỉ điền nếu nhóm làm bonus (ghi riêng, tối đa 10 điểm). Tool c�
 | Bonus | Evidence File | What Worked | Risk / Guardrail |
 |---|---|---|---|
 | Small Local Model | xem B7 |  |  |
-| Hơn 3 tool mới (≥ 4) |  |  |  |
-| `send` gửi thật lên Telegram sau xác nhận | transcript |  |  |
-| Test challenge (0 skipped / regression test) | `pytest` output: **86 passed, 0 skipped, 0 failed**; [`tests/test_tools_todo.py`](../../starter_v0/tests/test_tools_todo.py) | Viết thật 14 test stub cho tool có sẵn: `clarify` (1), `format` (3), `send` (2), `lookup` (1), `fetch` (2), `timeline` (1), `social_search` (1), `policy` (3) | Toàn bộ offline (`fake_http`, `monkeypatch.setenv`), không key thật; guardrail được test: `send` thiếu env không gửi request, nội dung giống lệnh trong policy bị tách vào `untrusted_text` |
+| Hơn 3 tool mới (≥ 4) | `tools/wiki/`, `tools/hackernews/`, `tools/github/`, `tools/hf_models/` (mỗi folder có `tool.py` + `TOOL.md`); test: [`tests/test_tools_todo.py`](../../starter_v0/tests/test_tools_todo.py) (wiki, 5 test), [`tests/test_tools_bonus.py`](../../starter_v0/tests/test_tools_bonus.py) (13 test); eval: G10 (`eval_group.json`), [`data/eval_group_bonus.json`](../../starter_v0/data/eval_group_bonus.json) (6 case) | **4 tool nhóm tự viết**, đủ TOOL.md + đăng ký + ≥ 3 test + eval case route tới. Run bonus v6: **6/6** ([`v6_B_group_mistral_20261110T185514104087.json`](../../starter_v0/runs/v6_B_group_mistral_20261110T185514104087.json)); base/group v6 vẫn 20/20, 10/10 | Cả 4 tool keyless, không side effect; input xấu trả error dict không gọi mạng; `max_results` kẹp [1, 20]; GitHub 403 rate limit / HF đổi format trả error dict. Case đối chứng B04 đảm bảo `hackernews` không cướp route Twitter |
+| `send` gửi thật lên Telegram sau xác nhận | — | **Nhóm không làm bonus này.** | Boundary xác nhận (bắt buộc) vẫn có trong prompt + `tools.yaml` và được eval R12, G04, G06 kiểm tra. Trên UI demo công khai, `send` bị tắt hẳn (`DISABLED_TOOLS` trong `app.py`) để người lạ không đăng được lên Telegram |
+| Test challenge (0 skipped / regression test) | `pytest` output: **115 passed, 0 skipped, 0 failed**; [`tests/test_tools_todo.py`](../../starter_v0/tests/test_tools_todo.py) | Viết thật 14 test stub cho tool có sẵn: `clarify` (1), `format` (3), `send` (2), `lookup` (1), `fetch` (2), `timeline` (1), `social_search` (1), `policy` (3) | Toàn bộ offline (`fake_http`, `monkeypatch.setenv`), không key thật; guardrail được test: `send` thiếu env không gửi request, nội dung giống lệnh trong policy bị tách vào `untrusted_text` |
+
+Hơn 3 tool mới (Hà Văn Khánh Đạt viết `hackernews`, `github`, `hf_models`; Nguyễn Văn Minh viết `wiki`): test theo bộ ba bắt buộc cho mỗi tool — happy path (request gửi đi + map kết quả), input xấu từ model (query rỗng / sai kiểu / enum sai → không gọi mạng), failure path (HTTP lỗi, timeout, rate limit, sai format → error dict). Bộ eval bonus tách riêng `eval_group_bonus.json` để `eval_group.json` giữ đúng 10 case theo đề; file này được thêm vào `EVAL_FILES` của contract test.
 
 Test challenge (Hà Văn Khánh Đạt): **0 bug** tìm được trong tool có sẵn — cả 14 test pass ngay trên code gốc. Các hành vi đã khoá bằng test:
 
