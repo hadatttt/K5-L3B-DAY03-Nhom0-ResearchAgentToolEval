@@ -6,7 +6,7 @@ cho chọn version và so sánh hành vi. File đang dùng để chạy eval v�
 | Version | Nguồn | Hash (khớp `version_log.csv`) |
 |---|---|---|
 | v0 | commit `c68da4c` (starter gốc) | p `eb1c8179815b` · t `e69bc53ed884` |
-| v1 | **không có** — prompt v1 (`5138c3df1f4b`) chưa từng được commit | — |
+| v1 | prompt v1 chưa từng được commit; tái tạo bằng cách đảo ngược 3 edit v1→v2 trên prompt `842e7d1` ([`../../scripts/rebuild_v1_prompt.py`](../../scripts/rebuild_v1_prompt.py), commit `e210d2b`) + tools commit `c68da4c`. sha256 khớp chính xác hash trong log | p `5138c3df1f4b` · t `e69bc53ed884` |
 | v2 | prompt commit `842e7d1` + tools commit `c68da4c` | p `c5fc9144fc14` · t `e69bc53ed884` |
 | v3 | commit `842e7d1` | p `c5fc9144fc14` · t `d31530f1bcea` |
 | v4 | commit `760bcf2` | p `9b250c66219d` · t `14319c9dd933` |
