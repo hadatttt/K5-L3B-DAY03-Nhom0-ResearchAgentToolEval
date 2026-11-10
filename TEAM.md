@@ -44,7 +44,8 @@
 - [x] Deploy link dùng thử (Streamlit Cloud): https://k5-l3b-day03-nhom0-researchagenttooleval-e3h7zcwv24sllsjwahcte.streamlit.app/
 - [x] Chat live ≥ 3 lượt, lưu transcript (UI: `transcripts/ui_mistral_*`; CLI 4 lượt do Đạt chạy)
 - [x] Báo cáo cá nhân `report/team/2A202604123_TrieuTuanMinh.md`
-- [ ] Tổng kiểm checklist SUBMISSION.md trước khi nộp
+- [x] Tổng kiểm checklist SUBMISSION.md trước khi nộp (Nguyễn Văn Minh rà 2026-11-10: pytest 115 passed/0 failed; 6 run chính hợp lệ `provider_error_cases=0`, `measured=total`; `eval_base.json`/`eval_research_extension.json` không đổi nội dung so với đề; không có `.env`/key/token bị commit; đủ run v0–v6 + transcript + UI deploy)
+  - Ghi chú: 10 commit kỹ thuật đầu (v0–v5, tool `wiki`, báo cáo cá nhân) được push dưới author chung `Nhom0` do cấu hình git trên máy của Nguyễn Văn Minh; các commit đó thuộc phần việc của Nguyễn Văn Minh như mô tả trong báo cáo cá nhân `report/team/2A202604117_NguyenVanMinh.md`
 
 ## Cá nhân
 
