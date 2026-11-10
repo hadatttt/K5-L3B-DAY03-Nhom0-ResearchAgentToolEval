@@ -249,49 +249,6 @@ def get_session_transcript() -> dict | None:
     return st.session_state.transcript
 
 
-def run_version_turn(version: str, user_text: str) -> dict:
-    """Chạy một lượt đơn (không history) với prompt/tools của version chỉ định."""
-    return run_model_tool_loop(
-        provider=get_provider(st.session_state.provider),
-        messages=[
-            {"role": "system", "content": version_paths(version)[0].read_text(encoding="utf-8") + DEMO_PROMPT_NOTE},
-            {"role": "user", "content": user_text},
-        ],
-        tools=get_tool_schema(version),
-        model=st.session_state.get("model_override") or None,
-        max_tool_rounds=MAX_TOOL_ROUNDS,
-    )
-
-
-def process_compare_turn(user_text: str) -> None:
-    """Chế độ A/B: cùng một câu hỏi chạy trên 2 version, lưu kết quả song song."""
-    transcript = get_session_transcript()
-    version_a, version_b = st.session_state.version, st.session_state.version_b
-    try:
-        with st.spinner(f"Đang chạy trên {version_a} rồi {version_b}…"):
-            res_a = run_version_turn(version_a, user_text)
-            res_b = run_version_turn(version_b, user_text)
-        st.session_state.messages.append({
-            "role": "compare",
-            "prompt": user_text,
-            "a": {"version": version_a, "result": res_a},
-            "b": {"version": version_b, "result": res_b},
-        })
-        turn_record = {
-            "user": user_text, "status": "compare", "mode": "ab",
-            "version_a": version_a, "version_b": version_b,
-            "result_a": {k: res_a[k] for k in ("status", "tool_events")},
-            "result_b": {k: res_b[k] for k in ("status", "tool_events")},
-        }
-    except Exception as exc:
-        error_text = f"Lỗi provider: {type(exc).__name__}: {exc}"
-        st.session_state.messages.append({"role": "assistant", "content": error_text, "tool_events": [], "status": "provider_error"})
-        turn_record = {"user": user_text, "status": "provider_error", "error": error_text}
-    if transcript is not None:
-        transcript["turns"].append(turn_record)
-        write_transcript(TRANSCRIPTS_DIR / f"{transcript['transcript_id']}.transcript.json", transcript)
-
-
 def process_user_turn(user_text: str) -> None:
     history = st.session_state.history
     transcript = get_session_transcript()
@@ -352,15 +309,6 @@ with st.sidebar:
         st.warning("v0 là prompt starter cố tình xấu: đoán bừa thay vì hỏi lại. Dùng để so sánh với bản sau.")
     if "v1" not in versions and "v1" in version_log():
         st.caption("v1 không có snapshot (prompt v1 chưa từng được commit).")
-
-    st.session_state.compare_mode = st.toggle("So sánh 2 version (A/B)", value=False)
-    if st.session_state.compare_mode:
-        default_b = versions.index("v0") if "v0" in versions else 0
-        st.session_state.version_b = st.selectbox(
-            "Version B", versions, index=default_b, format_func=version_label,
-            help="Cùng một câu hỏi sẽ chạy trên cả Version (A) ở trên và Version B, hiển thị cạnh nhau.",
-        )
-        st.caption("Câu hỏi phân biệt: *Tóm tắt 5 tweet mới nhất* (v0 đoán bừa tài khoản), *Đăng bản tin lên Telegram* (v0 tự gửi, bản mới xác nhận trước), *Tin tức AI hôm nay* (khác args).")
     st.session_state.provider = st.selectbox(
         "Provider", ["mistral", "openrouter", "openai", "anthropic", "gemini", "ollama"], index=0
     )
@@ -400,21 +348,6 @@ if "history" not in st.session_state:
     st.session_state.history = []
 
 for msg in st.session_state.messages:
-    if msg["role"] == "compare":
-        with st.chat_message("user"):
-            st.markdown(msg["prompt"])
-        left, right = st.columns(2)
-        for col, side in zip((left, right), ("a", "b")):
-            data = msg[side]
-            with col:
-                st.caption(f"**{version_label(data['version'])}**")
-                result = data["result"]
-                st.markdown(result["assistant_text"] or "(không có nội dung trả lời)")
-                if result["tool_events"]:
-                    render_tool_events(result["tool_events"])
-                if result["status"] == "waiting_for_user":
-                    st.markdown('<div class="ask-note">Agent chờ câu trả lời…</div>', unsafe_allow_html=True)
-        continue
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
         if msg.get("tool_events"):
@@ -425,14 +358,10 @@ for msg in st.session_state.messages:
             st.markdown('<div class="ask-note">Agent chờ câu trả lời của bạn — gõ vào ô chat bên dưới</div>', unsafe_allow_html=True)
 
 # Example buttons queue a prompt; otherwise wait for chat input.
-placeholder = "Nhập câu hỏi để chạy trên cả 2 version…" if st.session_state.get("compare_mode") else "Nhập câu hỏi / yêu cầu của bạn…"
-user_text = st.session_state.pop("queued_prompt", None) or st.chat_input(placeholder)
+user_text = st.session_state.pop("queued_prompt", None) or st.chat_input("Nhập câu hỏi / yêu cầu của bạn…")
 if user_text:
     with st.chat_message("user"):
         st.markdown(user_text)
-    if st.session_state.get("compare_mode"):
-        process_compare_turn(user_text)
-    else:
-        st.session_state.messages.append({"role": "user", "content": user_text})
-        process_user_turn(user_text)
+    st.session_state.messages.append({"role": "user", "content": user_text})
+    process_user_turn(user_text)
     st.rerun()

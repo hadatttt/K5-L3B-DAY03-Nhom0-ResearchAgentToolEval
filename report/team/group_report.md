@@ -30,8 +30,6 @@ streamlit run app.py
 
 Cần `.env` có `MISTRAL_API_KEY`, `TAVILY_API_KEY`, `FIRECRAWL_API_KEY`, `RAPIDAPI_KEY`.
 
-**Xem sự khác nhau giữa các version ngay trên UI:** sidebar có chọn **Version** (snapshot `artifacts/versions/v0`, `v2`–`v6`) kèm giả thuyết và metric từ `version_log.csv`; bật toggle **"So sánh 2 version (A/B)"** rồi gõ một câu — ví dụ *"Tóm tắt 5 tweet mới nhất giúp mình"* — để thấy cùng lúc: bản hiện tại hỏi lại thiếu handle, còn v0 đoán bừa `timeline(sama)`.
-
 **Link dùng thử (deploy):**
 
 > URL: **https://k5-l3b-day03-nhom0-researchagenttooleval-e3h7zcwv24sllsjwahcte.streamlit.app/**
