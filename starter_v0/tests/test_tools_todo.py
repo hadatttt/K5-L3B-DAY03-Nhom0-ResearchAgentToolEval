@@ -110,13 +110,79 @@ def test_policy_instruction_like_lines_go_to_untrusted_text() -> None:
 #   2. bad / missing input from the model (empty string, wrong type, out-of-enum value)
 #   3. failure path (missing key, HTTP error, timeout) -> returns error dict, does not raise
 
-def test_my_new_tool_happy_path() -> None:
-    pytest.skip(TODO)
+wiki_tool = TOOL_FUNCTIONS["wiki"]
 
 
-def test_my_new_tool_bad_input_from_model() -> None:
-    pytest.skip(TODO)
+def test_wiki_sends_expected_request_and_maps_results(fake_http) -> None:
+    """Happy path: gọi MediaWiki search API và map kết quả về items chuẩn."""
+    calls = fake_http(FakeResponse({"query": {"search": [
+        {"title": "VinUni", "snippet": "<b>VinUni</b> là trường đại học &quot;tư thục&quot; tại Hà Nội"},
+        {"title": "VinFast", "snippet": "<span>VinFast</span> là hãng xe điện"},
+    ]}}))
+
+    result = wiki_tool(query="VinUni", lang="vi", max_results=2)
+
+    # Request gửi đi đúng endpoint MediaWiki với params chuẩn
+    assert calls[0]["method"] == "GET"
+    assert calls[0]["url"] == "https://vi.wikipedia.org/w/api.php"
+    assert calls[0]["params"]["srsearch"] == "VinUni"
+    assert calls[0]["params"]["srlimit"] == 2
+    assert calls[0]["params"]["list"] == "search"
+    assert calls[0]["params"]["format"] == "json"
+    # Kết quả map đúng: bỏ thẻ HTML, unescape entity, url chuẩn
+    assert result["tool"] == "wiki_search"
+    assert result["item_count"] == 2
+    first = result["items"][0]
+    assert first["title"] == "VinUni"
+    assert first["url"] == "https://vi.wikipedia.org/wiki/VinUni"
+    assert first["source"] == "vi.wikipedia.org"
+    assert "<b>" not in first["summary"]
+    assert '"tư thục"' in first["summary"]
 
 
-def test_my_new_tool_failure_returns_error_dict() -> None:
-    pytest.skip(TODO)
+def test_wiki_empty_or_bad_query_returns_error_dict_without_network(fake_http) -> None:
+    """Model gửi query rỗng / sai kiểu -> error dict, không gọi mạng."""
+    calls = fake_http(FakeResponse({"query": {"search": []}}))
+
+    for bad in ["", "   ", None, 123]:
+        result = wiki_tool(query=bad)
+        assert result["error"] == "ValueError"
+        assert "query" in result["message"]
+
+    assert calls == []
+
+
+def test_wiki_lang_outside_enum_returns_error_dict(fake_http) -> None:
+    """lang ngoài {vi, en} -> error dict; lang hợp lệ nhưng viết xấu được normalize."""
+    calls = fake_http(FakeResponse({"query": {"search": []}}))
+
+    assert wiki_tool(query="X", lang="fr")["error"] == "ValueError"
+    assert calls == []  # lang sai bị chặn trước khi gọi API
+
+    # " VI " -> normalize thành "vi" rồi mới gọi
+    wiki_tool(query="X", lang=" VI ")
+    assert calls[0]["url"] == "https://vi.wikipedia.org/w/api.php"
+
+
+def test_wiki_clamps_bad_max_results_to_valid_range(fake_http) -> None:
+    """max_results sai kiểu / < 1 về mặc định 3; > 10 bị giới hạn về 10."""
+    calls = fake_http(FakeResponse({"query": {"search": []}}))
+
+    wiki_tool(query="AI", max_results=0)
+    assert calls[0]["params"]["srlimit"] == 3
+
+    wiki_tool(query="AI", max_results="5")  # model gửi số dạng chuỗi
+    assert calls[1]["params"]["srlimit"] == 5
+
+    wiki_tool(query="AI", max_results=99)
+    assert calls[2]["params"]["srlimit"] == 10
+
+
+def test_wiki_http_error_returns_error_dict_not_raise(fake_http) -> None:
+    """HTTP 500 từ API -> error dict, không raise exception."""
+    fake_http(FakeResponse(status_code=500))
+
+    result = wiki_tool(query="VinUni")
+
+    assert result["error"] == "HTTPError"
+    assert result["tool"] == "wiki_search"

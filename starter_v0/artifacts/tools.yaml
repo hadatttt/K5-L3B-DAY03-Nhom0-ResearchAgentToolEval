@@ -140,6 +140,23 @@ tools:
         sort_by: {type: string, enum: [relevance, lastUpdatedDate, submittedDate], default: "relevance", description: "relevance = liên quan nhất, submittedDate = mới nộp nhất"}
       required: [query]
 
+  - name: wiki
+    description: >
+      Tra cứu Wikipedia theo từ khóa (định nghĩa, tiểu sử, kiến thức nền).
+      Dùng khi: "X là ai?", "X là gì?", "giải thích khái niệm X", "tìm hiểu về X".
+      KHÔNG dùng khi: tin tức/sự kiện đang diễn ra (→ lookup topic=news),
+      paper học thuật (→ papers), tweet/bài đăng (→ social_search/timeline),
+      đọc một URL cụ thể (→ fetch), quy định nội bộ (→ policy).
+      Convention: query chỉ chứa chủ đề (vd 'VinUni'); lang="vi" mặc định,
+      "en" khi user hỏi bằng tiếng Anh hoặc cần bản tiếng Anh; max_results mặc định 3.
+    parameters:
+      type: object
+      properties:
+        query: {type: string, default: "", description: "Từ khóa tra cứu, vd 'transformer', 'VinUni'"}
+        lang: {type: string, enum: [vi, en], default: "vi", description: "Ngôn ngữ Wikipedia: vi (mặc định) hoặc en"}
+        max_results: {type: integer, default: 3, description: "Số bài trả về (mặc định 3, tối đa 10)"}
+      required: [query]
+
   - name: paper_text
     description: >
       Tải PDF của MỘT paper arXiv và trích text cục bộ. Cần URL arXiv (hoặc id) cụ thể đã biết
