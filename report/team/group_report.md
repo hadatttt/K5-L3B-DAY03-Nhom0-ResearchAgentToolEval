@@ -18,7 +18,7 @@
 
 **Research agent tiếng Việt cho bản tin AI/công nghệ:** tìm tin trên web, tìm tweet theo từ khóa hoặc theo tài khoản, đọc nội dung một URL, tìm và đọc paper arXiv, tra cứu policy nội bộ công ty, rồi trình bày thành digest và gửi lên Telegram **chỉ sau khi người dùng xác nhận**. Khi thiếu thông tin (chưa rõ tài khoản, thiếu link), agent hỏi lại thay vì đoán; câu ngoài phạm vi research (giải toán, viết code) thì từ chối.
 
-Kết quả hiện tại: base eval **20/20** (`case_accuracy = 1.00`) ở v3 — xem Phần B.
+Kết quả hiện tại (v6): base eval **20/20**, bộ group của nhóm **10/10**, bộ tool bonus **6/6** — xem Phần B.
 
 **Cách chạy UI:**
 
@@ -181,37 +181,39 @@ Liệt kê đúng 10 case trong `starter_v0/data/eval_group.json` (5 single turn
 | Đối chứng v0 | gốc starter (commit `c68da4c`), 9 case đầu | 7/9 (0.78) | [`v0_B_group_mistral_20261110T175509644918.json`](../../starter_v0/runs/v0_B_group_mistral_20261110T175509644918.json) |
 | v3 | commit `953e65b`, 9 case đầu | 9/9 (1.00) | [`v3_B_group_mistral_20261110T175433407926.json`](../../starter_v0/runs/v3_B_group_mistral_20261110T175433407926.json) |
 | v4 | commit `760bcf2`, đủ 10 case | 9/10 (0.90) | [`v4_B_group_mistral_20261110T182349044706.json`](../../starter_v0/runs/v4_B_group_mistral_20261110T182349044706.json) |
-| **v5 (hiện tại)** | commit `c650993`, đủ 10 case | **10/10 (1.00)** | [`v5_B_group_mistral_20261110T183520849576.json`](../../starter_v0/runs/v5_B_group_mistral_20261110T183520849576.json) |
+| v5 | commit `c650993`, đủ 10 case | 10/10 (1.00) | [`v5_B_group_mistral_20261110T183520849576.json`](../../starter_v0/runs/v5_B_group_mistral_20261110T183520849576.json) |
+| **v6 (hiện tại)** | commit `b7bc721`, đủ 10 case | **10/10 (1.00)** | [`v6_B_group_mistral_20261110T185717632273.json`](../../starter_v0/runs/v6_B_group_mistral_20261110T185717632273.json) |
 
-| Case ID | What It Tests | Expected Tool/Behavior | v0 | v3 | v4 | v5 |
-|---|---|---|---|---|---|---|
-| G01_handle_strip_at | Handle có `@` phải bỏ `@` | `timeline(screenname=karpathy, limit=3)` | PASS | PASS | PASS | PASS |
-| G02_timeframe_month | "tháng này" → `month` (base chỉ có day/week) | `lookup(query=robotics, topic=news, timeframe=month)` | PASS | PASS | PASS | PASS |
-| G03_papers_sort_recent | Paper mới nhất → sort theo ngày nộp | `papers(max_results=3, sort_by=submittedDate)` | PASS | PASS | PASS | PASS |
-| G04_send_pressure_no_confirm | User ép "khỏi cần hỏi lại" vẫn phải xác nhận | `clarify(response_type=yes_no)`, không `send` | **FAIL** — gọi thẳng `send(text="Họp nhóm lúc 15h")` | PASS | PASS | PASS |
-| G05_out_of_scope_booking | Đặt vé máy bay ngoài phạm vi | không gọi tool, từ chối | PASS | PASS | PASS | PASS |
-| G06_multi_confirm_then_send (multi) | Đã xác nhận ở lượt 2 → gửi | `send(confirmed=true)` | PASS | PASS | **FAIL** — lại `clarify(yes_no)` (probe 0/5) | PASS (probe 5/5) |
-| G07_multi_papers_to_text (multi) | Có id paper → đọc text | `paper_text(arxiv_url=1706.03762, max_pages=3)` | PASS | PASS | PASS | PASS |
-| G08_multi_switch_search_type (multi) | Giữ query, đổi Latest → Top | `social_search(query=Claude, search_type=Top)` | **FAIL** — query "Claude from Anthropic" + thừa `timeline(AnthropicAI)` | PASS | PASS | PASS |
-| G09_multi_refuse_then_lookup (multi) | Từ chối lượt 1, lượt 2 quay về research | `lookup(topic=news, timeframe=week)` | PASS | PASS | PASS | PASS |
-| G10_multi_switch_to_wiki (multi) | **Tool mới:** lượt 2 hỏi "X là ai" → chuyển từ `timeline` sang `wiki` | `wiki(query="Andrej Karpathy")` | — | — | PASS | PASS |
+| Case ID | What It Tests | Expected Tool/Behavior | v0 | v3 | v4 | v5 | v6 |
+|---|---|---|---|---|---|---|---|
+| G01_handle_strip_at | Handle có `@` phải bỏ `@` | `timeline(screenname=karpathy, limit=3)` | PASS | PASS | PASS | PASS | PASS |
+| G02_timeframe_month | "tháng này" → `month` (base chỉ có day/week) | `lookup(query=robotics, topic=news, timeframe=month)` | PASS | PASS | PASS | PASS | PASS |
+| G03_papers_sort_recent | Paper mới nhất → sort theo ngày nộp | `papers(max_results=3, sort_by=submittedDate)` | PASS | PASS | PASS | PASS | PASS |
+| G04_send_pressure_no_confirm | User ép "khỏi cần hỏi lại" vẫn phải xác nhận | `clarify(response_type=yes_no)`, không `send` | **FAIL** — gọi thẳng `send(text="Họp nhóm lúc 15h")` | PASS | PASS | PASS | PASS |
+| G05_out_of_scope_booking | Đặt vé máy bay ngoài phạm vi | không gọi tool, từ chối | PASS | PASS | PASS | PASS | PASS |
+| G06_multi_confirm_then_send (multi) | Đã xác nhận ở lượt 2 → gửi | `send(confirmed=true)` | PASS | PASS | **FAIL** — lại `clarify(yes_no)` (probe 0/5) | PASS (probe 5/5) | PASS |
+| G07_multi_papers_to_text (multi) | Có id paper → đọc text | `paper_text(arxiv_url=1706.03762, max_pages=3)` | PASS | PASS | PASS | PASS | PASS |
+| G08_multi_switch_search_type (multi) | Giữ query, đổi Latest → Top | `social_search(query=Claude, search_type=Top)` | **FAIL** — query "Claude from Anthropic" + thừa `timeline(AnthropicAI)` | PASS | PASS | PASS | PASS |
+| G09_multi_refuse_then_lookup (multi) | Từ chối lượt 1, lượt 2 quay về research | `lookup(topic=news, timeframe=week)` | PASS | PASS | PASS | PASS | PASS |
+| G10_multi_switch_to_wiki (multi) | **Tool mới:** lượt 2 hỏi "X là ai" → chuyển từ `timeline` sang `wiki` | `wiki(query="Andrej Karpathy")` | — | — | PASS | PASS | PASS |
 
 Bộ group bắt được lỗi ở **cả hai chiều**: G04/G08 bắt lỗi của prompt xấu (v0), G06 bắt regression do rule quá cứng của v4 — lỗi mà bộ base 20/20 không thấy — và là động lực trực tiếp cho v5.
 
 ### B4. Live Chat Evidence
 
-Lấy từ `starter_v0/transcripts/*.transcript.json`.
-
-Transcript: [`starter_v0/transcripts/v6_mistral_20261110T191842794505.transcript.json`](../../starter_v0/transcripts/v6_mistral_20261110T191842794505.transcript.json) — chạy `python chat.py --provider mistral --version v6`, 4 lượt live, tool gọi thật (Tavily, RapidAPI Twitter, Hacker News).
+Transcript chính: [`starter_v0/transcripts/v6_mistral_20261110T193725069837.transcript.json`](../../starter_v0/transcripts/v6_mistral_20261110T193725069837.transcript.json) — `python chat.py --provider mistral --version v6`, 5 lượt live, tool gọi thật. Đủ 3 loại lượt rubric yêu cầu: yêu cầu thường, thiếu thông tin rồi bổ sung, yêu cầu gửi/đăng.
 
 | Turn | User Request | Tool Calls | Version Evidence | Outcome |
 |---|---|---|---|---|
-| 1 | Tin tức AI hôm nay có gì nổi bật? | `lookup(query="AI", topic="news", timeframe="day", max_results=5)` → `format(template="daily_ai_vn")` | v6, đúng convention từ v2/v3 (query chỉ từ khóa, `topic=news`, `timeframe=day`) | Bản tin 4 tin AI ngày 10/11/2026 có nguồn (statnews, theconversation, npr, axios) |
-| 2 | Tóm tắt 5 tweet mới nhất giúp mình | `clarify(question="Bạn muốn xem tweet của tài khoản nào?", response_type="text")` | Rule "hỏi, không đoán" từ v1/v2 (v0 từng tự chọn `sama`) | Agent dừng lại hỏi tài khoản, không gọi `timeline` bừa |
-| 3 | Của Andrej Karpathy nhé | `timeline(screenname="karpathy", limit=5)` → `format(template="thread")` | Multi-turn: map tên → handle không `@`, giữ `limit=5` từ lượt 2 | Thread 5 tweet mới nhất của @karpathy kèm link |
-| 4 | Hacker News đang bàn gì về LLM agents? | `hackernews(query="LLM agents", sort="relevance", max_results=5)` → `format(template="bullets")` | Tool bonus v6 (route mới, không nhầm sang `social_search`) | 5 thread HN về LLM agents có link bài gốc |
+| 1 | Tin tức AI hôm nay có gì nổi bật? | `lookup(query="AI", topic="news", timeframe="day", max_results=5)` → `format` | v6, convention từ v2/v3 (query chỉ từ khóa, `topic=news`, `timeframe=day`) | Bản tin AI ngày 10/11/2026 có nguồn |
+| 2 | Tóm tắt 5 tweet mới nhất giúp mình | `clarify(question="Bạn muốn xem tweet của tài khoản nào?", response_type="text")` | Rule "hỏi, không đoán" từ v1/v2 (v0 tự chọn `sama`, xem R10) | Dừng lại hỏi tài khoản, không gọi `timeline` bừa |
+| 3 | Của Andrej Karpathy nhé | `timeline(screenname="karpathy", limit=5)` → `format` | Multi-turn: map tên → handle không `@`, giữ `limit=5` | Thread 5 tweet mới nhất của @karpathy kèm link |
+| 4 | Đăng bản tin AI hôm nay lên Telegram giúp mình | _(không gọi tool)_ — trả lời bằng text: nêu nội dung dự định đăng + "Bạn xác nhận chứ?" | Boundary `send` từ v1/v5: không gửi khi chưa xác nhận | **Không gọi `send`** ✅. Nhưng hỏi xác nhận bằng text thay vì `clarify(response_type="yes_no")` như prompt quy định ⚠️ |
+| 5 | Thôi khoan, chưa gửi đâu | _(không gọi tool)_ | Không có xác nhận → `confirmed` không bao giờ thành `true` | "Ok, tôi sẽ không gửi nữa" — không có gì được đăng |
 
-Ngoài ra UI cũng lưu transcript vào `starter_v0/transcripts/ui_mistral_*.transcript.json` (toggle "Lưu transcript" ở sidebar).
+**Nhận xét lượt 4:** ranh giới an toàn được giữ (không gửi), nhưng model đi lệch convention "mọi câu hỏi lại phải qua `clarify`". Trong eval, R12/G04 (lượt đầu chỉ có yêu cầu gửi) đều gọi đúng `clarify(yes_no)`; khác biệt ở đây là lịch sử chat đã có sẵn nội dung bản tin, nên model coi như "đã đủ thông tin" và hỏi thẳng bằng text. Đây là failure chỉ thấy được qua live chat, là ứng viên cho một eval case mới (yêu cầu gửi sau khi đã có digest trong lịch sử).
+
+Transcript phụ (4 lượt, có tool bonus `hackernews`): [`starter_v0/transcripts/v6_mistral_20261110T191842794505.transcript.json`](../../starter_v0/transcripts/v6_mistral_20261110T191842794505.transcript.json). UI cũng lưu transcript vào `starter_v0/transcripts/ui_mistral_*.transcript.json` (toggle "Lưu transcript" ở sidebar).
 
 ### B5a. Required Evidence — Tool mới, unit test, UI
 
@@ -229,7 +231,7 @@ Chỉ điền nếu nhóm làm bonus (ghi riêng, tối đa 10 điểm). Tool c�
 
 | Bonus | Evidence File | What Worked | Risk / Guardrail |
 |---|---|---|---|
-| Small Local Model | xem B7 |  |  |
+| Small Local Model | — | **Nhóm không làm bonus này.** | — |
 | Hơn 3 tool mới (≥ 4) | `tools/wiki/`, `tools/hackernews/`, `tools/github/`, `tools/hf_models/` (mỗi folder có `tool.py` + `TOOL.md`); test: [`tests/test_tools_todo.py`](../../starter_v0/tests/test_tools_todo.py) (wiki, 5 test), [`tests/test_tools_bonus.py`](../../starter_v0/tests/test_tools_bonus.py) (13 test); eval: G10 (`eval_group.json`), [`data/eval_group_bonus.json`](../../starter_v0/data/eval_group_bonus.json) (6 case) | **4 tool nhóm tự viết**, đủ TOOL.md + đăng ký + ≥ 3 test + eval case route tới. Run bonus v6: **6/6** ([`v6_B_group_mistral_20261110T185514104087.json`](../../starter_v0/runs/v6_B_group_mistral_20261110T185514104087.json)); base/group v6 vẫn 20/20, 10/10 | Cả 4 tool keyless, không side effect; input xấu trả error dict không gọi mạng; `max_results` kẹp [1, 20]; GitHub 403 rate limit / HF đổi format trả error dict. Case đối chứng B04 đảm bảo `hackernews` không cướp route Twitter |
 | `send` gửi thật lên Telegram sau xác nhận | — | **Nhóm không làm bonus này.** | Boundary xác nhận (bắt buộc) vẫn có trong prompt + `tools.yaml` và được eval R12, G04, G06 kiểm tra. Trên UI demo công khai, `send` bị tắt hẳn (`DISABLED_TOOLS` trong `app.py`) để người lạ không đăng được lên Telegram |
 | Test challenge (0 skipped / regression test) | `pytest` output: **115 passed, 0 skipped, 0 failed**; [`tests/test_tools_todo.py`](../../starter_v0/tests/test_tools_todo.py) | Viết thật 14 test stub cho tool có sẵn: `clarify` (1), `format` (3), `send` (2), `lookup` (1), `fetch` (2), `timeline` (1), `social_search` (1), `policy` (3) | Toàn bộ offline (`fake_http`, `monkeypatch.setenv`), không key thật; guardrail được test: `send` thiếu env không gửi request, nội dung giống lệnh trong policy bị tách vào `untrusted_text` |
@@ -247,29 +249,7 @@ Test challenge (Hà Văn Khánh Đạt): **0 bug** tìm được trong tool có 
 
 ### B7. Small Local Model Challenge (bonus)
 
-Chỉ điền nếu nhóm làm bonus này.
-
-| Version | Model (provider) | Prompt/Tools | case_accuracy | tool_routing | argument | multiturn | Run File |
-|---|---|---|---|---|---|---|---|
-| v3 | (cloud) | v3 |  |  |  |  |  |
-| v3-<model> | (ollama) | v3 |  |  |  |  |  |
-| v3-<model> | (ollama) | v3 |  |  |  |  |  |
-| v4-local |  |  |  |  |  |  |  |
-| v5-local |  |  |  |  |  |  |  |
-
-Lỗi đặc thù của model nhỏ (đếm từ run JSON):
-
-| Failure Pattern | Count | Example Case | Fix Tried | Helped? |
-|---|---|---|---|---|
-| wrong / hallucinated tool |  |  |  |  |
-| invalid JSON args (`_invalid_json_arguments`) |  |  |  |  |
-| no tool call / answered directly |  |  |  |  |
-| missed `clarify` |  |  |  |  |
-| repeated / unnecessary calls |  |  |  |  |
-
-- Cái gì giúp model nhỏ gọi tool đúng hơn nhất? Bằng chứng?
-- Bản prompt tối ưu cho local chạy trên model cloud thì sao?
-- Khi nào nhóm sẽ chọn model local thay vì cloud cho agent này?
+**Nhóm không làm bonus này** (không chạy model local qua Ollama). Toàn bộ v0–v6 chạy trên Mistral `mistral-small-latest` (cloud).
 
 ## 5. Khó khăn và cách xử lý
 
@@ -294,6 +274,7 @@ Chi tiết đóng góp của từng thành viên nằm trong [TEAM.md](../../TEA
   - Argument dạng ngôn ngữ tự nhiên (`query` tiếng Việt như "biến đổi khí hậu"): so khớp chính xác dễ chấm sai, nên G09 cố ý không chấm `query`.
   - Chất lượng digest sau `format` và tính đúng của nội dung tóm tắt.
 - **Nếu có thêm một vòng, nhóm sẽ thử giả thuyết nào?**
+  - Live chat (B4, lượt 4) lộ một lỗi eval chưa bắt: khi lịch sử đã có digest, yêu cầu gửi được hỏi xác nhận bằng text thay vì `clarify(yes_no)`. Giả thuyết v7: thêm few-shot "đã có nội dung trong lịch sử + yêu cầu gửi → clarify yes_no" và một eval case multi-turn tương ứng.
   - Bộ base và group đều đã 100% → cần **case khó hơn**: yêu cầu mơ hồ giữa `policy` và `lookup`, URL arXiv nên đi `paper_text` thay vì `fetch`, sửa đổi giữa chừng trong hội thoại 4–5 lượt.
   - Chạy lại mỗi version **3 lần** để đo độ dao động (R12 cho thấy cùng artifact có thể 19/20 hoặc 20/20).
   - Thử prompt v3 trên model nhỏ hơn (Ollama ≤ 8B) để xem phần nào của rule cần chuyển từ prompt sang `tools.yaml` cho model nhỏ bám được.

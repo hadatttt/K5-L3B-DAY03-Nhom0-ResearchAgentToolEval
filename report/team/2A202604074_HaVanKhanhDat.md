@@ -66,13 +66,14 @@ Cố ý **không chấm** `query` tiếng Việt ở G09 vì so khớp chính x�
 
 **Chat live, UI và deploy**
 
-- Chạy `chat.py` 4 lượt live trên v6: tin AI hôm nay (`lookup` → `format`) → thiếu tài khoản (`clarify`) → điền Karpathy (`timeline` → `format`) → Hacker News (`hackernews` → `format`): [`transcripts/v6_mistral_20261110T191842794505.transcript.json`](../../starter_v0/transcripts/v6_mistral_20261110T191842794505.transcript.json).
+- Chạy `chat.py` 5 lượt live trên v6 gồm đủ yêu cầu thường / thiếu thông tin rồi bổ sung / yêu cầu gửi: [`transcripts/v6_mistral_20261110T193725069837.transcript.json`](../../starter_v0/transcripts/v6_mistral_20261110T193725069837.transcript.json) — phát hiện lượt gửi được hỏi xác nhận bằng text thay vì `clarify` (đã ghi vào B4 và Reflection).
+- Transcript phụ 4 lượt trên v6: tin AI hôm nay (`lookup` → `format`) → thiếu tài khoản (`clarify`) → điền Karpathy (`timeline` → `format`) → Hacker News (`hackernews` → `format`): [`transcripts/v6_mistral_20261110T191842794505.transcript.json`](../../starter_v0/transcripts/v6_mistral_20261110T191842794505.transcript.json).
 - Sửa `app.py`: chữ sidebar đọc được ở dark mode, danh sách tool đọc từ `tools.yaml` (13 tool), tắt `send` trên demo công khai, link nguồn tiếng Việt dễ đọc. Test trên máy và trên bản deploy Streamlit Cloud.
 - Hướng dẫn cấu hình Streamlit Secrets (TOML) để deploy; kiểm tra bản deploy gọi được Mistral + Tavily thật.
 
 **Báo cáo nhóm**
 
-- Phần A: mô tả agent, bảng 11 tool (gồm tool mới `wiki`), 5 câu hỏi mẫu kèm tool kỳ vọng.
+- Phần A: mô tả agent, bảng 14 tool (gồm 4 tool nhóm tự viết: `wiki`, `hackernews`, `github`, `hf_models`), link deploy, 5 câu hỏi mẫu kèm tool kỳ vọng.
 - Phần B: mục 3 (giải pháp v1–v4, đọc diff commit `842e7d1`, `760bcf2`), B1 (version evidence v0–v4 + bảng metric chi tiết + regression G06), B2 (failure analysis lấy từ `actual_tool_calls`), B3 (bảng 10 case với kết quả v0/v3/v4), B5a (tool mới + unit test), B5 (test challenge), mục 5 (khó khăn), mục 7 (reflection), mục 8 (tài liệu tham khảo).
 - Phát hiện hash artifact trên máy Windows khác hash trong `version_log.csv` → kiểm tra và xác nhận là do CRLF (`core.autocrlf=true`), nội dung giống hệt v3; ghi vào mục 5.
 
@@ -84,7 +85,7 @@ Cố ý **không chấm** `query` tiếng Việt ở G09 vì so khớp chính x�
   - [`starter_v0/runs/v0_B_group_mistral_20261110T175509644918.json`](../../starter_v0/runs/v0_B_group_mistral_20261110T175509644918.json)
   - [`starter_v0/runs/v0_B_base_gemini_20261110T173540507369.json`](../../starter_v0/runs/v0_B_base_gemini_20261110T173540507369.json) (bằng chứng lỗi provider Gemini)
   - [`report/team/group_report.md`](group_report.md)
-- Commit: `083390b` ("dat push" — eval case, run group, 14 test bonus, báo cáo); commit cập nhật báo cáo theo v5 (sau `c650993`)
+- Commit: `083390b` ("dat push" — eval case, run group, 14 test bonus, báo cáo); commit cập nhật báo cáo theo v5 (sau `c650993`); `b7bc721` (v6 + 3 tool bonus + UI chọn version + báo cáo hoàn thiện — commit chốt)
 - AI/công cụ đã dùng và cách tự kiểm tra kết quả:
   - Dùng **Claude Code** để đọc repo, chạy lệnh, soạn nháp eval case và các mục báo cáo.
   - Tự kiểm tra: mọi số liệu trong báo cáo đều đối chiếu lại với `summary` và `results[*].result` trong run JSON thật (không chép từ trí nhớ); eval case được kiểm tra bằng `pytest` (contract test giữa `tools.yaml` ↔ code ↔ eval) và bằng run thật trên Mistral; chạy thêm đối chứng v0 để chắc case không quá dễ.
