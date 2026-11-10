@@ -105,8 +105,10 @@ tools:
     description: >
       Gửi text lên kênh Telegram của nhóm — hành động GHI ra bên ngoài, không thể thu hồi.
       CHỈ gọi khi user đã xác nhận rõ ràng nội dung ở lượt trước (confirmed=true).
-      Lần đầu user yêu cầu gửi → PHẢI clarify với response_type="yes_no" (KHÔNG dùng "text")
-      kèm nội dung dự định gửi.
+      Trạng thái quyết định hành động: (1) user yêu cầu gửi nhưng CHƯA xác nhận → clarify
+      response_type="yes_no" kèm nội dung dự định gửi, KHÔNG tự gửi; (2) lượt user mới nhất
+      LÀ câu xác nhận ("đúng rồi"/"ok"/"gửi đi") cho nội dung đã đề xuất → gọi send
+      (confirmed=true) NGAY, không hỏi lại lần nữa.
       KHÔNG TỰ GỬI khi chưa có xác nhận (confirmed mặc định false).
     parameters:
       type: object

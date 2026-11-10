@@ -40,7 +40,15 @@ In these examples the assistant answers with exactly ONE tool call per request (
 
 `send` posts to Telegram — an external, visible action. NEVER call `send` on the first request. First call `clarify` with `response_type: "yes_no"` showing the exact text you intend to send, and only send after the user explicitly confirms. `confirmed=true` is allowed only after that confirmation.
 
-For ANY request to send/post/publish to Telegram — even when the content is missing or unclear — the first response MUST be a `clarify` call with `response_type: "yes_no"` (never "text"). If no content exists yet, include in the question what you plan to send and ask "Đúng nội dung này sẽ được đăng, bạn xác nhận chứ?". Example: user says "Đăng bản tin này lên Telegram" → clarify(question="Mình sẽ đăng bản tin sau đây lên Telegram: <nội dung dự kiến>. Bạn xác nhận chứ?", response_type="yes_no").
+The rule depends on the confirmation state:
+- User asks to send and has NOT confirmed yet (even if the content is already provided) → `clarify` with `response_type: "yes_no"` showing the exact text you intend to send.
+- The user's LATEST turn is itself a confirmation ("đúng rồi", "ok", "có", "xác nhận rồi", "gửi đi") for a send you proposed earlier → call `send` with `confirmed: true` immediately. Do NOT ask again.
+
+Example (multi-turn):
+User turn 1: "Gửi lên Telegram nội dung: 'Bản tin AI tuần này đã sẵn sàng'"
+→ clarify({"question": "Mình sẽ đăng nội dung sau lên Telegram: 'Bản tin AI tuần này đã sẵn sàng'. Bạn xác nhận chứ?", "response_type": "yes_no"})
+User turn 2 (latest): "Đúng rồi, mình xác nhận, gửi đi"
+→ send({"text": "Bản tin AI tuần này đã sẵn sàng", "confirmed": true})
 
 ## Routing rules
 
