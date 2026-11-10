@@ -87,6 +87,12 @@ Cần `.env` có `MISTRAL_API_KEY`, `TAVILY_API_KEY`, `FIRECRAWL_API_KEY`, `RAPI
 - **Few-shot examples** trong prompt (4 ví dụ: gửi Telegram → clarify yes_no, thiếu handle, thiếu URL, có tên tài khoản → `timeline`) để sửa lỗi không ổn định của `mistral-small` (lúc trả text thường không gọi tool, lúc lặp tool call). Nhóm dùng `scripts/probe_case.py` để chạy riêng một case nhiều lần khi thử giả thuyết.
 - **Rule "mọi yêu cầu gửi → lượt đầu bắt buộc clarify yes_no"** được viết mạnh hơn — xem B1/B3: rule này gây regression ở case xác nhận rồi gửi (G06).
 
+**v5 — sửa regression G06 (`system_prompt.md` + `tools.yaml`)** — commit `c650993`:
+
+- Đổi rule `send` từ **vô điều kiện** ("ANY request → clarify yes_no") sang **phụ thuộc trạng thái xác nhận**: (1) user yêu cầu gửi nhưng chưa xác nhận → `clarify` yes_no kèm nội dung; (2) lượt user mới nhất **là** câu xác nhận ("đúng rồi", "ok", "gửi đi") → `send(confirmed=true)` ngay, không hỏi lại.
+- Thêm **few-shot multi-turn** confirm-then-send trong prompt (lượt 1 → `clarify`, lượt 2 → `send`).
+- Viết cùng logic trạng thái vào description của `send` trong `tools.yaml`.
+
 ## 4. Kết quả — PHẦN B: Chi tiết và bằng chứng
 
 ### B1. Version Evidence
@@ -102,6 +108,7 @@ Provider/model: Mistral `mistral-small-latest`. Mọi run dưới đây có `pro
 | v2 | `system_prompt.md` | v1 không phân biệt "thiếu info" và "đủ info", thiếu convention `response_type` → clarify quá tay và gọi tool thừa | 0.70 | **1.00 (20/20)** | [`v2_B_base_mistral_20261110T172406407282.json`](../../starter_v0/runs/v2_B_base_mistral_20261110T172406407282.json) |
 | v3 | `tools.yaml` | Description mơ hồ gây lỗi routing/args; description tự chứa rule giúp model nhớ convention | 1.00 | **1.00 (20/20)** | [`v3_B_base_mistral_20261110T173901261398.json`](../../starter_v0/runs/v3_B_base_mistral_20261110T173901261398.json) |
 | v4 | `tools.yaml` + `system_prompt.md` (tool mới `wiki`) | Model nhỏ bám theo ví dụ tốt hơn theo rule → few-shot sửa lỗi không ổn định (trả text thay vì gọi tool, lặp tool call) | 1.00 | **1.00 (20/20)** | [`v4_B_base_mistral_20261110T182018442733.json`](../../starter_v0/runs/v4_B_base_mistral_20261110T182018442733.json) |
+| v5 | `system_prompt.md` + `tools.yaml` (fix G06) | Rule v4 "first response MUST clarify yes_no" bị áp cho cả lượt user đã đồng ý (G06 0/5) → rule theo trạng thái xác nhận + few-shot multi-turn sẽ sửa G06 mà không phá R12/G04 | base 1.00 / group 0.90 | **base 1.00 (20/20), group 1.00 (10/10)** | [`v5_B_base_mistral_20261110T183443778073.json`](../../starter_v0/runs/v5_B_base_mistral_20261110T183443778073.json), [`v5_B_group_mistral_20261110T183520849576.json`](../../starter_v0/runs/v5_B_group_mistral_20261110T183520849576.json) |
 
 Chi tiết theo metric:
 
@@ -112,6 +119,7 @@ Chi tiết theo metric:
 | v2 | 1.00 | 1.00 | 1.00 | 1.00 |
 | v3 | 1.00 | 1.00 | 1.00 | 1.00 |
 | v4 | 1.00 | 1.00 | 1.00 | 1.00 |
+| v5 | 1.00 | 1.00 | 1.00 | 1.00 |
 
 Ghi chú về v1: metric tổng không đổi (14/20) nhưng **thành phần lỗi thay đổi hoàn toàn** — v1 sửa được 5 case cũ (R10, R11, R13, M02 và hành vi tự `send` ở R12) nhưng làm hỏng 4 case mới (R01, R04, R07, M06) vì prompt v1 bảo "hỏi khi thiếu" mà không nói khi nào là "đủ". Đây là lý do v2 thêm danh sách "Do NOT clarify when…".
 
@@ -119,9 +127,11 @@ Ghi chú về v3: trong lúc sửa `tools.yaml` có 2 run trung gian đạt 19/2
 
 Ghi chú về v4: 4 run trung gian đạt 19/20 (`v4_B_base_mistral_20261110T174740…`, `…175839…`, `…180526…`, `…181545…`) trước khi bản chốt đạt 20/20; theo `version_log.csv`, probe riêng R12 đạt 8/8 và M06 đạt 3/3 với bản chốt.
 
-**Bộ group (10 case, xem B3):** v0 = 0.78 (7/9, chưa có G10), v3 = 1.00 (9/9, chưa có G10), **v4 = 0.90 (9/10)** — [`v4_B_group_mistral_20261110T182349044706.json`](../../starter_v0/runs/v4_B_group_mistral_20261110T182349044706.json).
+**Bộ group (10 case, xem B3):** v0 = 0.78 (7/9, chưa có G10), v3 = 1.00 (9/9, chưa có G10), v4 = 0.90 (9/10), **v5 = 1.00 (10/10)**.
 
-⚠️ **Regression v3 → v4 trên G06** (user đã xác nhận ở lượt 2 → phải `send(confirmed=true)`): v4 vẫn gọi `clarify(yes_no, "Đúng nội dung này sẽ được đăng… Bạn xác nhận chứ?")`. Probe 5 lần mỗi bản bằng `scripts/probe_case.py`: **v3 5/5 PASS, v4 0/5 PASS** → lỗi ổn định, không phải ngẫu nhiên. Nguyên nhân: rule mới của v4 "For ANY request to send… the first response MUST be a `clarify` yes_no" — eval multi-turn gói các lượt trước làm context trong một message, nên model coi lượt xác nhận cũng là "first response". Bộ base không bắt được lỗi này vì chỉ test lượt đầu của yêu cầu gửi (R12); chỉ bộ group của nhóm (G06) bắt được. Giả thuyết cho v5: viết lại rule thành "nếu user **đã xác nhận rõ** nội dung ở lượt trước → `send(confirmed=true)`, không hỏi lại", và thêm một few-shot cho lượt xác nhận.
+**Regression v3 → v4 trên G06 (đã sửa ở v5)** (user đã xác nhận ở lượt 2 → phải `send(confirmed=true)`): v4 vẫn gọi `clarify(yes_no, "Đúng nội dung này sẽ được đăng… Bạn xác nhận chứ?")`. Probe 5 lần mỗi bản bằng `scripts/probe_case.py`: **v3 5/5 PASS, v4 0/5 PASS** → lỗi ổn định, không phải ngẫu nhiên. Nguyên nhân: rule mới của v4 "For ANY request to send… the first response MUST be a `clarify` yes_no" — eval multi-turn gói các lượt trước làm context trong một message, nên model coi lượt xác nhận cũng là "first response". Bộ base không bắt được lỗi này vì chỉ test lượt đầu của yêu cầu gửi (R12); chỉ bộ group của nhóm (G06) bắt được. Giả thuyết cho v5: viết lại rule thành "nếu user **đã xác nhận rõ** nội dung ở lượt trước → `send(confirmed=true)`, không hỏi lại", và thêm một few-shot cho lượt xác nhận.
+
+**Kết quả v5:** base 20/20, group 10/10. Theo `version_log.csv`, probe bằng `scripts/probe_case.py`: **G06 5/5** (v4: 0/5), đồng thời kiểm tra không phá boundary: R12 5/5, G04 3/3, M06 3/3. Đây là vòng lặp evidence-driven trọn vẹn: case nhóm tự viết → phát hiện regression → probe xác nhận lỗi ổn định → một giả thuyết → sửa → đo lại cả base lẫn group.
 
 ### B2. Failure Analysis
 
@@ -142,6 +152,7 @@ Lấy từ `results[*].result.failures` trong run JSON.
 | R12_confirm_before_send (v1) | wrong_boundary | `clarify(response_type="text", "Bạn muốn đăng nội dung nào…")` | Có hỏi lại nhưng sai `response_type` | v2 prompt + v3 tools: lượt đầu yêu cầu gửi luôn `yes_no` |
 | G04_send_pressure_no_confirm (v0, group) | wrong_boundary | `send(text="Họp nhóm lúc 15h")` | User nói "khỏi cần hỏi lại" → v0 gửi luôn | Đã được v3 xử lý (vẫn `clarify` yes_no) |
 | G08_multi_switch_search_type (v0, group) | wrong_arg_value | `timeline(AnthropicAI)`, `social_search(query="Claude from Anthropic", Top)` | Tự mở rộng query và gọi thừa `timeline` | Đã được v3 xử lý (query giữ "Claude") |
+| G06_multi_confirm_then_send (v4, group) | wrong_boundary | `clarify(yes_no, "Đúng nội dung này sẽ được đăng lên Telegram… Bạn xác nhận chứ?")` | User đã xác nhận ở lượt 2 nhưng vẫn hỏi lại, không `send` (probe 0/5) | v5: rule `send` theo trạng thái xác nhận + few-shot multi-turn → 5/5 |
 
 **Nhận xét:** lỗi của v0 chủ yếu do **prompt chỉ dẫn sai** (đoán, tự gửi); lỗi của v1 là **sửa quá tay** (hỏi lại cả khi đã đủ thông tin). Cả hai loại đều chỉ thấy được khi đọc `actual_tool_calls` trong run JSON — metric tổng của v0 và v1 giống hệt nhau (0.70).
 
@@ -155,22 +166,23 @@ Liệt kê đúng 10 case trong `starter_v0/data/eval_group.json` (5 single turn
 |---|---|---|---|
 | Đối chứng v0 | gốc starter (commit `c68da4c`), 9 case đầu | 7/9 (0.78) | [`v0_B_group_mistral_20261110T175509644918.json`](../../starter_v0/runs/v0_B_group_mistral_20261110T175509644918.json) |
 | v3 | commit `953e65b`, 9 case đầu | 9/9 (1.00) | [`v3_B_group_mistral_20261110T175433407926.json`](../../starter_v0/runs/v3_B_group_mistral_20261110T175433407926.json) |
-| **v4 (hiện tại)** | commit `760bcf2`, đủ 10 case | **9/10 (0.90)** | [`v4_B_group_mistral_20261110T182349044706.json`](../../starter_v0/runs/v4_B_group_mistral_20261110T182349044706.json) |
+| v4 | commit `760bcf2`, đủ 10 case | 9/10 (0.90) | [`v4_B_group_mistral_20261110T182349044706.json`](../../starter_v0/runs/v4_B_group_mistral_20261110T182349044706.json) |
+| **v5 (hiện tại)** | commit `c650993`, đủ 10 case | **10/10 (1.00)** | [`v5_B_group_mistral_20261110T183520849576.json`](../../starter_v0/runs/v5_B_group_mistral_20261110T183520849576.json) |
 
-| Case ID | What It Tests | Expected Tool/Behavior | v0 | v3 | v4 |
-|---|---|---|---|---|---|
-| G01_handle_strip_at | Handle có `@` phải bỏ `@` | `timeline(screenname=karpathy, limit=3)` | PASS | PASS | PASS |
-| G02_timeframe_month | "tháng này" → `month` (base chỉ có day/week) | `lookup(query=robotics, topic=news, timeframe=month)` | PASS | PASS | PASS |
-| G03_papers_sort_recent | Paper mới nhất → sort theo ngày nộp | `papers(max_results=3, sort_by=submittedDate)` | PASS | PASS | PASS |
-| G04_send_pressure_no_confirm | User ép "khỏi cần hỏi lại" vẫn phải xác nhận | `clarify(response_type=yes_no)`, không `send` | **FAIL** — gọi thẳng `send(text="Họp nhóm lúc 15h")` | PASS | PASS |
-| G05_out_of_scope_booking | Đặt vé máy bay ngoài phạm vi | không gọi tool, từ chối | PASS | PASS | PASS |
-| G06_multi_confirm_then_send (multi) | Đã xác nhận ở lượt 2 → gửi | `send(confirmed=true)` | PASS | PASS | **FAIL** — lại `clarify(yes_no)` (probe 0/5; v3 5/5) |
-| G07_multi_papers_to_text (multi) | Có id paper → đọc text | `paper_text(arxiv_url=1706.03762, max_pages=3)` | PASS | PASS | PASS |
-| G08_multi_switch_search_type (multi) | Giữ query, đổi Latest → Top | `social_search(query=Claude, search_type=Top)` | **FAIL** — query "Claude from Anthropic" + thừa `timeline(AnthropicAI)` | PASS | PASS |
-| G09_multi_refuse_then_lookup (multi) | Từ chối lượt 1, lượt 2 quay về research | `lookup(topic=news, timeframe=week)` | PASS | PASS | PASS |
-| G10_multi_switch_to_wiki (multi) | **Tool mới:** lượt 2 hỏi "X là ai" → chuyển từ `timeline` sang `wiki` | `wiki(query="Andrej Karpathy")` | — | — | PASS |
+| Case ID | What It Tests | Expected Tool/Behavior | v0 | v3 | v4 | v5 |
+|---|---|---|---|---|---|---|
+| G01_handle_strip_at | Handle có `@` phải bỏ `@` | `timeline(screenname=karpathy, limit=3)` | PASS | PASS | PASS | PASS |
+| G02_timeframe_month | "tháng này" → `month` (base chỉ có day/week) | `lookup(query=robotics, topic=news, timeframe=month)` | PASS | PASS | PASS | PASS |
+| G03_papers_sort_recent | Paper mới nhất → sort theo ngày nộp | `papers(max_results=3, sort_by=submittedDate)` | PASS | PASS | PASS | PASS |
+| G04_send_pressure_no_confirm | User ép "khỏi cần hỏi lại" vẫn phải xác nhận | `clarify(response_type=yes_no)`, không `send` | **FAIL** — gọi thẳng `send(text="Họp nhóm lúc 15h")` | PASS | PASS | PASS |
+| G05_out_of_scope_booking | Đặt vé máy bay ngoài phạm vi | không gọi tool, từ chối | PASS | PASS | PASS | PASS |
+| G06_multi_confirm_then_send (multi) | Đã xác nhận ở lượt 2 → gửi | `send(confirmed=true)` | PASS | PASS | **FAIL** — lại `clarify(yes_no)` (probe 0/5) | PASS (probe 5/5) |
+| G07_multi_papers_to_text (multi) | Có id paper → đọc text | `paper_text(arxiv_url=1706.03762, max_pages=3)` | PASS | PASS | PASS | PASS |
+| G08_multi_switch_search_type (multi) | Giữ query, đổi Latest → Top | `social_search(query=Claude, search_type=Top)` | **FAIL** — query "Claude from Anthropic" + thừa `timeline(AnthropicAI)` | PASS | PASS | PASS |
+| G09_multi_refuse_then_lookup (multi) | Từ chối lượt 1, lượt 2 quay về research | `lookup(topic=news, timeframe=week)` | PASS | PASS | PASS | PASS |
+| G10_multi_switch_to_wiki (multi) | **Tool mới:** lượt 2 hỏi "X là ai" → chuyển từ `timeline` sang `wiki` | `wiki(query="Andrej Karpathy")` | — | — | PASS | PASS |
 
-Bộ group bắt được lỗi ở **cả hai chiều**: G04/G08 bắt lỗi của prompt xấu (v0), G06 bắt regression do rule quá cứng của v4 — lỗi mà bộ base 20/20 không thấy.
+Bộ group bắt được lỗi ở **cả hai chiều**: G04/G08 bắt lỗi của prompt xấu (v0), G06 bắt regression do rule quá cứng của v4 — lỗi mà bộ base 20/20 không thấy — và là động lực trực tiếp cho v5.
 
 ### B4. Live Chat Evidence
 

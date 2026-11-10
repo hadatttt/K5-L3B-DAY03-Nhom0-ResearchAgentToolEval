@@ -44,7 +44,7 @@ Thiết kế để **không trùng** với 20 case base mà cover các conventio
 
 Cố ý **không chấm** `query` tiếng Việt ở G09 vì so khớp chính xác dễ chấm sai.
 
-**Phát hiện regression của v4:** chạy đủ 10 case trên v4 ([`runs/v4_B_group_mistral_20261110T182349044706.json`](../../starter_v0/runs/v4_B_group_mistral_20261110T182349044706.json)) được 9/10 — G06 (đã xác nhận → `send`) hỏng. Dùng `scripts/probe_case.py -n 5` so sánh: v3 5/5 PASS, v4 0/5 PASS → lỗi ổn định do rule "mọi yêu cầu gửi → lượt đầu bắt buộc clarify yes_no" của v4. Bộ base vẫn 20/20 nên không thấy; đã ghi vào B1/B3 kèm giả thuyết cho v5 và báo cho người phụ trách prompt.
+**Phát hiện regression của v4:** chạy đủ 10 case trên v4 ([`runs/v4_B_group_mistral_20261110T182349044706.json`](../../starter_v0/runs/v4_B_group_mistral_20261110T182349044706.json)) được 9/10 — G06 (đã xác nhận → `send`) hỏng. Dùng `scripts/probe_case.py -n 5` so sánh: v3 5/5 PASS, v4 0/5 PASS → lỗi ổn định do rule "mọi yêu cầu gửi → lượt đầu bắt buộc clarify yes_no" của v4. Bộ base vẫn 20/20 nên không thấy; đã ghi vào B1/B3 kèm giả thuyết cho v5 và báo cho người phụ trách prompt. Văn Minh đã sửa ở v5 (commit `c650993`): group 10/10, G06 probe 5/5.
 
 **Chạy suite group và đối chứng**
 
@@ -71,7 +71,7 @@ Cố ý **không chấm** `query` tiếng Việt ở G09 vì so khớp chính x�
   - [`starter_v0/runs/v0_B_group_mistral_20261110T175509644918.json`](../../starter_v0/runs/v0_B_group_mistral_20261110T175509644918.json)
   - [`starter_v0/runs/v0_B_base_gemini_20261110T173540507369.json`](../../starter_v0/runs/v0_B_base_gemini_20261110T173540507369.json) (bằng chứng lỗi provider Gemini)
   - [`report/team/group_report.md`](group_report.md)
-- Commit: _(điền hash sau khi push)_
+- Commit: `083390b` ("dat push" — eval case, run group, 14 test bonus, báo cáo); commit cập nhật báo cáo theo v5 (sau `c650993`)
 - AI/công cụ đã dùng và cách tự kiểm tra kết quả:
   - Dùng **Claude Code** để đọc repo, chạy lệnh, soạn nháp eval case và các mục báo cáo.
   - Tự kiểm tra: mọi số liệu trong báo cáo đều đối chiếu lại với `summary` và `results[*].result` trong run JSON thật (không chép từ trí nhớ); eval case được kiểm tra bằng `pytest` (contract test giữa `tools.yaml` ↔ code ↔ eval) và bằng run thật trên Mistral; chạy thêm đối chứng v0 để chắc case không quá dễ.
