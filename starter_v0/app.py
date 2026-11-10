@@ -83,7 +83,7 @@ st.caption("Demo UI for the Day 03 research agent. Works with the same system pr
 
 with st.sidebar:
     st.header("Config")
-    provider_name = st.selectbox("Provider", ["openrouter", "openai", "anthropic", "gemini", "ollama"], index=0)
+    provider_name = st.selectbox("Provider", ["mistral", "openrouter", "openai", "anthropic", "gemini", "ollama"], index=0)
     model_override = st.text_input("Model override (optional)", value="")
     st.markdown("- Prompt: `artifacts/system_prompt.md`")
     st.markdown("- Tools: `artifacts/tools.yaml`")
