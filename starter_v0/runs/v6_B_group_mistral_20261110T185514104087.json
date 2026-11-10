@@ -1,0 +1,680 @@
+{
+  "run_id": "v6_B_group_mistral_20261110T185514104087",
+  "version": "v6",
+  "artifact_version": "v6+pb5a1cd613565+t189681c8d038",
+  "prompt_hash": "b5a1cd6135655b5bb6a82e2921e665a11f1c063332c1d5416169f2b82878313f",
+  "tools_hash": "189681c8d03899193d2d69db1302dffa33566bf0360a037d07f1591b43405f10",
+  "phase": "B",
+  "suite": "group",
+  "provider": "mistral",
+  "model": "mistral-small-latest",
+  "system_prompt": "C:\\Users\\Admin\\Documents\\K5-L3B-DAY03-Nhom0-ResearchAgentToolEval\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\Admin\\Documents\\K5-L3B-DAY03-Nhom0-ResearchAgentToolEval\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group_bonus.json",
+  "dataset_id": "day03_v2_research_group_bonus_tools",
+  "dataset_role": "group",
+  "description": "Case route tới 3 tool bonus của nhóm (hackernews, github, hf_models) + case đối chứng để tool mới không 'cướp' route của tool cũ. Tách riêng khỏi eval_group.json để bộ group giữ đúng 10 case theo đề.",
+  "generated_at": "2026-11-10T18:55:14",
+  "summary": {
+    "total_cases": 6,
+    "measured_cases": 6,
+    "provider_error_cases": 0,
+    "passed_cases": 6,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "B01_hackernews_routing",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_bonus_hackernews",
+        "difficulty": "easy",
+        "what_it_tests": "Nhắc Hacker News → hackernews (không phải social_search/lookup), query chỉ là chủ đề."
+      },
+      "input": "Dân kỹ thuật trên Hacker News đang bàn gì về Rust?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hackernews",
+            "args": {
+              "query": "Rust"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "hackernews",
+            "args": {
+              "query": "Rust",
+              "sort": "relevance",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "hackernews",
+          "args": {
+            "query": "Rust",
+            "sort": "relevance",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "hackernews_search",
+            "query": "Rust",
+            "sort": "relevance",
+            "item_count": 5,
+            "items": [
+              {
+                "title": "Why Discord is switching from Go to Rust",
+                "url": "https://blog.discordapp.com/why-discord-is-switching-from-go-to-rust-a190bbca2b1f",
+                "source": "news.ycombinator.com",
+                "summary": "1582 points, 642 comments, by Sikul",
+                "discussion_url": "https://news.ycombinator.com/item?id=22238335",
+                "date": "2020-02-04T17:30:40Z",
+                "points": 1582,
+                "num_comments": 642
+              },
+              {
+                "title": "Leaving Rust gamedev after 3 years",
+                "url": "https://loglog.games/blog/leaving-rust-gamedev/",
+                "source": "news.ycombinator.com",
+                "summary": "1484 points, 972 comments, by darthdeus",
+                "discussion_url": "https://news.ycombinator.com/item?id=40172033",
+                "date": "2024-04-26T17:33:56Z",
+                "points": 1484,
+                "num_comments": 972
+              },
+              {
+                "title": "A half-hour to learn Rust",
+                "url": "https://fasterthanli.me/articles/a-half-hour-to-learn-rust",
+                "source": "news.ycombinator.com",
+                "summary": "1444 points, 330 comments, by selvan",
+                "discussion_url": "https://news.ycombinator.com/item?id=25610741",
+                "date": "2021-01-02T05:50:39Z",
+                "points": 1444,
+                "num_comments": 330
+              },
+              {
+                "title": "Announcing Rust 1.0",
+                "url": "http://blog.rust-lang.org/2015/05/15/Rust-1.0.html",
+                "source": "news.ycombinator.com",
+                "summary": "1363 points, 306 comments, by jhund",
+                "discussion_url": "https://news.ycombinator.com/item?id=9551937",
+                "date": "2015-05-15T17:02:09Z",
+                "points": 1363,
+                "num_comments": 306
+              },
+              {
+                "title": "CityBound – An open source city simulation game in Rust",
+                "url": "https://github.com/citybound/citybound",
+                "source": "news.ycombinator.com",
+                "summary": "1340 points, 264 comments, by formalsystem",
+                "discussion_url": "https://news.ycombinator.com/item?id=19583384",
+                "date": "2019-04-05T15:18:45Z",
+                "points": 1340,
+                "num_comments": 264
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "B02_github_language_arg",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_bonus_github_args",
+        "difficulty": "medium",
+        "what_it_tests": "Repo code → github; ngôn ngữ vào `language` chứ không nhét vào query; 'nhiều sao nhất' → sort=stars."
+      },
+      "input": "Tìm repo GitHub nhiều sao nhất về RAG viết bằng Python",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github",
+            "args": {
+              "query": "RAG",
+              "language": "Python",
+              "sort": "stars"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "github",
+            "args": {
+              "query": "RAG",
+              "language": "Python",
+              "sort": "stars",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "github",
+          "args": {
+            "query": "RAG",
+            "language": "Python",
+            "sort": "stars",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "github_repo_search",
+            "query": "RAG language:Python",
+            "sort": "stars",
+            "item_count": 5,
+            "items": [
+              {
+                "title": "langgenius/dify",
+                "url": "https://github.com/langgenius/dify",
+                "source": "github.com",
+                "summary": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+                "stars": 160827,
+                "language": "Python",
+                "date": "2026-11-10T11:53:45Z"
+              },
+              {
+                "title": "langchain-ai/langchain",
+                "url": "https://github.com/langchain-ai/langchain",
+                "source": "github.com",
+                "summary": "The agent engineering platform.",
+                "stars": 149300,
+                "language": "Python",
+                "date": "2026-11-10T11:00:31Z"
+              },
+              {
+                "title": "Graphify-Labs/graphify",
+                "url": "https://github.com/Graphify-Labs/graphify",
+                "source": "github.com",
+                "summary": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
+                "stars": 145322,
+                "language": "Python",
+                "date": "2026-11-10T11:53:02Z"
+              },
+              {
+                "title": "Shubhamsaboo/awesome-llm-apps",
+                "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+                "source": "github.com",
+                "summary": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
+                "stars": 144340,
+                "language": "Python",
+                "date": "2026-11-10T11:46:59Z"
+              },
+              {
+                "title": "PaddlePaddle/PaddleOCR",
+                "url": "https://github.com/PaddlePaddle/PaddleOCR",
+                "source": "github.com",
+                "summary": "Turn any PDF or image document into structured data for your AI. A powerful, lightweight OCR toolkit that bridges the gap between images/PDFs and LLMs. Supports 100+ languages.",
+                "stars": 92517,
+                "language": "Python",
+                "date": "2026-11-10T11:28:52Z"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "B03_hf_models_routing",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_bonus_hf_models",
+        "difficulty": "easy",
+        "what_it_tests": "Model pretrained trên Hugging Face → hf_models (không phải papers/github), 'tải nhiều nhất' → sort=downloads."
+      },
+      "input": "Model Whisper nào được tải nhiều nhất trên Hugging Face?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hf_models",
+            "args": {
+              "query": "whisper",
+              "sort": "downloads"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "hf_models",
+            "args": {
+              "query": "whisper",
+              "sort": "downloads",
+              "max_results": 1
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "hf_models",
+          "args": {
+            "query": "whisper",
+            "sort": "downloads",
+            "max_results": 1
+          },
+          "result": {
+            "tool": "hf_model_search",
+            "query": "whisper",
+            "sort": "downloads",
+            "item_count": 1,
+            "items": [
+              {
+                "title": "argmaxinc/whisperkit-coreml",
+                "url": "https://huggingface.co/argmaxinc/whisperkit-coreml",
+                "source": "huggingface.co",
+                "summary": "automatic-speech-recognition · 54455770 downloads · 262 likes",
+                "task": "automatic-speech-recognition",
+                "downloads": 54455770,
+                "likes": 262
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "B04_twitter_not_hackernews",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_guard_old_tool",
+        "difficulty": "medium",
+        "what_it_tests": "Đối chứng: Twitter vẫn phải đi social_search — tool mới hackernews không được cướp route."
+      },
+      "input": "Mọi người trên Twitter nói gì về Rust?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Rust"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Rust",
+              "search_type": "Latest",
+              "limit": 5
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "Rust",
+            "search_type": "Latest",
+            "limit": 5
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "Rust",
+            "search_type": "Latest",
+            "items": [
+              {
+                "title": "@notreallife94 @RepThomasMassie @elonmusk @cradrrat I wrote a bunch of apps in rust using AI. I was having trouble with ",
+                "summary": "@notreallife94 @RepThomasMassie @elonmusk @cradrrat I wrote a bunch of apps in rust using AI. I was having trouble with an event driven project. What I learned is there is far less code written in rust than in C++. With less code for AI to train on it was as good at what I needed.",
+                "url": "https://x.com/sidinick/status/2120122938099929105",
+                "source": "@sidinick",
+                "date": "Tue Nov 10 11:54:33 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": null
+                }
+              },
+              {
+                "title": "✼••┈┈୨୧┈┈••✼",
+                "summary": "✼••┈┈୨୧┈┈••✼\n　　配信告知\n　本日 11月10日(火) \n　　 21:00～\n✼••┈┈୨୧┈┈••✼\n\n【RUST】メインクエストが終わらない…！！ひたすらファームだぁーー！！ #ビビラス【苺莉ゆさ】 https://t.co/dRrugWgNd5",
+                "url": "https://x.com/meiriyusa/status/2120122854121582861",
+                "source": "@meiriyusa",
+                "date": "Tue Nov 10 11:54:13 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": "9"
+                }
+              },
+              {
+                "title": "【Uwinks Rust】ギャンブルすんべ！！！！！ https://t.co/zOt8aAmjPF",
+                "summary": "【Uwinks Rust】ギャンブルすんべ！！！！！ https://t.co/zOt8aAmjPF",
+                "url": "https://x.com/knkdcy/status/2120122829891076282",
+                "source": "@knkdcy",
+                "date": "Tue Nov 10 11:54:07 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": "10"
+                }
+              },
+              {
+                "title": "One more thing to take note on the ai bubble: rust party",
+                "summary": "One more thing to take note on the ai bubble: rust party",
+                "url": "https://x.com/LucasAl23069953/status/2120122741542297957",
+                "source": "@LucasAl23069953",
+                "date": "Tue Nov 10 11:53:46 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": "2"
+                }
+              },
+              {
+                "title": "“Rust bewaren en vertrouwen houden, is belangrijk. Niet alleen nu, maar ook als het sportief even wat minder gaat. Onrus",
+                "summary": "“Rust bewaren en vertrouwen houden, is belangrijk. Niet alleen nu, maar ook als het sportief even wat minder gaat. Onrust sijpelt altijd door naar het veld en komt de kleedkamer binnen. Dat moeten we koste wat kost voorkomen. Rust en vertrouwen moeten juist doorsijpelen.” Amen!",
+                "url": "https://x.com/FabianNagtzaam/status/2120122593252618560",
+                "source": "@FabianNagtzaam",
+                "date": "Tue Nov 10 11:53:10 +0000 2026",
+                "metrics": {
+                  "favorites": 1,
+                  "retweets": 0,
+                  "views": "15"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "B05_multi_hackernews_sort_date",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_bonus_hackernews",
+        "difficulty": "medium",
+        "what_it_tests": "Giữ query từ lượt 1, đổi sort relevance → date theo lượt 2."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Hacker News đang bàn gì về LLM agents?"
+        },
+        {
+          "role": "user",
+          "content": "Chỉ lấy các bài mới đăng gần đây nhất thôi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hackernews",
+            "args": {
+              "query": "LLM agents",
+              "sort": "date"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "hackernews",
+            "args": {
+              "query": "LLM agents",
+              "sort": "date",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "hackernews",
+          "args": {
+            "query": "LLM agents",
+            "sort": "date",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "hackernews_search",
+            "query": "LLM agents",
+            "sort": "date",
+            "item_count": 5,
+            "items": [
+              {
+                "title": "MemoryDojo: Benchmarking Poisoning Through LLM Agent Memory",
+                "url": "https://arxiv.org/abs/2611.09721",
+                "source": "news.ycombinator.com",
+                "summary": "1 points, 0 comments, by anatolii1309",
+                "discussion_url": "https://news.ycombinator.com/item?id=50437547",
+                "date": "2026-11-10T08:28:09Z",
+                "points": 1,
+                "num_comments": 0
+              },
+              {
+                "title": "Socratic-tutor – turns an LLM into a strict personal tutor",
+                "url": "https://github.com/janestreet/agent_skills",
+                "source": "news.ycombinator.com",
+                "summary": "1 points, 0 comments, by vpj",
+                "discussion_url": "https://news.ycombinator.com/item?id=50436087",
+                "date": "2026-11-10T04:31:59Z",
+                "points": 1,
+                "num_comments": 0
+              },
+              {
+                "title": "FlashStates Unlocking Flexible Hybrid State Management for Agentic LLM Inference",
+                "url": "https://flashstates.ai/",
+                "source": "news.ycombinator.com",
+                "summary": "1 points, 0 comments, by matt_d",
+                "discussion_url": "https://news.ycombinator.com/item?id=50436074",
+                "date": "2026-11-10T04:29:35Z",
+                "points": 1,
+                "num_comments": 0
+              },
+              {
+                "title": "Ask HN: Good Harness for Advanced Learning?",
+                "url": "https://news.ycombinator.com/item?id=50430434",
+                "source": "news.ycombinator.com",
+                "summary": "1 points, 1 comments, by py4",
+                "discussion_url": "https://news.ycombinator.com/item?id=50430434",
+                "date": "2026-11-09T19:25:46Z",
+                "points": 1,
+                "num_comments": 1
+              },
+              {
+                "title": "What broke when I upgraded my agent from Sonnet 5 to Sonnet 5.5",
+                "url": "https://www.evalshift.dev/blog/llm-regression-testing-model-upgrade",
+                "source": "news.ycombinator.com",
+                "summary": "1 points, 0 comments, by nupize",
+                "discussion_url": "https://news.ycombinator.com/item?id=50428926",
+                "date": "2026-11-09T17:52:47Z",
+                "points": 1,
+                "num_comments": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "B06_multi_papers_to_hf_models",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_papers_to_hf",
+        "difficulty": "hard",
+        "what_it_tests": "Lượt 2 đổi từ paper sang model dùng được ngay → hf_models (không gọi lại papers), 'thích nhiều nhất' → sort=likes."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm paper về speech recognition"
+        },
+        {
+          "role": "user",
+          "content": "Thôi, cho mình model có sẵn trên Hugging Face để dùng luôn, loại được thích nhiều nhất"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hf_models",
+            "args": {
+              "sort": "likes"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "hf_models",
+            "args": {
+              "query": "speech recognition",
+              "sort": "likes",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": "",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "hf_models",
+          "args": {
+            "query": "speech recognition",
+            "sort": "likes",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "hf_model_search",
+            "query": "speech recognition",
+            "sort": "likes",
+            "item_count": 5,
+            "items": [
+              {
+                "title": "ehcalabres/wav2vec2-lg-xlsr-en-speech-emotion-recognition",
+                "url": "https://huggingface.co/ehcalabres/wav2vec2-lg-xlsr-en-speech-emotion-recognition",
+                "source": "huggingface.co",
+                "summary": "audio-classification · 11334 downloads · 263 likes",
+                "task": "audio-classification",
+                "downloads": 11334,
+                "likes": 263
+              },
+              {
+                "title": "speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
+                "url": "https://huggingface.co/speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
+                "source": "huggingface.co",
+                "summary": "audio-classification · 55152 downloads · 206 likes",
+                "task": "audio-classification",
+                "downloads": 55152,
+                "likes": 206
+              },
+              {
+                "title": "firdhokk/speech-emotion-recognition-with-openai-whisper-large-v3",
+                "url": "https://huggingface.co/firdhokk/speech-emotion-recognition-with-openai-whisper-large-v3",
+                "source": "huggingface.co",
+                "summary": "audio-classification · 1788 downloads · 138 likes",
+                "task": "audio-classification",
+                "downloads": 1788,
+                "likes": 138
+              },
+              {
+                "title": "harshit345/xlsr-wav2vec-speech-emotion-recognition",
+                "url": "https://huggingface.co/harshit345/xlsr-wav2vec-speech-emotion-recognition",
+                "source": "huggingface.co",
+                "summary": "audio-classification · 289 downloads · 73 likes",
+                "task": "audio-classification",
+                "downloads": 289,
+                "likes": 73
+              },
+              {
+                "title": "xmj2002/hubert-base-ch-speech-emotion-recognition",
+                "url": "https://huggingface.co/xmj2002/hubert-base-ch-speech-emotion-recognition",
+                "source": "huggingface.co",
+                "summary": "audio-classification · 578 downloads · 62 likes",
+                "task": "audio-classification",
+                "downloads": 578,
+                "likes": 62
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "dataset_id": "day03_v2_research_group_bonus_tools",
+  "dataset_role": "group",
+  "description": "Case route tới 3 tool bonus của nhóm (hackernews, github, hf_models) + case đối chứng để tool mới không 'cướp' route của tool cũ. Tách riêng khỏi eval_group.json để bộ group giữ đúng 10 case theo đề.",
+  "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
+  "cases": [
+    {
+      "id": "B01_hackernews_routing",
+      "phase": "B",
+      "suite": "group",
+      "query": "Dân kỹ thuật trên Hacker News đang bàn gì về Rust?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "hackernews", "args": {"query": "Rust"}}]},
+      "metadata": {"skill": "routing_bonus_hackernews", "difficulty": "easy", "what_it_tests": "Nhắc Hacker News → hackernews (không phải social_search/lookup), query chỉ là chủ đề."}
+    },
+    {
+      "id": "B02_github_language_arg",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tìm repo GitHub nhiều sao nhất về RAG viết bằng Python",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "github", "args": {"query": "RAG", "language": "Python", "sort": "stars"}}]},
+      "metadata": {"skill": "routing_bonus_github_args", "difficulty": "medium", "what_it_tests": "Repo code → github; ngôn ngữ vào `language` chứ không nhét vào query; 'nhiều sao nhất' → sort=stars."}
+    },
+    {
+      "id": "B03_hf_models_routing",
+      "phase": "B",
+      "suite": "group",
+      "query": "Model Whisper nào được tải nhiều nhất trên Hugging Face?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "hf_models", "args": {"query": "whisper", "sort": "downloads"}}]},
+      "metadata": {"skill": "routing_bonus_hf_models", "difficulty": "easy", "what_it_tests": "Model pretrained trên Hugging Face → hf_models (không phải papers/github), 'tải nhiều nhất' → sort=downloads."}
+    },
+    {
+      "id": "B04_twitter_not_hackernews",
+      "phase": "B",
+      "suite": "group",
+      "query": "Mọi người trên Twitter nói gì về Rust?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "social_search", "args": {"query": "Rust"}}]},
+      "metadata": {"skill": "routing_guard_old_tool", "difficulty": "medium", "what_it_tests": "Đối chứng: Twitter vẫn phải đi social_search — tool mới hackernews không được cướp route."}
+    },
+    {
+      "id": "B05_multi_hackernews_sort_date",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Hacker News đang bàn gì về LLM agents?"},
+        {"role": "user", "content": "Chỉ lấy các bài mới đăng gần đây nhất thôi"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "hackernews", "args": {"query": "LLM agents", "sort": "date"}}]},
+      "metadata": {"skill": "multiturn_bonus_hackernews", "difficulty": "medium", "what_it_tests": "Giữ query từ lượt 1, đổi sort relevance → date theo lượt 2."}
+    },
+    {
+      "id": "B06_multi_papers_to_hf_models",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tìm paper về speech recognition"},
+        {"role": "user", "content": "Thôi, cho mình model có sẵn trên Hugging Face để dùng luôn, loại được thích nhiều nhất"}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "hf_models", "args": {"sort": "likes"}}]},
+      "metadata": {"skill": "multiturn_switch_papers_to_hf", "difficulty": "hard", "what_it_tests": "Lượt 2 đổi từ paper sang model dùng được ngay → hf_models (không gọi lại papers), 'thích nhiều nhất' → sort=likes."}
+    }
+  ]
+}

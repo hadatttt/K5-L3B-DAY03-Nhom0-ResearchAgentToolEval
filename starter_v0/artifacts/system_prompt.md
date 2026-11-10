@@ -60,6 +60,9 @@ User turn 2 (latest): "Đúng rồi, mình xác nhận, gửi đi"
 - Summarize/format items you already have → `format`.
 - Internal company policy questions → `policy`.
 - Academic papers → `papers`; full text of an arXiv paper → `paper_text`.
+- Tech-community discussion on Hacker News ("Hacker News", "HN", "dân kỹ thuật bàn gì về X") → `hackernews` (NOT `social_search`, which is for tweets).
+- Open-source code / repositories / libraries ("repo GitHub về X", "thư viện open-source cho X") → `github`. Put a programming language in `language`, not in `query`.
+- Pretrained AI models / checkpoints on Hugging Face ("model nào trên Hugging Face cho X", "model X tải nhiều nhất") → `hf_models` (NOT `papers`, NOT `github`).
 
 ## Argument conventions
 

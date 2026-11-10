@@ -1,0 +1,1024 @@
+{
+  "transcript_id": "v6_mistral_20261110T191842794505",
+  "version": "v6",
+  "artifact_version": "v6+pb5a1cd613565+t189681c8d038",
+  "prompt_hash": "b5a1cd6135655b5bb6a82e2921e665a11f1c063332c1d5416169f2b82878313f",
+  "tools_hash": "189681c8d03899193d2d69db1302dffa33566bf0360a037d07f1591b43405f10",
+  "provider": "mistral",
+  "model": "mistral-small-latest",
+  "system_prompt": "C:\\Users\\Admin\\Documents\\K5-L3B-DAY03-Nhom0-ResearchAgentToolEval\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\Admin\\Documents\\K5-L3B-DAY03-Nhom0-ResearchAgentToolEval\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4,
+  "created_at": "2026-11-10T19:18:42",
+  "updated_at": "2026-11-10T19:19:30",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-10T19:18:42",
+      "user": "Tin tức AI hôm nay có gì nổi bật?",
+      "status": "answered",
+      "assistant_text": "**Tin AI nổi bật hôm nay (10/11/2026)**\n\n**Tin chính**\n- **AI trong y tế: Lợi ích to lớn nhưng rủi ro tiềm ẩn**\n  AI cung cấp lời khuyên y tế ở quy mô chưa từng có: hơn 300 triệu người mỗi tuần đặt câu hỏi sức khỏe cho ChatGPT. Chính phủ Mỹ cũng đang đẩy mạnh ứng dụng AI trong chăm sóc y tế, coi đây là \"chén thánh\" cải thiện sức khỏe cộng đồng. Tuy nhiên, các chuyên gia nhấn mạnh: AI không thể trung lập vì mỗi câu trả lời đều loại trừ nhiều thông tin khác và nhấn mạnh một số thông tin nhất định, từ đó ảnh hưởng đến hành vi người dùng. Cần bổ sung đánh giá an toàn không chỉ ngăn chặn nguy hại tức thời (tự hại, bỏ điều trị) mà còn ngăn ngừa hại lâu dài, đồng thời thúc đẩy nghĩa vụ \"làm điều tốt\" cho người bệnh.\n  [Xem chi tiết tại *STAT*](https://www.statnews.com/2026/11/10/ai-health-advice-accuracy-messaging-risk-behavioral-benchmarking)\n\n- **Nvidia: Sức mạnh thống trị thị trường AI và những rủi ro từ scandal của Jensen Huang**\n  Nvidia thống trị thị trường AI nhờ thiết kế GPU chuyên dụng cho đào tạo và chạy mô hình AI, trong khi các đối thủ như Google hay AMD chưa thể thay thế. Sự thống trị này không chỉ là lợi thế kinh doanh mà còn là yếu tố địa chính trị quan trọng khi chip mạnh nhất quyết định ưu thế AI giữa Mỹ và Trung Quốc. Việc CEO Jensen Huang dính scandal có thể gây xáo trộn lớn cho ngành, giữa lúc các nhà đầu tư lo ngại về khả năng sinh lời của vốn đổ vào AI.\n  [Xem chi tiết tại *The Conversation*](https://theconversation.com/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-scandal-really-cost-296257)\n\n- **AI bị lợi dụng để tạo cuộc gọi khẩn cấp giả (swatting)**\n  AI đang được sử dụng để tạo ra các cuộc gọi khẩn cấp giả (swatting) cực kỳ thuyết phục, khiến cơ quan chức năng khó phân biệt thật giả. Điều này gây ra thách thức mới trong an ninh công cộng khi tội phạm khai thác AI để lừa cảnh sát và gây nhiễu hệ thống ứng phó khẩn cấp.\n  [Xem chi tiết tại *NPR*](https://www.npr.org/2026/11/10/nx-s1-5971477/ai-is-making-it-harder-to-detect-fake-emergency-calls)\n\n- **Cổ phiếu AI phục hồi mạnh mẽ sau đợt sụt giảm**\n  Cổ phiếu AI phục hồi mạnh mẽ sau đợt sụt giảm trước đó, bất chấp những biến động chính trị gần đây. Các chuyên gia từ Goldman Sachs, Morgan Stanley và JPMorgan đều khuyến nghị \"mua khi giảm sâu\" vì lĩnh vực này vẫn có tiềm năng dài hạn, dù Nvidia (ngoại lệ duy nhất) đang gặp khó khăn sau cáo buộc liên quan đến CEO Jensen Huang.\n  [Xem chi tiết tại *Axios*](https://www.axios.com/2026/11/10/ai-stocks-nvidia-broadcom)",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "",
+          "tool_calls": [
+            {
+              "name": "lookup",
+              "args": {
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "lookup",
+              "args": {
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              },
+              "result": {
+                "tool": "web_search",
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day",
+                "items": [
+                  {
+                    "title": "Accurate medical advice from AI can still be dangerous | STAT",
+                    "url": "https://www.statnews.com/2026/11/10/ai-health-advice-accuracy-messaging-risk-behavioral-benchmarking",
+                    "source": "statnews.com",
+                    "summary": "Some will argue that AI should be a neutral aggregator of information. But AI cannot be neutral: Every accurate answer excludes many additional facts and emphasizes some over others. Because of these choices, AI answers already influence behavior, as shown by the chickenpox party examples. [...] Artificial intelligence is delivering health guidance at an unprecedented scale. Every week, more than 300 million people ask ChatGPT health questions. Now, the federal government is moving AI deeper into medical care to communicate directly and autonomously with patients. Chris Klomp, the nominee for deputy secretary of Health and Human Services, has called AI in patient care the agency’s “holy grail” for improving the nation’s health. [...] Medical ethics pairs the duty to do no harm with beneficence, which is an affirmative obligation to do good. Safety evaluations of AI have focused mainly on the first duty by screening for responses that encourage imminent self-harm, discourage necessary care, or spread false information. Behavioral benchmarking would extend the first duty beyond imminent danger to long-term harms. It could also advance the second duty, which has received far less attention: designing AI to help people by",
+                    "score": 0.31910068
+                  },
+                  {
+                    "title": "Why is Nvidia so powerful in the AI world, and what could Jensen Huang’s scandal really cost?",
+                    "url": "https://theconversation.com/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-scandal-really-cost-296257",
+                    "source": "theconversation.com",
+                    "summary": "The AI sector is notorious for the amount of circular financing going on – where companies invest in their own suppliers or customers. Nvidia is a key player in this loop.\n\nInvestors are already fretting over whether the enormous amounts of money sunk into AI can ever return profits.\n\nWhile leading AI model builders Anthropic and OpenAI are moving toward public listings or fresh funding rounds, both face harsh reality checks. [...] The now multi-trillion-dollar company got its start making chips called graphic processing units (GPUs), used largely for video games. However, these chips – and their successors – turned out to be ideal for the kind of number-crunching needed for training and using AI models.\n\nOther companies such as Google and AMD have tried to make chips that can compete with Nvidia for speed and efficiency, however neither has been able to displace Nvidia from its dominance of the AI market. [...] Computer chips – specifically the chips used to produce and run artificial intelligence (AI) systems – have become a key front in the United States’ rivalry with China for geopolitical power and influence. The most powerful chips are needed for the most advanced AI, and the US has tried to maintain its edge over China by restricting access to those chips.\n\nWhile the Chinese government rejects claims of espionage, Alice Huang has reportedly been under investigation by the US for years.",
+                    "score": 0.5139658
+                  },
+                  {
+                    "title": "Banks push online banking, then blame us when we get hacked | Opinion",
+                    "url": "https://www.usatoday.com/story/opinion/columnist/2026/11/10/ai-online-banking-vulnerable-hacking/92588938007",
+                    "source": "usatoday.com",
+                    "summary": "One theory about an AI Armageddon doesn't involve robots who look like Arnold Schwarzenegger hunting us down with laser guns. AI could just take over our natural habitat, as we've done with other animals and plants, which would leave us without food and shelter.\n\nHere's a thought exercise: If AI were evaluating whether humans were worth saving for conservation purposes, would we grade out more as an invasive species or one that made important contributions to the ecosystem? [...] # Someone drained my bank account. Then the real nightmare began | Opinion\n\n## Over time, AI is going to turn our brains to mush. People won't be able to remember phone numbers, basic grammar or directions to places they've visited once or twice without consulting AI overlords.\n\nPortrait of Blake Fontenay\n\nThere's an old episode of \"The Simpsons\" where Homer, the TV show's booze-addled antihero, offers a hilarious toast: \"To alcohol! The cause of – and solution to – all of life's problems.\" [...] People – some of us, at least – are worried about AI eventually overthrowing human civilization. Even more immediately, there's widespread concern about the proliferation of data centers needed to support AI operations.\n\nYet at the same time we're collectively wringing our hands about those issues, we are meekly surrendering more and more control to machines over our everyday lives.",
+                    "score": 0.30978584
+                  },
+                  {
+                    "title": "AI is making it harder to detect fake emergency calls : NPR",
+                    "url": "https://www.npr.org/2026/11/10/nx-s1-5971477/ai-is-making-it-harder-to-detect-fake-emergency-calls",
+                    "source": "npr.org",
+                    "summary": "Jaclyn Diaz\n\nIt's getting harder to detect fake emergency calls thanks to AI. The tech is being used to generate believable swatting calls to law enforcement that claim a shooting or other crime is taking place.\n\nNPR does not offer or accept money for coverage or interviews.  \n Anyone who makes such an offer or request is not an NPR employee and does not represent NPR. [...] Accessibility links\n\n Keyboard shortcuts for audio player\n\nAI is making it harder to detect fake emergency calls It's getting harder to detect fake emergency calls thanks to AI. The tech is being used to generate believable swatting calls to law enforcement that claim a shooting or other crime is taking place.\n\n### Artificial Intelligence\n\n# AI is making it harder to detect fake emergency calls\n\nJaclyn Diaz",
+                    "score": 0.25530696
+                  },
+                  {
+                    "title": "AI stocks bounce back — with one notable exception",
+                    "url": "https://www.axios.com/2026/11/10/ai-stocks-nvidia-broadcom",
+                    "source": "axios.com",
+                    "summary": "The AI trade has regained momentum despite — or maybe because of — Nvidia's struggles following the weekend revelations from CEO Jensen Huang.\n\nThe big picture: Monday's sudden burst of exuberance for AI was the latest wide swing for a market upended by last week's \"blue tsunami\" in the midterm elections and the threat they could pose to the data center boom. [...] \"We believe stocks are now clearly in oversold territory,\" Goldman Sachs analysts wrote in a note Monday.\n   \"We believe the market's reaction to the midterms is overdone,\" wrote Morgan Stanley tech analysts in a note entitled \"Buy the Drop: AI Investment Opportunities Post the U.S. Midterms,\" which it published Sunday night. [...] \"We do not think AI is a continued sell here. In fact, tech drawdown is offering certain opportunities. The selloff was very sharp,\" JPMorgan equity strategists wrote Monday.",
+                    "score": 0.35186818
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "",
+          "tool_calls": [
+            {
+              "name": "format",
+              "args": {
+                "items": [
+                  {
+                    "title": "Accurate medical advice from AI can still be dangerous",
+                    "url": "https://www.statnews.com/2026/11/10/ai-health-advice-accuracy-messaging-risk-behavioral-benchmarking",
+                    "source": "statnews.com",
+                    "summary": "AI cung cấp lời khuyên y tế ở quy mô chưa từng có: hơn 300 triệu người mỗi tuần đặt câu hỏi sức khỏe cho ChatGPT. Chính phủ Mỹ cũng đang đẩy mạnh ứng dụng AI trong chăm sóc y tế, coi đây là 'chén thánh' cải thiện sức khỏe cộng đồng. Tuy nhiên, các chuyên gia nhấn mạnh: AI không thể trung lập vì mỗi câu trả lời đều loại trừ nhiều thông tin khác và nhấn mạnh một số thông tin nhất định, từ đó ảnh hưởng đến hành vi người dùng. Cần bổ sung đánh giá an toàn không chỉ ngăn chặn nguy hại tức thời (tự hại, bỏ điều trị) mà còn ngăn ngừa hại lâu dài, đồng thời thúc đẩy nghĩa vụ 'làm điều tốt' cho người bệnh."
+                  },
+                  {
+                    "title": "Why is Nvidia so powerful in the AI world, and what could Jensen Huang’s scandal really cost?",
+                    "url": "https://theconversation.com/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-scandal-really-cost-296257",
+                    "source": "theconversation.com",
+                    "summary": "Nvidia thống trị thị trường AI nhờ thiết kế GPU chuyên dụng cho đào tạo và chạy mô hình AI, trong khi các đối thủ như Google hay AMD chưa thể thay thế. Sự thống trị này không chỉ là lợi thế kinh doanh mà còn là yếu tố địa chính trị quan trọng khi chip mạnh nhất quyết định ưu thế AI giữa Mỹ và Trung Quốc. Việc CEO Jensen Huang dính scandal có thể gây xáo trộn lớn cho ngành, giữa lúc các nhà đầu tư lo ngại về khả năng sinh lời của vốn đổ vào AI."
+                  },
+                  {
+                    "title": "AI is making it harder to detect fake emergency calls",
+                    "url": "https://www.npr.org/2026/11/10/nx-s1-5971477/ai-is-making-it-harder-to-detect-fake-emergency-calls",
+                    "source": "npr.org",
+                    "summary": "AI đang được sử dụng để tạo ra các cuộc gọi khẩn cấp giả (swatting) cực kỳ thuyết phục, khiến cơ quan chức năng khó phân biệt thật giả. Điều này gây ra thách thức mới trong an ninh công cộng khi tội phạm khai thác AI để lừa cảnh sát và gây nhiễu hệ thống ứng phó khẩn cấp."
+                  },
+                  {
+                    "title": "AI stocks bounce back — with one notable exception",
+                    "url": "https://www.axios.com/2026/11/10/ai-stocks-nvidia-broadcom",
+                    "source": "axios.com",
+                    "summary": "Cổ phiếu AI phục hồi mạnh mẽ sau đợt sụt giảm trước đó, bất chấp những biến động chính trị gần đây. Các chuyên gia từ Goldman Sachs, Morgan Stanley và JPMorgan đều khuyến nghị 'mua khi giảm sâu' vì lĩnh vực này vẫn có tiềm năng dài hạn, dù Nvidia (ngoại lệ duy nhất) đang gặp khó khăn sau cáo buộc liên quan đến CEO Jensen Huang."
+                  }
+                ],
+                "template": "daily_ai_vn",
+                "headline": "Tin AI nổi bật hôm nay (10/11/2026)"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "format",
+              "args": {
+                "items": [
+                  {
+                    "title": "Accurate medical advice from AI can still be dangerous",
+                    "url": "https://www.statnews.com/2026/11/10/ai-health-advice-accuracy-messaging-risk-behavioral-benchmarking",
+                    "source": "statnews.com",
+                    "summary": "AI cung cấp lời khuyên y tế ở quy mô chưa từng có: hơn 300 triệu người mỗi tuần đặt câu hỏi sức khỏe cho ChatGPT. Chính phủ Mỹ cũng đang đẩy mạnh ứng dụng AI trong chăm sóc y tế, coi đây là 'chén thánh' cải thiện sức khỏe cộng đồng. Tuy nhiên, các chuyên gia nhấn mạnh: AI không thể trung lập vì mỗi câu trả lời đều loại trừ nhiều thông tin khác và nhấn mạnh một số thông tin nhất định, từ đó ảnh hưởng đến hành vi người dùng. Cần bổ sung đánh giá an toàn không chỉ ngăn chặn nguy hại tức thời (tự hại, bỏ điều trị) mà còn ngăn ngừa hại lâu dài, đồng thời thúc đẩy nghĩa vụ 'làm điều tốt' cho người bệnh."
+                  },
+                  {
+                    "title": "Why is Nvidia so powerful in the AI world, and what could Jensen Huang’s scandal really cost?",
+                    "url": "https://theconversation.com/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-scandal-really-cost-296257",
+                    "source": "theconversation.com",
+                    "summary": "Nvidia thống trị thị trường AI nhờ thiết kế GPU chuyên dụng cho đào tạo và chạy mô hình AI, trong khi các đối thủ như Google hay AMD chưa thể thay thế. Sự thống trị này không chỉ là lợi thế kinh doanh mà còn là yếu tố địa chính trị quan trọng khi chip mạnh nhất quyết định ưu thế AI giữa Mỹ và Trung Quốc. Việc CEO Jensen Huang dính scandal có thể gây xáo trộn lớn cho ngành, giữa lúc các nhà đầu tư lo ngại về khả năng sinh lời của vốn đổ vào AI."
+                  },
+                  {
+                    "title": "AI is making it harder to detect fake emergency calls",
+                    "url": "https://www.npr.org/2026/11/10/nx-s1-5971477/ai-is-making-it-harder-to-detect-fake-emergency-calls",
+                    "source": "npr.org",
+                    "summary": "AI đang được sử dụng để tạo ra các cuộc gọi khẩn cấp giả (swatting) cực kỳ thuyết phục, khiến cơ quan chức năng khó phân biệt thật giả. Điều này gây ra thách thức mới trong an ninh công cộng khi tội phạm khai thác AI để lừa cảnh sát và gây nhiễu hệ thống ứng phó khẩn cấp."
+                  },
+                  {
+                    "title": "AI stocks bounce back — with one notable exception",
+                    "url": "https://www.axios.com/2026/11/10/ai-stocks-nvidia-broadcom",
+                    "source": "axios.com",
+                    "summary": "Cổ phiếu AI phục hồi mạnh mẽ sau đợt sụt giảm trước đó, bất chấp những biến động chính trị gần đây. Các chuyên gia từ Goldman Sachs, Morgan Stanley và JPMorgan đều khuyến nghị 'mua khi giảm sâu' vì lĩnh vực này vẫn có tiềm năng dài hạn, dù Nvidia (ngoại lệ duy nhất) đang gặp khó khăn sau cáo buộc liên quan đến CEO Jensen Huang."
+                  }
+                ],
+                "template": "daily_ai_vn",
+                "headline": "Tin AI nổi bật hôm nay (10/11/2026)"
+              },
+              "result": {
+                "tool": "render_digest",
+                "template": "daily_ai_vn",
+                "markdown": "**Tin AI nổi bật hôm nay (10/11/2026)**\n\n**Tin chính**\n- AI cung cấp lời khuyên y tế ở quy mô chưa từng có: hơn 300 triệu người mỗi tuần đặt câu hỏi sức khỏe cho ChatGPT. Chính phủ Mỹ cũng đang đẩy mạnh ứng dụng AI trong chăm sóc y tế, coi đây là 'chén thánh' cải thiện sức khỏe cộng đồng. Tuy nhiên, các chuyên gia nhấn mạnh: AI khôn... - [statnews.com](https://www.statnews.com/2026/11/10/ai-health-advice-accuracy-messaging-risk-behavioral-benchmarking)\n- Nvidia thống trị thị trường AI nhờ thiết kế GPU chuyên dụng cho đào tạo và chạy mô hình AI, trong khi các đối thủ như Google hay AMD chưa thể thay thế. Sự thống trị này không chỉ là lợi thế kinh doanh mà còn là yếu tố địa chính trị quan trọng khi chip mạnh nhất quyết định ưu t... - [theconversation.com](https://theconversation.com/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-scandal-really-cost-296257)\n- AI đang được sử dụng để tạo ra các cuộc gọi khẩn cấp giả (swatting) cực kỳ thuyết phục, khiến cơ quan chức năng khó phân biệt thật giả. Điều này gây ra thách thức mới trong an ninh công cộng khi tội phạm khai thác AI để lừa cảnh sát và gây nhiễu hệ thống ứng phó khẩn cấp. - [npr.org](https://www.npr.org/2026/11/10/nx-s1-5971477/ai-is-making-it-harder-to-detect-fake-emergency-calls)\n- Cổ phiếu AI phục hồi mạnh mẽ sau đợt sụt giảm trước đó, bất chấp những biến động chính trị gần đây. Các chuyên gia từ Goldman Sachs, Morgan Stanley và JPMorgan đều khuyến nghị 'mua khi giảm sâu' vì lĩnh vực này vẫn có tiềm năng dài hạn, dù Nvidia (ngoại lệ duy nhất) đang gặp k... - [axios.com](https://www.axios.com/2026/11/10/ai-stocks-nvidia-broadcom)\n",
+                "item_count": 4
+              }
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "assistant_text": "**Tin AI nổi bật hôm nay (10/11/2026)**\n\n**Tin chính**\n- **AI trong y tế: Lợi ích to lớn nhưng rủi ro tiềm ẩn**\n  AI cung cấp lời khuyên y tế ở quy mô chưa từng có: hơn 300 triệu người mỗi tuần đặt câu hỏi sức khỏe cho ChatGPT. Chính phủ Mỹ cũng đang đẩy mạnh ứng dụng AI trong chăm sóc y tế, coi đây là \"chén thánh\" cải thiện sức khỏe cộng đồng. Tuy nhiên, các chuyên gia nhấn mạnh: AI không thể trung lập vì mỗi câu trả lời đều loại trừ nhiều thông tin khác và nhấn mạnh một số thông tin nhất định, từ đó ảnh hưởng đến hành vi người dùng. Cần bổ sung đánh giá an toàn không chỉ ngăn chặn nguy hại tức thời (tự hại, bỏ điều trị) mà còn ngăn ngừa hại lâu dài, đồng thời thúc đẩy nghĩa vụ \"làm điều tốt\" cho người bệnh.\n  [Xem chi tiết tại *STAT*](https://www.statnews.com/2026/11/10/ai-health-advice-accuracy-messaging-risk-behavioral-benchmarking)\n\n- **Nvidia: Sức mạnh thống trị thị trường AI và những rủi ro từ scandal của Jensen Huang**\n  Nvidia thống trị thị trường AI nhờ thiết kế GPU chuyên dụng cho đào tạo và chạy mô hình AI, trong khi các đối thủ như Google hay AMD chưa thể thay thế. Sự thống trị này không chỉ là lợi thế kinh doanh mà còn là yếu tố địa chính trị quan trọng khi chip mạnh nhất quyết định ưu thế AI giữa Mỹ và Trung Quốc. Việc CEO Jensen Huang dính scandal có thể gây xáo trộn lớn cho ngành, giữa lúc các nhà đầu tư lo ngại về khả năng sinh lời của vốn đổ vào AI.\n  [Xem chi tiết tại *The Conversation*](https://theconversation.com/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-scandal-really-cost-296257)\n\n- **AI bị lợi dụng để tạo cuộc gọi khẩn cấp giả (swatting)**\n  AI đang được sử dụng để tạo ra các cuộc gọi khẩn cấp giả (swatting) cực kỳ thuyết phục, khiến cơ quan chức năng khó phân biệt thật giả. Điều này gây ra thách thức mới trong an ninh công cộng khi tội phạm khai thác AI để lừa cảnh sát và gây nhiễu hệ thống ứng phó khẩn cấp.\n  [Xem chi tiết tại *NPR*](https://www.npr.org/2026/11/10/nx-s1-5971477/ai-is-making-it-harder-to-detect-fake-emergency-calls)\n\n- **Cổ phiếu AI phục hồi mạnh mẽ sau đợt sụt giảm**\n  Cổ phiếu AI phục hồi mạnh mẽ sau đợt sụt giảm trước đó, bất chấp những biến động chính trị gần đây. Các chuyên gia từ Goldman Sachs, Morgan Stanley và JPMorgan đều khuyến nghị \"mua khi giảm sâu\" vì lĩnh vực này vẫn có tiềm năng dài hạn, dù Nvidia (ngoại lệ duy nhất) đang gặp khó khăn sau cáo buộc liên quan đến CEO Jensen Huang.\n  [Xem chi tiết tại *Axios*](https://www.axios.com/2026/11/10/ai-stocks-nvidia-broadcom)",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "Accurate medical advice from AI can still be dangerous | STAT",
+                "url": "https://www.statnews.com/2026/11/10/ai-health-advice-accuracy-messaging-risk-behavioral-benchmarking",
+                "source": "statnews.com",
+                "summary": "Some will argue that AI should be a neutral aggregator of information. But AI cannot be neutral: Every accurate answer excludes many additional facts and emphasizes some over others. Because of these choices, AI answers already influence behavior, as shown by the chickenpox party examples. [...] Artificial intelligence is delivering health guidance at an unprecedented scale. Every week, more than 300 million people ask ChatGPT health questions. Now, the federal government is moving AI deeper into medical care to communicate directly and autonomously with patients. Chris Klomp, the nominee for deputy secretary of Health and Human Services, has called AI in patient care the agency’s “holy grail” for improving the nation’s health. [...] Medical ethics pairs the duty to do no harm with beneficence, which is an affirmative obligation to do good. Safety evaluations of AI have focused mainly on the first duty by screening for responses that encourage imminent self-harm, discourage necessary care, or spread false information. Behavioral benchmarking would extend the first duty beyond imminent danger to long-term harms. It could also advance the second duty, which has received far less attention: designing AI to help people by",
+                "score": 0.31910068
+              },
+              {
+                "title": "Why is Nvidia so powerful in the AI world, and what could Jensen Huang’s scandal really cost?",
+                "url": "https://theconversation.com/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-scandal-really-cost-296257",
+                "source": "theconversation.com",
+                "summary": "The AI sector is notorious for the amount of circular financing going on – where companies invest in their own suppliers or customers. Nvidia is a key player in this loop.\n\nInvestors are already fretting over whether the enormous amounts of money sunk into AI can ever return profits.\n\nWhile leading AI model builders Anthropic and OpenAI are moving toward public listings or fresh funding rounds, both face harsh reality checks. [...] The now multi-trillion-dollar company got its start making chips called graphic processing units (GPUs), used largely for video games. However, these chips – and their successors – turned out to be ideal for the kind of number-crunching needed for training and using AI models.\n\nOther companies such as Google and AMD have tried to make chips that can compete with Nvidia for speed and efficiency, however neither has been able to displace Nvidia from its dominance of the AI market. [...] Computer chips – specifically the chips used to produce and run artificial intelligence (AI) systems – have become a key front in the United States’ rivalry with China for geopolitical power and influence. The most powerful chips are needed for the most advanced AI, and the US has tried to maintain its edge over China by restricting access to those chips.\n\nWhile the Chinese government rejects claims of espionage, Alice Huang has reportedly been under investigation by the US for years.",
+                "score": 0.5139658
+              },
+              {
+                "title": "Banks push online banking, then blame us when we get hacked | Opinion",
+                "url": "https://www.usatoday.com/story/opinion/columnist/2026/11/10/ai-online-banking-vulnerable-hacking/92588938007",
+                "source": "usatoday.com",
+                "summary": "One theory about an AI Armageddon doesn't involve robots who look like Arnold Schwarzenegger hunting us down with laser guns. AI could just take over our natural habitat, as we've done with other animals and plants, which would leave us without food and shelter.\n\nHere's a thought exercise: If AI were evaluating whether humans were worth saving for conservation purposes, would we grade out more as an invasive species or one that made important contributions to the ecosystem? [...] # Someone drained my bank account. Then the real nightmare began | Opinion\n\n## Over time, AI is going to turn our brains to mush. People won't be able to remember phone numbers, basic grammar or directions to places they've visited once or twice without consulting AI overlords.\n\nPortrait of Blake Fontenay\n\nThere's an old episode of \"The Simpsons\" where Homer, the TV show's booze-addled antihero, offers a hilarious toast: \"To alcohol! The cause of – and solution to – all of life's problems.\" [...] People – some of us, at least – are worried about AI eventually overthrowing human civilization. Even more immediately, there's widespread concern about the proliferation of data centers needed to support AI operations.\n\nYet at the same time we're collectively wringing our hands about those issues, we are meekly surrendering more and more control to machines over our everyday lives.",
+                "score": 0.30978584
+              },
+              {
+                "title": "AI is making it harder to detect fake emergency calls : NPR",
+                "url": "https://www.npr.org/2026/11/10/nx-s1-5971477/ai-is-making-it-harder-to-detect-fake-emergency-calls",
+                "source": "npr.org",
+                "summary": "Jaclyn Diaz\n\nIt's getting harder to detect fake emergency calls thanks to AI. The tech is being used to generate believable swatting calls to law enforcement that claim a shooting or other crime is taking place.\n\nNPR does not offer or accept money for coverage or interviews.  \n Anyone who makes such an offer or request is not an NPR employee and does not represent NPR. [...] Accessibility links\n\n Keyboard shortcuts for audio player\n\nAI is making it harder to detect fake emergency calls It's getting harder to detect fake emergency calls thanks to AI. The tech is being used to generate believable swatting calls to law enforcement that claim a shooting or other crime is taking place.\n\n### Artificial Intelligence\n\n# AI is making it harder to detect fake emergency calls\n\nJaclyn Diaz",
+                "score": 0.25530696
+              },
+              {
+                "title": "AI stocks bounce back — with one notable exception",
+                "url": "https://www.axios.com/2026/11/10/ai-stocks-nvidia-broadcom",
+                "source": "axios.com",
+                "summary": "The AI trade has regained momentum despite — or maybe because of — Nvidia's struggles following the weekend revelations from CEO Jensen Huang.\n\nThe big picture: Monday's sudden burst of exuberance for AI was the latest wide swing for a market upended by last week's \"blue tsunami\" in the midterm elections and the threat they could pose to the data center boom. [...] \"We believe stocks are now clearly in oversold territory,\" Goldman Sachs analysts wrote in a note Monday.\n   \"We believe the market's reaction to the midterms is overdone,\" wrote Morgan Stanley tech analysts in a note entitled \"Buy the Drop: AI Investment Opportunities Post the U.S. Midterms,\" which it published Sunday night. [...] \"We do not think AI is a continued sell here. In fact, tech drawdown is offering certain opportunities. The selloff was very sharp,\" JPMorgan equity strategists wrote Monday.",
+                "score": 0.35186818
+              }
+            ]
+          }
+        },
+        {
+          "tool": "format",
+          "args": {
+            "items": [
+              {
+                "title": "Accurate medical advice from AI can still be dangerous",
+                "url": "https://www.statnews.com/2026/11/10/ai-health-advice-accuracy-messaging-risk-behavioral-benchmarking",
+                "source": "statnews.com",
+                "summary": "AI cung cấp lời khuyên y tế ở quy mô chưa từng có: hơn 300 triệu người mỗi tuần đặt câu hỏi sức khỏe cho ChatGPT. Chính phủ Mỹ cũng đang đẩy mạnh ứng dụng AI trong chăm sóc y tế, coi đây là 'chén thánh' cải thiện sức khỏe cộng đồng. Tuy nhiên, các chuyên gia nhấn mạnh: AI không thể trung lập vì mỗi câu trả lời đều loại trừ nhiều thông tin khác và nhấn mạnh một số thông tin nhất định, từ đó ảnh hưởng đến hành vi người dùng. Cần bổ sung đánh giá an toàn không chỉ ngăn chặn nguy hại tức thời (tự hại, bỏ điều trị) mà còn ngăn ngừa hại lâu dài, đồng thời thúc đẩy nghĩa vụ 'làm điều tốt' cho người bệnh."
+              },
+              {
+                "title": "Why is Nvidia so powerful in the AI world, and what could Jensen Huang’s scandal really cost?",
+                "url": "https://theconversation.com/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-scandal-really-cost-296257",
+                "source": "theconversation.com",
+                "summary": "Nvidia thống trị thị trường AI nhờ thiết kế GPU chuyên dụng cho đào tạo và chạy mô hình AI, trong khi các đối thủ như Google hay AMD chưa thể thay thế. Sự thống trị này không chỉ là lợi thế kinh doanh mà còn là yếu tố địa chính trị quan trọng khi chip mạnh nhất quyết định ưu thế AI giữa Mỹ và Trung Quốc. Việc CEO Jensen Huang dính scandal có thể gây xáo trộn lớn cho ngành, giữa lúc các nhà đầu tư lo ngại về khả năng sinh lời của vốn đổ vào AI."
+              },
+              {
+                "title": "AI is making it harder to detect fake emergency calls",
+                "url": "https://www.npr.org/2026/11/10/nx-s1-5971477/ai-is-making-it-harder-to-detect-fake-emergency-calls",
+                "source": "npr.org",
+                "summary": "AI đang được sử dụng để tạo ra các cuộc gọi khẩn cấp giả (swatting) cực kỳ thuyết phục, khiến cơ quan chức năng khó phân biệt thật giả. Điều này gây ra thách thức mới trong an ninh công cộng khi tội phạm khai thác AI để lừa cảnh sát và gây nhiễu hệ thống ứng phó khẩn cấp."
+              },
+              {
+                "title": "AI stocks bounce back — with one notable exception",
+                "url": "https://www.axios.com/2026/11/10/ai-stocks-nvidia-broadcom",
+                "source": "axios.com",
+                "summary": "Cổ phiếu AI phục hồi mạnh mẽ sau đợt sụt giảm trước đó, bất chấp những biến động chính trị gần đây. Các chuyên gia từ Goldman Sachs, Morgan Stanley và JPMorgan đều khuyến nghị 'mua khi giảm sâu' vì lĩnh vực này vẫn có tiềm năng dài hạn, dù Nvidia (ngoại lệ duy nhất) đang gặp khó khăn sau cáo buộc liên quan đến CEO Jensen Huang."
+              }
+            ],
+            "template": "daily_ai_vn",
+            "headline": "Tin AI nổi bật hôm nay (10/11/2026)"
+          },
+          "result": {
+            "tool": "render_digest",
+            "template": "daily_ai_vn",
+            "markdown": "**Tin AI nổi bật hôm nay (10/11/2026)**\n\n**Tin chính**\n- AI cung cấp lời khuyên y tế ở quy mô chưa từng có: hơn 300 triệu người mỗi tuần đặt câu hỏi sức khỏe cho ChatGPT. Chính phủ Mỹ cũng đang đẩy mạnh ứng dụng AI trong chăm sóc y tế, coi đây là 'chén thánh' cải thiện sức khỏe cộng đồng. Tuy nhiên, các chuyên gia nhấn mạnh: AI khôn... - [statnews.com](https://www.statnews.com/2026/11/10/ai-health-advice-accuracy-messaging-risk-behavioral-benchmarking)\n- Nvidia thống trị thị trường AI nhờ thiết kế GPU chuyên dụng cho đào tạo và chạy mô hình AI, trong khi các đối thủ như Google hay AMD chưa thể thay thế. Sự thống trị này không chỉ là lợi thế kinh doanh mà còn là yếu tố địa chính trị quan trọng khi chip mạnh nhất quyết định ưu t... - [theconversation.com](https://theconversation.com/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-scandal-really-cost-296257)\n- AI đang được sử dụng để tạo ra các cuộc gọi khẩn cấp giả (swatting) cực kỳ thuyết phục, khiến cơ quan chức năng khó phân biệt thật giả. Điều này gây ra thách thức mới trong an ninh công cộng khi tội phạm khai thác AI để lừa cảnh sát và gây nhiễu hệ thống ứng phó khẩn cấp. - [npr.org](https://www.npr.org/2026/11/10/nx-s1-5971477/ai-is-making-it-harder-to-detect-fake-emergency-calls)\n- Cổ phiếu AI phục hồi mạnh mẽ sau đợt sụt giảm trước đó, bất chấp những biến động chính trị gần đây. Các chuyên gia từ Goldman Sachs, Morgan Stanley và JPMorgan đều khuyến nghị 'mua khi giảm sâu' vì lĩnh vực này vẫn có tiềm năng dài hạn, dù Nvidia (ngoại lệ duy nhất) đang gặp k... - [axios.com](https://www.axios.com/2026/11/10/ai-stocks-nvidia-broadcom)\n",
+            "item_count": 4
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T19:19:00"
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-11-10T19:19:00",
+      "user": "Tóm tắt 5 tweet mới nhất giúp mình",
+      "status": "waiting_for_user",
+      "assistant_text": "Bạn muốn xem tweet của tài khoản nào?",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "",
+          "tool_calls": [
+            {
+              "name": "clarify",
+              "args": {
+                "question": "Bạn muốn xem tweet của tài khoản nào?",
+                "response_type": "text"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "clarify",
+              "args": {
+                "question": "Bạn muốn xem tweet của tài khoản nào?",
+                "response_type": "text"
+              },
+              "result": {
+                "tool": "ask_user",
+                "question": "Bạn muốn xem tweet của tài khoản nào?",
+                "response_type": "text",
+                "options": [],
+                "awaiting_user": true
+              }
+            }
+          ]
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn muốn xem tweet của tài khoản nào?",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn muốn xem tweet của tài khoản nào?",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T19:19:01"
+    },
+    {
+      "turn_index": 3,
+      "started_at": "2026-11-10T19:19:01",
+      "user": "Của Andrej Karpathy nhé",
+      "status": "answered",
+      "assistant_text": "**5 tweet mới nhất của @karpathy**\n\n1/ [Earlier this week Tristan published his top YouTube channels](https://x.com/karpathy/status/2119114537442189652)\n→ Chuyển danh sách kênh YouTube hay của Tristan thành **TristanTube**: 47K video siêu nerd + chế độ TV thư giãn. (Làm xong trong 3 phút bằng Claude Code)\n\n2/ [Weekend hack: HackerTube](https://x.com/karpathy/status/2116957135661945283)\n→ Lọc 43 triệu bình luận trên Hacker News 20 năm xuống còn 6.454 video được đề xuất liên tục → trải nghiệm YouTube tốt hơn hẳn. Code deploy xong trong ~2 giờ bằng Opus 5.5.\n\n3/ [RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why](https://x.com/karpathy/status/2114384346815820050)\n→ Smart TV rẻ vì chúng thu thập dữ liệu người dùng 24/7 (ví dụ: mic luôn bật).\n\n4/ [Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*](https://x.com/karpathy/status/2109361546505966046)\n→ Phân tầng hiểu biết về LLM:\n- 75% dân số chưa tiếp xúc.\n- 20% dùng free-tier như Google nâng cấp.\n- 0.2% chuyên gia thấy LLM làm dự án lớn trong phút chốc.\n- 0.00006% (5.000 người) có quyền truy cập hệ thống nội bộ thấy AI chạy siêu dự án, tấn công mạng, khám phá khoa học.\n\n5/ [Cool eval: “Land or Water?”](https://x.com/karpathy/status/2105909609487872075)\n→ Chỉ cần hỏi LLM “Đất hay Nước?” kèm tọa độ → vẽ bản đồ 16.200 lần. Mô hình biết nhờ nén thông tin internet.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "",
+          "tool_calls": [
+            {
+              "name": "timeline",
+              "args": {
+                "screenname": "karpathy",
+                "limit": 5
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "timeline",
+              "args": {
+                "screenname": "karpathy",
+                "limit": 5
+              },
+              "result": {
+                "tool": "get_user_tweets",
+                "screenname": "karpathy",
+                "items": [
+                  {
+                    "title": "Earlier this week Tristan published his top YouTube channels:",
+                    "summary": "Earlier this week Tristan published his top YouTube channels:\nhttps://t.co/NZ3UCNo6cT\nWhich looked excellent so clearly I had to turn it into TristanTube:\nhttps://t.co/l0KyW1WdNH\n47K super nerdy videos +TV mode for laid back watching. (One-shotted with Claude Code in 3 minutes)",
+                    "url": "https://x.com/karpathy/status/2119114537442189652",
+                    "source": "@karpathy",
+                    "date": "Sat Nov 07 17:07:31 +0000 2026",
+                    "metrics": {
+                      "favorites": 9180,
+                      "retweets": 772,
+                      "views": "945525"
+                    }
+                  },
+                  {
+                    "title": "Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 ",
+                    "summary": "Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. *Significantly* better viewing experience, ~2 hours with Opus 5.5:\nhttps://t.co/JIhXN7OSh1\n\n- Excellent recs without any logins (state is kept in local browser session)\n- Thumbnail is a representative frame from middle of the video instead of the super duper A/B test hyper-optimized user uploads\n- Underlying data from the comment analysis as one zip file, point your Claude at it and ask for your own version\n- HackerTube Longs ✊\n\nA bit more on the process:\nI use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only \"manual work\" I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.\n\nMany awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.",
+                    "url": "https://x.com/karpathy/status/2116957135661945283",
+                    "source": "@karpathy",
+                    "date": "Sun Nov 01 18:14:46 +0000 2026",
+                    "metrics": {
+                      "favorites": 52355,
+                      "retweets": 4836,
+                      "views": "5725976"
+                    }
+                  },
+                  {
+                    "title": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.",
+                    "summary": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.\n\n@log4j rooted his Samsung and found an always-on hot mic,…",
+                    "url": "https://x.com/karpathy/status/2114384346815820050",
+                    "source": "@karpathy",
+                    "date": "Sun Oct 25 15:51:26 +0000 2026",
+                    "metrics": {
+                      "favorites": 0,
+                      "retweets": 3287,
+                      "views": "40227"
+                    }
+                  },
+                  {
+                    "title": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now les",
+                    "summary": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now less \"two groups of people speaking past each other\" and more a sharp funnel.\n\n- Napkin math somewhere around 6B people (~75% of the population) have barely come in contact with LLMs at all.\n- Around 1-2B (~20%) are casual and infrequent users of free-tier ChatGPT-like products. This group sees derpy chatbots and treats them a bit like a better Google search, a writing aid, or etc. Maybe an agent tries to book you a flight. I have non-tech friends who (reasonably, imo) say they have not much use for it at all. Even many professionals outside of math&code are in this tier. For example, execs and many other functions spend a lot of their time talking to other people, so while they understand what is happening intellectually, it is still second-hand and a bit abstract.\n- Now we get to professional use of frontier-grade LLMs in math&code. Somewhere around 20M people (0.2%) see first-hand that large, complex projects that used to take them weeks/months can now be completed by agents with a prompt. Building apps, copying apps, translating apps, decompiling apps from binaries... This has all happened very quickly and recently - less than 1 year ago, I was writing code manually by hand, typing memorized computer code commands into a code editor character by character, occasionally pressing Tab to autocomplete a little chunk of code.\n- And finally we get to the ~5,000 people (~0.00006%) with access to frontier-grade systems internally. The external world has seen the preview. It looks like swarms of thousands of agents collaborating over weeks on software mega projects: minting zero days, running cyber attacks and defenses at machine speeds, discovering new science, advancing the frontier of mathematics. Things that would have taken top professionals in the industry years of work. Meanwhile, human review and comprehension are starting to fall behind. For example, people are still involved in the \"archeology\" of the OpenAI-HF incident from many months ago. Mathematicians may be poring over the 722 manuscripts on frontier mathematics for a while.\n\nThe funnel is driven by a combination of factors:\n1. The impact scales with ambition, problem size, and horizon. A question with a paragraph answer barely stresses the system. You need a reservoir of big, difficult problems that you really care about. This aspect drives the consumer / professional dimension of the funnel.\n2. The jaggedness of the system (which I have written about a lot separately). Capability peaks in domains that are digital, verifiable and economically valuable. This is because LLM capability emerges from reinforcement learning on verifiable rewards on a curated environment mixture driven by revenue potential. This aspect primarily drives the area (e.g. math&code) dimension of the funnel.\n3. Access. Free-tier, paid-tier, internal.\n\nSo this is the weirdness of the moment. The general public has mostly not interacted with these systems. When they have, it looks like a derpy chatbot. The majority of professionals still see only a modest uplift. And a small sliver of professionals are experiencing the vertigo of the curve going vertical. And it is all happening at the same time.",
+                    "url": "https://x.com/karpathy/status/2109361546505966046",
+                    "source": "@karpathy",
+                    "date": "Sun Oct 11 19:12:37 +0000 2026",
+                    "metrics": {
+                      "favorites": 44257,
+                      "retweets": 5926,
+                      "views": "6980573"
+                    }
+                  },
+                  {
+                    "title": "Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times,",
+                    "summary": "Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times, plot as image. The models know. From compressing the internet.",
+                    "url": "https://x.com/karpathy/status/2105909609487872075",
+                    "source": "@karpathy",
+                    "date": "Fri Oct 02 06:35:51 +0000 2026",
+                    "metrics": {
+                      "favorites": 19514,
+                      "retweets": 1092,
+                      "views": "1606680"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "",
+          "tool_calls": [
+            {
+              "name": "format",
+              "args": {
+                "items": [
+                  {
+                    "title": "Earlier this week Tristan published his top YouTube channels:",
+                    "url": "https://x.com/karpathy/status/2119114537442189652",
+                    "source": "@karpathy",
+                    "summary": "Earlier this week Tristan published his top YouTube channels: https://t.co/NZ3UCNo6cT\nWhich looked excellent so clearly I had to turn it into TristanTube: https://t.co/l0KyW1WdNH\n47K super nerdy videos +TV mode for laid back watching. (One-shotted with Claude Code in 3 minutes)",
+                    "metrics": {
+                      "favorites": 9180,
+                      "retweets": 772,
+                      "views": 945525
+                    }
+                  },
+                  {
+                    "title": "Weekend hack: HackerTube",
+                    "url": "https://x.com/karpathy/status/2116957135661945283",
+                    "source": "@karpathy",
+                    "summary": "Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. *Significantly* better viewing experience, ~2 hours with Opus 5.5:\nhttps://t.co/JIhXN7OSh1\n\n- Excellent recs without any logins (state is kept in local browser session)\n- Thumbnail is a representative frame from middle of the video instead of the super duper A/B test hyper-optimized user uploads\n- Underlying data from the comment analysis as one zip file, point your Claude at it and ask for your own version\n- HackerTube Longs ✊\n\nA bit more on the process:\nI use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only \"manual work\" I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.\n\nMany awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.",
+                    "metrics": {
+                      "favorites": 52355,
+                      "retweets": 4836,
+                      "views": 5725976
+                    }
+                  },
+                  {
+                    "title": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.",
+                    "url": "https://x.com/karpathy/status/2114384346815820050",
+                    "source": "@karpathy",
+                    "summary": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.\n\n@log4j rooted his Samsung and found an always-on hot mic,…",
+                    "metrics": {
+                      "favorites": 0,
+                      "retweets": 3287,
+                      "views": 40227
+                    }
+                  },
+                  {
+                    "title": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*",
+                    "url": "https://x.com/karpathy/status/2109361546505966046",
+                    "source": "@karpathy",
+                    "summary": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now less \"two groups of people speaking past each other\" and more a sharp funnel.\n\n- Napkin math somewhere around 6B people (~75% of the population) have barely come in contact with LLMs at all.\n- Around 1-2B (~20%) are casual and infrequent users of free-tier ChatGPT-like products. This group sees derpy chatbots and treats them a bit like a better Google search, a writing aid, or etc. Maybe an agent tries to book you a flight. I have non-tech friends who (reasonably, imo) say they have not much use for it at all. Even many professionals outside of math&code are in this tier. For example, execs and many other functions spend a lot of their time talking to other people, so while they understand what is happening intellectually, it is still second-hand and a bit abstract.\n- Now we get to professional use of frontier-grade LLMs in math&code. Somewhere around 20M people (0.2%) see first-hand that large, complex projects that used to take them weeks/months can now be completed by agents with a prompt. Building apps, copying apps, translating apps, decompiling apps from binaries... This has all happened very quickly and recently - less than 1 year ago, I was writing code manually by hand, typing memorized computer code commands into a code editor character by character, occasionally pressing Tab to autocomplete a little chunk of code.\n- And finally we get to the ~5,000 people (~0.00006%) with access to frontier-grade systems internally. The external world has seen the preview. It looks like swarms of thousands of agents collaborating over weeks on software mega projects: minting zero days, running cyber attacks and defenses at machine speeds, discovering new science, advancing the frontier of mathematics. Things that would have taken top professionals in the industry years of work. Meanwhile, human review and comprehension are starting to fall behind. For example, people are still involved in the \"archeology\" of the OpenAI-HF incident from many months ago. Mathematicians may be poring over the 722 manuscripts on frontier mathematics for a while.\n\nThe funnel is driven by a combination of factors:\n1. The impact scales with ambition, problem size, and horizon. A question with a paragraph answer barely stresses the system. You need a reservoir of big, difficult problems that you really care about. This aspect drives the consumer / professional dimension of the funnel.\n2. The jaggedness of the system (which I have written about a lot separately). Capability peaks in domains that are digital, verifiable and economically valuable. This is because LLM capability emerges from reinforcement learning on verifiable rewards on a curated environment mixture driven by revenue potential. This aspect primarily drives the area (e.g. math&code) dimension of the funnel.\n3. Access. Free-tier, paid-tier, internal.",
+                    "metrics": {
+                      "favorites": 44257,
+                      "retweets": 5926,
+                      "views": 6980573
+                    }
+                  },
+                  {
+                    "title": "Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times,",
+                    "url": "https://x.com/karpathy/status/2105909609487872075",
+                    "source": "@karpathy",
+                    "summary": "Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times, plot as image. The models know. From compressing the internet.",
+                    "metrics": {
+                      "favorites": 19514,
+                      "retweets": 1092,
+                      "views": 1606680
+                    }
+                  }
+                ],
+                "template": "thread",
+                "headline": "5 tweet mới nhất của @karpathy"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "format",
+              "args": {
+                "items": [
+                  {
+                    "title": "Earlier this week Tristan published his top YouTube channels:",
+                    "url": "https://x.com/karpathy/status/2119114537442189652",
+                    "source": "@karpathy",
+                    "summary": "Earlier this week Tristan published his top YouTube channels: https://t.co/NZ3UCNo6cT\nWhich looked excellent so clearly I had to turn it into TristanTube: https://t.co/l0KyW1WdNH\n47K super nerdy videos +TV mode for laid back watching. (One-shotted with Claude Code in 3 minutes)",
+                    "metrics": {
+                      "favorites": 9180,
+                      "retweets": 772,
+                      "views": 945525
+                    }
+                  },
+                  {
+                    "title": "Weekend hack: HackerTube",
+                    "url": "https://x.com/karpathy/status/2116957135661945283",
+                    "source": "@karpathy",
+                    "summary": "Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. *Significantly* better viewing experience, ~2 hours with Opus 5.5:\nhttps://t.co/JIhXN7OSh1\n\n- Excellent recs without any logins (state is kept in local browser session)\n- Thumbnail is a representative frame from middle of the video instead of the super duper A/B test hyper-optimized user uploads\n- Underlying data from the comment analysis as one zip file, point your Claude at it and ask for your own version\n- HackerTube Longs ✊\n\nA bit more on the process:\nI use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only \"manual work\" I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.\n\nMany awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.",
+                    "metrics": {
+                      "favorites": 52355,
+                      "retweets": 4836,
+                      "views": 5725976
+                    }
+                  },
+                  {
+                    "title": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.",
+                    "url": "https://x.com/karpathy/status/2114384346815820050",
+                    "source": "@karpathy",
+                    "summary": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.\n\n@log4j rooted his Samsung and found an always-on hot mic,…",
+                    "metrics": {
+                      "favorites": 0,
+                      "retweets": 3287,
+                      "views": 40227
+                    }
+                  },
+                  {
+                    "title": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*",
+                    "url": "https://x.com/karpathy/status/2109361546505966046",
+                    "source": "@karpathy",
+                    "summary": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now less \"two groups of people speaking past each other\" and more a sharp funnel.\n\n- Napkin math somewhere around 6B people (~75% of the population) have barely come in contact with LLMs at all.\n- Around 1-2B (~20%) are casual and infrequent users of free-tier ChatGPT-like products. This group sees derpy chatbots and treats them a bit like a better Google search, a writing aid, or etc. Maybe an agent tries to book you a flight. I have non-tech friends who (reasonably, imo) say they have not much use for it at all. Even many professionals outside of math&code are in this tier. For example, execs and many other functions spend a lot of their time talking to other people, so while they understand what is happening intellectually, it is still second-hand and a bit abstract.\n- Now we get to professional use of frontier-grade LLMs in math&code. Somewhere around 20M people (0.2%) see first-hand that large, complex projects that used to take them weeks/months can now be completed by agents with a prompt. Building apps, copying apps, translating apps, decompiling apps from binaries... This has all happened very quickly and recently - less than 1 year ago, I was writing code manually by hand, typing memorized computer code commands into a code editor character by character, occasionally pressing Tab to autocomplete a little chunk of code.\n- And finally we get to the ~5,000 people (~0.00006%) with access to frontier-grade systems internally. The external world has seen the preview. It looks like swarms of thousands of agents collaborating over weeks on software mega projects: minting zero days, running cyber attacks and defenses at machine speeds, discovering new science, advancing the frontier of mathematics. Things that would have taken top professionals in the industry years of work. Meanwhile, human review and comprehension are starting to fall behind. For example, people are still involved in the \"archeology\" of the OpenAI-HF incident from many months ago. Mathematicians may be poring over the 722 manuscripts on frontier mathematics for a while.\n\nThe funnel is driven by a combination of factors:\n1. The impact scales with ambition, problem size, and horizon. A question with a paragraph answer barely stresses the system. You need a reservoir of big, difficult problems that you really care about. This aspect drives the consumer / professional dimension of the funnel.\n2. The jaggedness of the system (which I have written about a lot separately). Capability peaks in domains that are digital, verifiable and economically valuable. This is because LLM capability emerges from reinforcement learning on verifiable rewards on a curated environment mixture driven by revenue potential. This aspect primarily drives the area (e.g. math&code) dimension of the funnel.\n3. Access. Free-tier, paid-tier, internal.",
+                    "metrics": {
+                      "favorites": 44257,
+                      "retweets": 5926,
+                      "views": 6980573
+                    }
+                  },
+                  {
+                    "title": "Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times,",
+                    "url": "https://x.com/karpathy/status/2105909609487872075",
+                    "source": "@karpathy",
+                    "summary": "Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times, plot as image. The models know. From compressing the internet.",
+                    "metrics": {
+                      "favorites": 19514,
+                      "retweets": 1092,
+                      "views": 1606680
+                    }
+                  }
+                ],
+                "template": "thread",
+                "headline": "5 tweet mới nhất của @karpathy"
+              },
+              "result": {
+                "tool": "render_digest",
+                "template": "thread",
+                "markdown": "1/ Earlier this week Tristan published his top YouTube channels: https://t.co/NZ3UCNo6cT Which looked excellent so clearly I had to turn it into TristanTube: https://t.co/l0KyW1WdNH 47K super nerdy videos +TV mode for laid back watching. (One-shotted with Claude Code in 3 minutes) - [@karpathy](https://x.com/karpathy/status/2119114537442189652)\n\n2/ Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. *Significantly* better viewing experience, ~2 hours with Opus 5.5: https://t.co/JIhXN7OSh1  - Excell... - [@karpathy](https://x.com/karpathy/status/2116957135661945283)\n\n3/ RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.  @log4j rooted his Samsung and found an always-on hot mic,… - [@karpathy](https://x.com/karpathy/status/2114384346815820050)\n\n4/ Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now less \"two groups of people speaking past each other\" and more a sharp funnel.  - Napkin math somewhere around 6B people (~75% of the population) have barely com... - [@karpathy](https://x.com/karpathy/status/2109361546505966046)\n\n5/ Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times, plot as image. The models know. From compressing the internet. - [@karpathy](https://x.com/karpathy/status/2105909609487872075)",
+                "item_count": 5
+              }
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "assistant_text": "**5 tweet mới nhất của @karpathy**\n\n1/ [Earlier this week Tristan published his top YouTube channels](https://x.com/karpathy/status/2119114537442189652)\n→ Chuyển danh sách kênh YouTube hay của Tristan thành **TristanTube**: 47K video siêu nerd + chế độ TV thư giãn. (Làm xong trong 3 phút bằng Claude Code)\n\n2/ [Weekend hack: HackerTube](https://x.com/karpathy/status/2116957135661945283)\n→ Lọc 43 triệu bình luận trên Hacker News 20 năm xuống còn 6.454 video được đề xuất liên tục → trải nghiệm YouTube tốt hơn hẳn. Code deploy xong trong ~2 giờ bằng Opus 5.5.\n\n3/ [RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why](https://x.com/karpathy/status/2114384346815820050)\n→ Smart TV rẻ vì chúng thu thập dữ liệu người dùng 24/7 (ví dụ: mic luôn bật).\n\n4/ [Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*](https://x.com/karpathy/status/2109361546505966046)\n→ Phân tầng hiểu biết về LLM:\n- 75% dân số chưa tiếp xúc.\n- 20% dùng free-tier như Google nâng cấp.\n- 0.2% chuyên gia thấy LLM làm dự án lớn trong phút chốc.\n- 0.00006% (5.000 người) có quyền truy cập hệ thống nội bộ thấy AI chạy siêu dự án, tấn công mạng, khám phá khoa học.\n\n5/ [Cool eval: “Land or Water?”](https://x.com/karpathy/status/2105909609487872075)\n→ Chỉ cần hỏi LLM “Đất hay Nước?” kèm tọa độ → vẽ bản đồ 16.200 lần. Mô hình biết nhờ nén thông tin internet.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "karpathy",
+            "limit": 5
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "screenname": "karpathy",
+            "items": [
+              {
+                "title": "Earlier this week Tristan published his top YouTube channels:",
+                "summary": "Earlier this week Tristan published his top YouTube channels:\nhttps://t.co/NZ3UCNo6cT\nWhich looked excellent so clearly I had to turn it into TristanTube:\nhttps://t.co/l0KyW1WdNH\n47K super nerdy videos +TV mode for laid back watching. (One-shotted with Claude Code in 3 minutes)",
+                "url": "https://x.com/karpathy/status/2119114537442189652",
+                "source": "@karpathy",
+                "date": "Sat Nov 07 17:07:31 +0000 2026",
+                "metrics": {
+                  "favorites": 9180,
+                  "retweets": 772,
+                  "views": "945525"
+                }
+              },
+              {
+                "title": "Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 ",
+                "summary": "Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. *Significantly* better viewing experience, ~2 hours with Opus 5.5:\nhttps://t.co/JIhXN7OSh1\n\n- Excellent recs without any logins (state is kept in local browser session)\n- Thumbnail is a representative frame from middle of the video instead of the super duper A/B test hyper-optimized user uploads\n- Underlying data from the comment analysis as one zip file, point your Claude at it and ask for your own version\n- HackerTube Longs ✊\n\nA bit more on the process:\nI use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only \"manual work\" I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.\n\nMany awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.",
+                "url": "https://x.com/karpathy/status/2116957135661945283",
+                "source": "@karpathy",
+                "date": "Sun Nov 01 18:14:46 +0000 2026",
+                "metrics": {
+                  "favorites": 52355,
+                  "retweets": 4836,
+                  "views": "5725976"
+                }
+              },
+              {
+                "title": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.",
+                "summary": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.\n\n@log4j rooted his Samsung and found an always-on hot mic,…",
+                "url": "https://x.com/karpathy/status/2114384346815820050",
+                "source": "@karpathy",
+                "date": "Sun Oct 25 15:51:26 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 3287,
+                  "views": "40227"
+                }
+              },
+              {
+                "title": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now les",
+                "summary": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now less \"two groups of people speaking past each other\" and more a sharp funnel.\n\n- Napkin math somewhere around 6B people (~75% of the population) have barely come in contact with LLMs at all.\n- Around 1-2B (~20%) are casual and infrequent users of free-tier ChatGPT-like products. This group sees derpy chatbots and treats them a bit like a better Google search, a writing aid, or etc. Maybe an agent tries to book you a flight. I have non-tech friends who (reasonably, imo) say they have not much use for it at all. Even many professionals outside of math&code are in this tier. For example, execs and many other functions spend a lot of their time talking to other people, so while they understand what is happening intellectually, it is still second-hand and a bit abstract.\n- Now we get to professional use of frontier-grade LLMs in math&code. Somewhere around 20M people (0.2%) see first-hand that large, complex projects that used to take them weeks/months can now be completed by agents with a prompt. Building apps, copying apps, translating apps, decompiling apps from binaries... This has all happened very quickly and recently - less than 1 year ago, I was writing code manually by hand, typing memorized computer code commands into a code editor character by character, occasionally pressing Tab to autocomplete a little chunk of code.\n- And finally we get to the ~5,000 people (~0.00006%) with access to frontier-grade systems internally. The external world has seen the preview. It looks like swarms of thousands of agents collaborating over weeks on software mega projects: minting zero days, running cyber attacks and defenses at machine speeds, discovering new science, advancing the frontier of mathematics. Things that would have taken top professionals in the industry years of work. Meanwhile, human review and comprehension are starting to fall behind. For example, people are still involved in the \"archeology\" of the OpenAI-HF incident from many months ago. Mathematicians may be poring over the 722 manuscripts on frontier mathematics for a while.\n\nThe funnel is driven by a combination of factors:\n1. The impact scales with ambition, problem size, and horizon. A question with a paragraph answer barely stresses the system. You need a reservoir of big, difficult problems that you really care about. This aspect drives the consumer / professional dimension of the funnel.\n2. The jaggedness of the system (which I have written about a lot separately). Capability peaks in domains that are digital, verifiable and economically valuable. This is because LLM capability emerges from reinforcement learning on verifiable rewards on a curated environment mixture driven by revenue potential. This aspect primarily drives the area (e.g. math&code) dimension of the funnel.\n3. Access. Free-tier, paid-tier, internal.\n\nSo this is the weirdness of the moment. The general public has mostly not interacted with these systems. When they have, it looks like a derpy chatbot. The majority of professionals still see only a modest uplift. And a small sliver of professionals are experiencing the vertigo of the curve going vertical. And it is all happening at the same time.",
+                "url": "https://x.com/karpathy/status/2109361546505966046",
+                "source": "@karpathy",
+                "date": "Sun Oct 11 19:12:37 +0000 2026",
+                "metrics": {
+                  "favorites": 44257,
+                  "retweets": 5926,
+                  "views": "6980573"
+                }
+              },
+              {
+                "title": "Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times,",
+                "summary": "Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times, plot as image. The models know. From compressing the internet.",
+                "url": "https://x.com/karpathy/status/2105909609487872075",
+                "source": "@karpathy",
+                "date": "Fri Oct 02 06:35:51 +0000 2026",
+                "metrics": {
+                  "favorites": 19514,
+                  "retweets": 1092,
+                  "views": "1606680"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "tool": "format",
+          "args": {
+            "items": [
+              {
+                "title": "Earlier this week Tristan published his top YouTube channels:",
+                "url": "https://x.com/karpathy/status/2119114537442189652",
+                "source": "@karpathy",
+                "summary": "Earlier this week Tristan published his top YouTube channels: https://t.co/NZ3UCNo6cT\nWhich looked excellent so clearly I had to turn it into TristanTube: https://t.co/l0KyW1WdNH\n47K super nerdy videos +TV mode for laid back watching. (One-shotted with Claude Code in 3 minutes)",
+                "metrics": {
+                  "favorites": 9180,
+                  "retweets": 772,
+                  "views": 945525
+                }
+              },
+              {
+                "title": "Weekend hack: HackerTube",
+                "url": "https://x.com/karpathy/status/2116957135661945283",
+                "source": "@karpathy",
+                "summary": "Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. *Significantly* better viewing experience, ~2 hours with Opus 5.5:\nhttps://t.co/JIhXN7OSh1\n\n- Excellent recs without any logins (state is kept in local browser session)\n- Thumbnail is a representative frame from middle of the video instead of the super duper A/B test hyper-optimized user uploads\n- Underlying data from the comment analysis as one zip file, point your Claude at it and ask for your own version\n- HackerTube Longs ✊\n\nA bit more on the process:\nI use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only \"manual work\" I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.\n\nMany awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.",
+                "metrics": {
+                  "favorites": 52355,
+                  "retweets": 4836,
+                  "views": 5725976
+                }
+              },
+              {
+                "title": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.",
+                "url": "https://x.com/karpathy/status/2114384346815820050",
+                "source": "@karpathy",
+                "summary": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.\n\n@log4j rooted his Samsung and found an always-on hot mic,…",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 3287,
+                  "views": 40227
+                }
+              },
+              {
+                "title": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*",
+                "url": "https://x.com/karpathy/status/2109361546505966046",
+                "source": "@karpathy",
+                "summary": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now less \"two groups of people speaking past each other\" and more a sharp funnel.\n\n- Napkin math somewhere around 6B people (~75% of the population) have barely come in contact with LLMs at all.\n- Around 1-2B (~20%) are casual and infrequent users of free-tier ChatGPT-like products. This group sees derpy chatbots and treats them a bit like a better Google search, a writing aid, or etc. Maybe an agent tries to book you a flight. I have non-tech friends who (reasonably, imo) say they have not much use for it at all. Even many professionals outside of math&code are in this tier. For example, execs and many other functions spend a lot of their time talking to other people, so while they understand what is happening intellectually, it is still second-hand and a bit abstract.\n- Now we get to professional use of frontier-grade LLMs in math&code. Somewhere around 20M people (0.2%) see first-hand that large, complex projects that used to take them weeks/months can now be completed by agents with a prompt. Building apps, copying apps, translating apps, decompiling apps from binaries... This has all happened very quickly and recently - less than 1 year ago, I was writing code manually by hand, typing memorized computer code commands into a code editor character by character, occasionally pressing Tab to autocomplete a little chunk of code.\n- And finally we get to the ~5,000 people (~0.00006%) with access to frontier-grade systems internally. The external world has seen the preview. It looks like swarms of thousands of agents collaborating over weeks on software mega projects: minting zero days, running cyber attacks and defenses at machine speeds, discovering new science, advancing the frontier of mathematics. Things that would have taken top professionals in the industry years of work. Meanwhile, human review and comprehension are starting to fall behind. For example, people are still involved in the \"archeology\" of the OpenAI-HF incident from many months ago. Mathematicians may be poring over the 722 manuscripts on frontier mathematics for a while.\n\nThe funnel is driven by a combination of factors:\n1. The impact scales with ambition, problem size, and horizon. A question with a paragraph answer barely stresses the system. You need a reservoir of big, difficult problems that you really care about. This aspect drives the consumer / professional dimension of the funnel.\n2. The jaggedness of the system (which I have written about a lot separately). Capability peaks in domains that are digital, verifiable and economically valuable. This is because LLM capability emerges from reinforcement learning on verifiable rewards on a curated environment mixture driven by revenue potential. This aspect primarily drives the area (e.g. math&code) dimension of the funnel.\n3. Access. Free-tier, paid-tier, internal.",
+                "metrics": {
+                  "favorites": 44257,
+                  "retweets": 5926,
+                  "views": 6980573
+                }
+              },
+              {
+                "title": "Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times,",
+                "url": "https://x.com/karpathy/status/2105909609487872075",
+                "source": "@karpathy",
+                "summary": "Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times, plot as image. The models know. From compressing the internet.",
+                "metrics": {
+                  "favorites": 19514,
+                  "retweets": 1092,
+                  "views": 1606680
+                }
+              }
+            ],
+            "template": "thread",
+            "headline": "5 tweet mới nhất của @karpathy"
+          },
+          "result": {
+            "tool": "render_digest",
+            "template": "thread",
+            "markdown": "1/ Earlier this week Tristan published his top YouTube channels: https://t.co/NZ3UCNo6cT Which looked excellent so clearly I had to turn it into TristanTube: https://t.co/l0KyW1WdNH 47K super nerdy videos +TV mode for laid back watching. (One-shotted with Claude Code in 3 minutes) - [@karpathy](https://x.com/karpathy/status/2119114537442189652)\n\n2/ Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. *Significantly* better viewing experience, ~2 hours with Opus 5.5: https://t.co/JIhXN7OSh1  - Excell... - [@karpathy](https://x.com/karpathy/status/2116957135661945283)\n\n3/ RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.  @log4j rooted his Samsung and found an always-on hot mic,… - [@karpathy](https://x.com/karpathy/status/2114384346815820050)\n\n4/ Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now less \"two groups of people speaking past each other\" and more a sharp funnel.  - Napkin math somewhere around 6B people (~75% of the population) have barely com... - [@karpathy](https://x.com/karpathy/status/2109361546505966046)\n\n5/ Cool eval. Simply ask an LLM “Land or Water?” and give it a latitude and longitude coordinate as text. Ask 16,200 times, plot as image. The models know. From compressing the internet. - [@karpathy](https://x.com/karpathy/status/2105909609487872075)",
+            "item_count": 5
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T19:19:20"
+    },
+    {
+      "turn_index": 4,
+      "started_at": "2026-11-10T19:19:20",
+      "user": "Hacker News đang bàn gì về LLM agents?",
+      "status": "answered",
+      "assistant_text": "**Hacker News bàn về LLM Agents**\n\n- Đề xuất mô hình agent suy luận kết hợp: suy nghĩ trong không gian tiềm ẩn (latent space) nhưng hành động thông qua văn bản, nhằm cải thiện khả năng lập luận và tương tác.\n  [Hacker News](https://arxiv.org/abs/2610.18861)\n\n- Thảo luận về hiệu quả bất ngờ của vòng lặp agent sử dụng công cụ (tool use), qua đó nâng cao khả năng giải quyết vấn đề thực tế.\n  [Hacker News](https://sketch.dev/blog/agent-loop)\n\n- Giới thiệu \"Claws\" như một lớp bổ sung mới cho agent LLM, nhằm tối ưu hóa khả năng tương tác và điều khiển.\n  [Hacker News](https://twitter.com/karpathy/status/2024987174077432126)\n\n- Phân tích hai điểm yếu chính của agent lập trình LLM: xử lý ngữ cảnh dài và bảo trì code lâu dài.\n  [Hacker News](https://kix.dev/two-things-llm-coding-agents-are-still-bad-at/)\n\n- Thảo luận về khái niệm \"Sleeper Agent LLMs\" — những mô hình tiềm ẩn nguy cơ bảo mật khi được huấn luyện ngầm thực hiện hành vi độc hại theo lệnh.\n  [Hacker News](https://twitter.com/karpathy/status/1745921205020799433)",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "",
+          "tool_calls": [
+            {
+              "name": "hackernews",
+              "args": {
+                "query": "LLM agents",
+                "sort": "relevance",
+                "max_results": 5
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "hackernews",
+              "args": {
+                "query": "LLM agents",
+                "sort": "relevance",
+                "max_results": 5
+              },
+              "result": {
+                "tool": "hackernews_search",
+                "query": "LLM agents",
+                "sort": "relevance",
+                "item_count": 5,
+                "items": [
+                  {
+                    "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+                    "url": "https://arxiv.org/abs/2610.18861",
+                    "source": "news.ycombinator.com",
+                    "summary": "520 points, 239 comments, by allinonai",
+                    "discussion_url": "https://news.ycombinator.com/item?id=50145337",
+                    "date": "2026-10-18T20:48:14Z",
+                    "points": 520,
+                    "num_comments": 239
+                  },
+                  {
+                    "title": "The unreasonable effectiveness of an LLM agent loop with tool use",
+                    "url": "https://sketch.dev/blog/agent-loop",
+                    "source": "news.ycombinator.com",
+                    "summary": "447 points, 320 comments, by crawshaw",
+                    "discussion_url": "https://news.ycombinator.com/item?id=43998472",
+                    "date": "2025-05-15T19:33:44Z",
+                    "points": 447,
+                    "num_comments": 320
+                  },
+                  {
+                    "title": "Claws are now a new layer on top of LLM agents",
+                    "url": "https://twitter.com/karpathy/status/2024987174077432126",
+                    "source": "news.ycombinator.com",
+                    "summary": "412 points, 941 comments, by Cyphase",
+                    "discussion_url": "https://news.ycombinator.com/item?id=47096253",
+                    "date": "2026-02-21T00:56:29Z",
+                    "points": 412,
+                    "num_comments": 941
+                  },
+                  {
+                    "title": "Two things LLM coding agents are still bad at",
+                    "url": "https://kix.dev/two-things-llm-coding-agents-are-still-bad-at/",
+                    "source": "news.ycombinator.com",
+                    "summary": "345 points, 370 comments, by kixpanganiban",
+                    "discussion_url": "https://news.ycombinator.com/item?id=45523537",
+                    "date": "2025-10-09T04:33:48Z",
+                    "points": 345,
+                    "num_comments": 370
+                  },
+                  {
+                    "title": "On Sleeper Agent LLMs",
+                    "url": "https://twitter.com/karpathy/status/1745921205020799433",
+                    "source": "news.ycombinator.com",
+                    "summary": "312 points, 130 comments, by admp",
+                    "discussion_url": "https://news.ycombinator.com/item?id=38974802",
+                    "date": "2024-01-12T22:10:02Z",
+                    "points": 312,
+                    "num_comments": 130
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "",
+          "tool_calls": [
+            {
+              "name": "format",
+              "args": {
+                "items": [
+                  {
+                    "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+                    "url": "https://arxiv.org/abs/2610.18861",
+                    "source": "Hacker News",
+                    "summary": "Đề xuất mô hình agent suy luận kết hợp: suy nghĩ trong không gian tiềm ẩn (latent space) nhưng hành động thông qua văn bản, nhằm cải thiện khả năng lập luận và tương tác."
+                  },
+                  {
+                    "title": "The unreasonable effectiveness of an LLM agent loop with tool use",
+                    "url": "https://sketch.dev/blog/agent-loop",
+                    "source": "Hacker News",
+                    "summary": "Thảo luận về hiệu quả bất ngờ của vòng lặp agent sử dụng công cụ (tool use), qua đó nâng cao khả năng giải quyết vấn đề thực tế."
+                  },
+                  {
+                    "title": "Claws are now a new layer on top of LLM agents",
+                    "url": "https://twitter.com/karpathy/status/2024987174077432126",
+                    "source": "Hacker News",
+                    "summary": "Giới thiệu \"Claws\" như một lớp bổ sung mới cho agent LLM, nhằm tối ưu hóa khả năng tương tác và điều khiển."
+                  },
+                  {
+                    "title": "Two things LLM coding agents are still bad at",
+                    "url": "https://kix.dev/two-things-llm-coding-agents-are-still-bad-at/",
+                    "source": "Hacker News",
+                    "summary": "Phân tích hai điểm yếu chính của agent lập trình LLM: xử lý ngữ cảnh dài và bảo trì code lâu dài."
+                  },
+                  {
+                    "title": "On Sleeper Agent LLMs",
+                    "url": "https://twitter.com/karpathy/status/1745921205020799433",
+                    "source": "Hacker News",
+                    "summary": "Thảo luận về khái niệm \"Sleeper Agent LLMs\" — những mô hình tiềm ẩn nguy cơ bảo mật khi được huấn luyện ngầm thực hiện hành vi độc hại theo lệnh."
+                  }
+                ],
+                "template": "bullets",
+                "headline": "Hacker News bàn về LLM Agents"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "format",
+              "args": {
+                "items": [
+                  {
+                    "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+                    "url": "https://arxiv.org/abs/2610.18861",
+                    "source": "Hacker News",
+                    "summary": "Đề xuất mô hình agent suy luận kết hợp: suy nghĩ trong không gian tiềm ẩn (latent space) nhưng hành động thông qua văn bản, nhằm cải thiện khả năng lập luận và tương tác."
+                  },
+                  {
+                    "title": "The unreasonable effectiveness of an LLM agent loop with tool use",
+                    "url": "https://sketch.dev/blog/agent-loop",
+                    "source": "Hacker News",
+                    "summary": "Thảo luận về hiệu quả bất ngờ của vòng lặp agent sử dụng công cụ (tool use), qua đó nâng cao khả năng giải quyết vấn đề thực tế."
+                  },
+                  {
+                    "title": "Claws are now a new layer on top of LLM agents",
+                    "url": "https://twitter.com/karpathy/status/2024987174077432126",
+                    "source": "Hacker News",
+                    "summary": "Giới thiệu \"Claws\" như một lớp bổ sung mới cho agent LLM, nhằm tối ưu hóa khả năng tương tác và điều khiển."
+                  },
+                  {
+                    "title": "Two things LLM coding agents are still bad at",
+                    "url": "https://kix.dev/two-things-llm-coding-agents-are-still-bad-at/",
+                    "source": "Hacker News",
+                    "summary": "Phân tích hai điểm yếu chính của agent lập trình LLM: xử lý ngữ cảnh dài và bảo trì code lâu dài."
+                  },
+                  {
+                    "title": "On Sleeper Agent LLMs",
+                    "url": "https://twitter.com/karpathy/status/1745921205020799433",
+                    "source": "Hacker News",
+                    "summary": "Thảo luận về khái niệm \"Sleeper Agent LLMs\" — những mô hình tiềm ẩn nguy cơ bảo mật khi được huấn luyện ngầm thực hiện hành vi độc hại theo lệnh."
+                  }
+                ],
+                "template": "bullets",
+                "headline": "Hacker News bàn về LLM Agents"
+              },
+              "result": {
+                "tool": "render_digest",
+                "template": "bullets",
+                "markdown": "- Đề xuất mô hình agent suy luận kết hợp: suy nghĩ trong không gian tiềm ẩn (latent space) nhưng hành động thông qua văn bản, nhằm cải thiện khả năng lập luận và tương tác. - [Hacker News](https://arxiv.org/abs/2610.18861)\n- Thảo luận về hiệu quả bất ngờ của vòng lặp agent sử dụng công cụ (tool use), qua đó nâng cao khả năng giải quyết vấn đề thực tế. - [Hacker News](https://sketch.dev/blog/agent-loop)\n- Giới thiệu \"Claws\" như một lớp bổ sung mới cho agent LLM, nhằm tối ưu hóa khả năng tương tác và điều khiển. - [Hacker News](https://twitter.com/karpathy/status/2024987174077432126)\n- Phân tích hai điểm yếu chính của agent lập trình LLM: xử lý ngữ cảnh dài và bảo trì code lâu dài. - [Hacker News](https://kix.dev/two-things-llm-coding-agents-are-still-bad-at/)\n- Thảo luận về khái niệm \"Sleeper Agent LLMs\" — những mô hình tiềm ẩn nguy cơ bảo mật khi được huấn luyện ngầm thực hiện hành vi độc hại theo lệnh. - [Hacker News](https://twitter.com/karpathy/status/1745921205020799433)",
+                "item_count": 5
+              }
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "assistant_text": "**Hacker News bàn về LLM Agents**\n\n- Đề xuất mô hình agent suy luận kết hợp: suy nghĩ trong không gian tiềm ẩn (latent space) nhưng hành động thông qua văn bản, nhằm cải thiện khả năng lập luận và tương tác.\n  [Hacker News](https://arxiv.org/abs/2610.18861)\n\n- Thảo luận về hiệu quả bất ngờ của vòng lặp agent sử dụng công cụ (tool use), qua đó nâng cao khả năng giải quyết vấn đề thực tế.\n  [Hacker News](https://sketch.dev/blog/agent-loop)\n\n- Giới thiệu \"Claws\" như một lớp bổ sung mới cho agent LLM, nhằm tối ưu hóa khả năng tương tác và điều khiển.\n  [Hacker News](https://twitter.com/karpathy/status/2024987174077432126)\n\n- Phân tích hai điểm yếu chính của agent lập trình LLM: xử lý ngữ cảnh dài và bảo trì code lâu dài.\n  [Hacker News](https://kix.dev/two-things-llm-coding-agents-are-still-bad-at/)\n\n- Thảo luận về khái niệm \"Sleeper Agent LLMs\" — những mô hình tiềm ẩn nguy cơ bảo mật khi được huấn luyện ngầm thực hiện hành vi độc hại theo lệnh.\n  [Hacker News](https://twitter.com/karpathy/status/1745921205020799433)",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "hackernews",
+          "args": {
+            "query": "LLM agents",
+            "sort": "relevance",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "hackernews_search",
+            "query": "LLM agents",
+            "sort": "relevance",
+            "item_count": 5,
+            "items": [
+              {
+                "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+                "url": "https://arxiv.org/abs/2610.18861",
+                "source": "news.ycombinator.com",
+                "summary": "520 points, 239 comments, by allinonai",
+                "discussion_url": "https://news.ycombinator.com/item?id=50145337",
+                "date": "2026-10-18T20:48:14Z",
+                "points": 520,
+                "num_comments": 239
+              },
+              {
+                "title": "The unreasonable effectiveness of an LLM agent loop with tool use",
+                "url": "https://sketch.dev/blog/agent-loop",
+                "source": "news.ycombinator.com",
+                "summary": "447 points, 320 comments, by crawshaw",
+                "discussion_url": "https://news.ycombinator.com/item?id=43998472",
+                "date": "2025-05-15T19:33:44Z",
+                "points": 447,
+                "num_comments": 320
+              },
+              {
+                "title": "Claws are now a new layer on top of LLM agents",
+                "url": "https://twitter.com/karpathy/status/2024987174077432126",
+                "source": "news.ycombinator.com",
+                "summary": "412 points, 941 comments, by Cyphase",
+                "discussion_url": "https://news.ycombinator.com/item?id=47096253",
+                "date": "2026-02-21T00:56:29Z",
+                "points": 412,
+                "num_comments": 941
+              },
+              {
+                "title": "Two things LLM coding agents are still bad at",
+                "url": "https://kix.dev/two-things-llm-coding-agents-are-still-bad-at/",
+                "source": "news.ycombinator.com",
+                "summary": "345 points, 370 comments, by kixpanganiban",
+                "discussion_url": "https://news.ycombinator.com/item?id=45523537",
+                "date": "2025-10-09T04:33:48Z",
+                "points": 345,
+                "num_comments": 370
+              },
+              {
+                "title": "On Sleeper Agent LLMs",
+                "url": "https://twitter.com/karpathy/status/1745921205020799433",
+                "source": "news.ycombinator.com",
+                "summary": "312 points, 130 comments, by admp",
+                "discussion_url": "https://news.ycombinator.com/item?id=38974802",
+                "date": "2024-01-12T22:10:02Z",
+                "points": 312,
+                "num_comments": 130
+              }
+            ]
+          }
+        },
+        {
+          "tool": "format",
+          "args": {
+            "items": [
+              {
+                "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+                "url": "https://arxiv.org/abs/2610.18861",
+                "source": "Hacker News",
+                "summary": "Đề xuất mô hình agent suy luận kết hợp: suy nghĩ trong không gian tiềm ẩn (latent space) nhưng hành động thông qua văn bản, nhằm cải thiện khả năng lập luận và tương tác."
+              },
+              {
+                "title": "The unreasonable effectiveness of an LLM agent loop with tool use",
+                "url": "https://sketch.dev/blog/agent-loop",
+                "source": "Hacker News",
+                "summary": "Thảo luận về hiệu quả bất ngờ của vòng lặp agent sử dụng công cụ (tool use), qua đó nâng cao khả năng giải quyết vấn đề thực tế."
+              },
+              {
+                "title": "Claws are now a new layer on top of LLM agents",
+                "url": "https://twitter.com/karpathy/status/2024987174077432126",
+                "source": "Hacker News",
+                "summary": "Giới thiệu \"Claws\" như một lớp bổ sung mới cho agent LLM, nhằm tối ưu hóa khả năng tương tác và điều khiển."
+              },
+              {
+                "title": "Two things LLM coding agents are still bad at",
+                "url": "https://kix.dev/two-things-llm-coding-agents-are-still-bad-at/",
+                "source": "Hacker News",
+                "summary": "Phân tích hai điểm yếu chính của agent lập trình LLM: xử lý ngữ cảnh dài và bảo trì code lâu dài."
+              },
+              {
+                "title": "On Sleeper Agent LLMs",
+                "url": "https://twitter.com/karpathy/status/1745921205020799433",
+                "source": "Hacker News",
+                "summary": "Thảo luận về khái niệm \"Sleeper Agent LLMs\" — những mô hình tiềm ẩn nguy cơ bảo mật khi được huấn luyện ngầm thực hiện hành vi độc hại theo lệnh."
+              }
+            ],
+            "template": "bullets",
+            "headline": "Hacker News bàn về LLM Agents"
+          },
+          "result": {
+            "tool": "render_digest",
+            "template": "bullets",
+            "markdown": "- Đề xuất mô hình agent suy luận kết hợp: suy nghĩ trong không gian tiềm ẩn (latent space) nhưng hành động thông qua văn bản, nhằm cải thiện khả năng lập luận và tương tác. - [Hacker News](https://arxiv.org/abs/2610.18861)\n- Thảo luận về hiệu quả bất ngờ của vòng lặp agent sử dụng công cụ (tool use), qua đó nâng cao khả năng giải quyết vấn đề thực tế. - [Hacker News](https://sketch.dev/blog/agent-loop)\n- Giới thiệu \"Claws\" như một lớp bổ sung mới cho agent LLM, nhằm tối ưu hóa khả năng tương tác và điều khiển. - [Hacker News](https://twitter.com/karpathy/status/2024987174077432126)\n- Phân tích hai điểm yếu chính của agent lập trình LLM: xử lý ngữ cảnh dài và bảo trì code lâu dài. - [Hacker News](https://kix.dev/two-things-llm-coding-agents-are-still-bad-at/)\n- Thảo luận về khái niệm \"Sleeper Agent LLMs\" — những mô hình tiềm ẩn nguy cơ bảo mật khi được huấn luyện ngầm thực hiện hành vi độc hại theo lệnh. - [Hacker News](https://twitter.com/karpathy/status/1745921205020799433)",
+            "item_count": 5
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T19:19:30"
+    }
+  ]
+}

@@ -57,6 +57,19 @@ Cố ý **không chấm** `query` tiếng Việt ở G09 vì so khớp chính x�
 - `pytest`: 72 passed / 14 skipped → **86 passed, 0 skipped, 0 failed**. Toàn bộ offline bằng `fake_http` và `monkeypatch`.
 - Không tìm thấy bug trong tool có sẵn; các test khoá lại guardrail quan trọng: `send` thiếu env không gửi request, dòng giống lệnh trong policy bị tách vào `untrusted_text`.
 
+**Bonus — Hơn 3 tool mới (3 tool + v6)**
+
+- Viết 3 tool keyless: `hackernews` (Algolia HN API), `github` (GitHub repo search), `hf_models` (Hugging Face Hub). Mỗi tool có `tool.py` + `TOOL.md`, đăng ký trong `tools/__init__.py` và `artifacts/tools.yaml`; cùng `wiki` của Văn Minh nhóm có **4 tool tự viết**.
+- 13 unit test trong [`tests/test_tools_bonus.py`](../../starter_v0/tests/test_tools_bonus.py) (happy path, input xấu không gọi mạng, HTTP lỗi / timeout / rate limit / sai format → error dict). `pytest` toàn suite: **115 passed, 0 skipped, 0 failed**.
+- 6 eval case trong [`data/eval_group_bonus.json`](../../starter_v0/data/eval_group_bonus.json), gồm case đối chứng B04 (Twitter vẫn phải đi `social_search`, không bị `hackernews` cướp route). Thêm file vào `EVAL_FILES` của contract test.
+- Thêm 3 dòng routing vào prompt → **v6**, ghi `version_log.csv`. Kết quả v6: base 20/20, group 10/10, bonus 6/6 — không regression.
+
+**Chat live, UI và deploy**
+
+- Chạy `chat.py` 4 lượt live trên v6: tin AI hôm nay (`lookup` → `format`) → thiếu tài khoản (`clarify`) → điền Karpathy (`timeline` → `format`) → Hacker News (`hackernews` → `format`): [`transcripts/v6_mistral_20261110T191842794505.transcript.json`](../../starter_v0/transcripts/v6_mistral_20261110T191842794505.transcript.json).
+- Sửa `app.py`: chữ sidebar đọc được ở dark mode, danh sách tool đọc từ `tools.yaml` (13 tool), tắt `send` trên demo công khai, link nguồn tiếng Việt dễ đọc. Test trên máy và trên bản deploy Streamlit Cloud.
+- Hướng dẫn cấu hình Streamlit Secrets (TOML) để deploy; kiểm tra bản deploy gọi được Mistral + Tavily thật.
+
 **Báo cáo nhóm**
 
 - Phần A: mô tả agent, bảng 11 tool (gồm tool mới `wiki`), 5 câu hỏi mẫu kèm tool kỳ vọng.
@@ -79,5 +92,5 @@ Cố ý **không chấm** `query` tiếng Việt ở G09 vì so khớp chính x�
 ## 5. Tự đánh giá
 
 - **Làm tốt:** eval case có chủ đích (mỗi case lấp một khoảng trống của bộ base) và có đối chứng v0 vs v3 làm bằng chứng; báo cáo bám sát log thật, chỉ ra được việc metric v0 = v1 nhưng thành phần lỗi khác nhau hoàn toàn.
-- **Chưa xong:** B4 (live chat) và phần UI của B5a chờ transcript và UI của Triệu Tuấn Minh.
+- **Đã hoàn thiện:** toàn bộ Phần A + B của báo cáo nhóm, gồm B4 (transcript 4 lượt) và dòng UI của B5a (link deploy, guardrail tắt `send`).
 - **Học được:** nhìn metric tổng là không đủ — phải đọc `actual_tool_calls` mới biết prompt đang sai theo hướng nào (đoán bừa hay hỏi quá tay). Và cần chọn provider ổn định trước khi đo, vì lỗi `503` / `429` làm hỏng cả một lần baseline.
