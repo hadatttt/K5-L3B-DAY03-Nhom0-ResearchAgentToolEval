@@ -4,8 +4,8 @@
 
 - Họ tên: Nguyễn Văn Minh
 - MSSV: 2A202604117
-- Email: _(điền)_
-- GitHub: _(điền)_
+- Email: vm140205@gmail.com
+- GitHub: vm140205-collab
 - Vai trò: **Tools & Testing** (xem [TEAM.md](../../TEAM.md))
 
 ## 2. Phần việc phụ trách
@@ -64,7 +64,7 @@
   - Run JSON: v0 → v5 trong [`starter_v0/runs/`](../../starter_v0/runs) (kèm 4 run trung gian 19/20 của v4 — bằng chứng quá trình đo lặp)
 - Commit: `842e7d1` (setup Mistral + v0–v3), `760bcf2` (tool wiki + v4), `c650993` (v5 fix G06)
 - AI/công cụ đã dùng và cách tự kiểm tra kết quả:
-  - Dùng **Claude Code** (pi agent) để đọc starter, chạy lệnh, viết code/test và phân tích run JSON.
+  - Dùng **trợ lý AI coding agent (pi)** để đọc starter, chạy lệnh, viết code/test và phân tích run JSON; mình là người ra quyết định từng bước (chọn hướng sửa, duyệt từng thay đổi) và là người chạy/kiểm tra kết quả cuối.
   - Tự kiểm tra: mọi metric trích từ `summary` trong run JSON thật, không tự ghi từ trí nhớ; mọi giả thuyết đều đo lại bằng run thật (probe `-n` nhiều lần để loại nhiễu nondeterminism); tool mới được test bằng `pytest` offline (86 passed, 0 skipped, 0 failed) **và** chạy live một lượt trước khi tính là xong; contract test giữ `tools.yaml` ↔ code ↔ eval đồng bộ mỗi lần sửa.
 
 ## 5. Tự đánh giá
