@@ -22,18 +22,18 @@ HISTORY_WINDOW = 5
 MAX_TOOL_ROUNDS = 4
 
 TOOL_META = {
-    # name: (icon, one-line description for the sidebar)
-    "lookup": ("🔎", "Tìm web / tin tức (Tavily)"),
-    "timeline": ("🐦", "Bài đăng gần đây của một tài khoản"),
-    "social_search": ("💬", "Tìm bài đăng theo từ khóa"),
-    "fetch": ("📄", "Đọc nội dung một URL"),
-    "format": ("📝", "Trình bày kết quả thành digest"),
-    "clarify": ("❓", "Hỏi lại khi thiếu thông tin"),
-    "send": ("📤", "Gửi lên Telegram (sau xác nhận)"),
-    "policy": ("🏢", "Tra policy nội bộ"),
-    "papers": ("📚", "Tìm paper arXiv"),
-    "paper_text": ("📖", "Đọc text paper arXiv"),
-    "wiki": ("🌐", "Tra Wikipedia (kiến thức nền)"),
+    # name: one-line description for the sidebar
+    "lookup": "Tìm web / tin tức (Tavily)",
+    "timeline": "Bài đăng gần đây của một tài khoản",
+    "social_search": "Tìm bài đăng theo từ khóa",
+    "fetch": "Đọc nội dung một URL",
+    "format": "Trình bày kết quả thành digest",
+    "clarify": "Hỏi lại khi thiếu thông tin",
+    "send": "Gửi lên Telegram (sau xác nhận)",
+    "policy": "Tra policy nội bộ",
+    "papers": "Tìm paper arXiv",
+    "paper_text": "Đọc text paper arXiv",
+    "wiki": "Tra Wikipedia (kiến thức nền)",
 }
 
 EXAMPLE_PROMPTS = [
@@ -43,25 +43,48 @@ EXAMPLE_PROMPTS = [
     "Đăng bản tin AI lên Telegram giúp mình",
 ]
 
-st.set_page_config(page_title="Research Agent Demo", page_icon="🔎", layout="centered")
+st.set_page_config(page_title="Research Agent", layout="centered")
 
 st.markdown(
     """
     <style>
+    :root {
+        --ink: #1a1d21; --ink-2: #4a5158; --ink-3: #8a9199;
+        --surface: #f4f5f6; --hairline: rgba(26, 29, 33, 0.08);
+        --accent: #1b5cc4;
+        --ok: #1d7a45; --warn: #b8860b; --err: #b3261e;
+    }
     .tool-chip {
-        display: inline-flex; align-items: center; gap: .35rem;
-        font-size: .78rem; padding: .18rem .55rem; border-radius: .5rem;
-        background: #f1f3f5; color: #495057; border: 1px solid #e2e6ea;
-        margin: .1rem .15rem .1rem 0;
+        display: inline-flex; align-items: center; gap: 6px;
+        font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+        font-size: 12px; line-height: 20px;
+        padding: 2px 8px; border-radius: 6px;
+        background: var(--surface); color: var(--ink-2);
+        border: 1px solid var(--hairline);
+        margin: 2px 8px 2px 0;
     }
-    .tool-chip.clarify { background: #fff4d6; border-color: #ffe69c; color: #7a5c00; }
-    .tool-chip.send-ok { background: #e6f7ee; border-color: #b7e5cd; color: #116b3c; }
-    .tool-chip.error { background: #fdebec; border-color: #f5c2c7; color: #8b1e24; }
+    .tool-chip .dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--ink-3); flex: none;
+    }
+    .tool-chip.clarify { border-color: rgba(184, 134, 11, 0.4); }
+    .tool-chip.clarify .dot { background: var(--warn); }
+    .tool-chip.send-ok .dot { background: var(--ok); }
+    .tool-chip.error .dot { background: var(--err); }
+    .tool-chip b { color: var(--ink); font-weight: 500; }
+    .tool-chip .sep { color: var(--ink-3); }
     .ask-note {
-        font-size: .8rem; color: #7a5c00; background: #fff4d6;
-        border: 1px solid #ffe69c; border-radius: .5rem; padding: .35rem .6rem; margin-top: .3rem;
+        font-size: 12px; color: var(--ink-2);
+        border-left: 2px solid var(--warn);
+        padding: 4px 8px; margin-top: 4px;
     }
-    .sources a { color: #1c7ed6; text-decoration: none; font-size: .8rem; }
+    .sources { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+    .sources a { color: var(--accent); text-decoration: none; }
+    .tool-list code {
+        font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+        font-size: 12px; color: var(--ink);
+    }
+    .tool-list div { margin: 4px 0; color: var(--ink-2); font-size: 13px; }
     </style>
     """,
     unsafe_allow_html=True,
@@ -100,7 +123,7 @@ def result_summary(result: dict) -> tuple[str, str, list[str]]:
     urls = [it.get("url") for it in items if isinstance(it, dict) and it.get("url")][:5]
     label = ""
     if result.get("status") == "sent":
-        return "send-ok", "✅ đã gửi lên Telegram", []
+        return "send-ok", "đã gửi lên Telegram", []
     if result.get("markdown"):
         label = "digest đã tạo"
     elif items:
@@ -113,14 +136,17 @@ def result_summary(result: dict) -> tuple[str, str, list[str]]:
 def render_tool_events(events: list[dict]) -> None:
     for event in events:
         name = event.get("tool", "?")
-        icon, _ = TOOL_META.get(name, ("🔧", ""))
         chip_class, label, urls = result_summary(event.get("result", {}))
         args_preview = main_arg_preview(event.get("args", {}))
-        chip = f'<span class="tool-chip {chip_class}">{icon} <code>{name}</code>' + (f' · {args_preview}' if args_preview else "") + (f' · {label}' if label else "") + "</span>"
-        st.markdown(chip, unsafe_allow_html=True)
+        parts = [f'<span class="dot"></span>', f"<b>{name}</b>"]
+        if args_preview:
+            parts.append(f'(<span class="sep">{args_preview}</span>)')
+        if label:
+            parts.append(f'<span class="sep">— {label}</span>')
+        st.markdown(f'<span class="tool-chip {chip_class}">' + " ".join(parts) + "</span>", unsafe_allow_html=True)
         if urls:
             st.markdown(
-                "Nguồn: " + " · ".join(f"[{u.split('//')[1][:40]}]({u})" for u in urls),
+                '<div class="sources">Nguồn: ' + " · ".join(f'<a href="{u}">{u.split("//")[1][:40]}</a>' for u in urls) + "</div>",
                 unsafe_allow_html=True,
             )
         result = event.get("result", {})
@@ -154,7 +180,7 @@ def process_user_turn(user_text: str) -> None:
 
     turn_record = {"user": user_text, "status": "started"}
     try:
-        with st.spinner("Agent đang suy nghĩ và gọi tool…"):
+        with st.spinner("Đang gọi tool…"):
             result = run_model_tool_loop(
                 provider=get_provider(st.session_state.provider),
                 messages=[
@@ -198,8 +224,8 @@ with st.sidebar:
 
     st.divider()
     st.subheader("Tools")
-    for name, (icon, desc) in TOOL_META.items():
-        st.markdown(f"{icon} **{name}** — {desc}")
+    for name, desc in TOOL_META.items():
+        st.markdown(f'<div class="tool-list"><div><code>{name}</code> — {desc}</div></div>', unsafe_allow_html=True)
 
     st.divider()
     st.subheader("Câu hỏi mẫu")
@@ -209,15 +235,12 @@ with st.sidebar:
 
 # ---------------- Main chat ----------------
 
-st.title("🔎 Research Agent")
-st.caption(
-    "Agent chọn tool, truyền arguments, chạy tool thật rồi tổng hợp câu trả lời. "
-    "Thiếu thông tin thì hỏi lại; gửi Telegram thì phải xác nhận trước."
-)
+st.title("Research Agent")
+st.caption("Agent chọn tool, chạy tool thật rồi tổng hợp câu trả lời — hỏi lại khi thiếu thông tin, xác nhận trước khi gửi")
 
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "assistant", "content": "Xin chào! Hỏi tôi về tin tức, tweet, paper, policy, Wikipedia, hoặc yêu cầu gửi bản tin lên Telegram.", "tool_events": [], "status": "greeting"}
+        {"role": "assistant", "content": "Research agent với 11 tool: tin tức, tweet, paper, Wikipedia, policy nội bộ, và gửi Telegram sau xác nhận. Bấm một câu hỏi mẫu ở sidebar hoặc gõ yêu cầu của bạn", "tool_events": [], "status": "greeting"}
     ]
 if "history" not in st.session_state:
     st.session_state.history = []
@@ -228,7 +251,7 @@ for msg in st.session_state.messages:
         if msg.get("tool_events"):
             render_tool_events(msg["tool_events"])
         if msg.get("status") == "waiting_for_user":
-            st.markdown("⏳ *Agent đang chờ bạn trả lời — nhập câu trả lời ở ô chat bên dưới.*")
+            st.markdown('<div class="ask-note">Agent chờ câu trả lời của bạn — gõ vào ô chat bên dưới</div>', unsafe_allow_html=True)
 
 # Example buttons queue a prompt; otherwise wait for chat input.
 user_text = st.session_state.pop("queued_prompt", None) or st.chat_input("Nhập câu hỏi / yêu cầu của bạn…")
