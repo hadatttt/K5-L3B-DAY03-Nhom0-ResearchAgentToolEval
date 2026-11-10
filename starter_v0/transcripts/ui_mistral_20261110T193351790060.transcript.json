@@ -1,0 +1,106 @@
+{
+  "transcript_id": "ui_mistral_20261110T193351790060",
+  "provider": "mistral",
+  "version": "current",
+  "model": null,
+  "created_at": "2026-11-10T19:33:51",
+  "turns": [
+    {
+      "user": "VinUni là trường đại học nào?",
+      "version": "current",
+      "status": "answered",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "",
+          "tool_calls": [
+            {
+              "name": "wiki",
+              "args": {
+                "query": "VinUni",
+                "lang": "vi"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "wiki",
+              "args": {
+                "query": "VinUni",
+                "lang": "vi"
+              },
+              "result": {
+                "tool": "wiki_search",
+                "query": "VinUni",
+                "lang": "vi",
+                "item_count": 3,
+                "items": [
+                  {
+                    "title": "Tập đoàn Vingroup",
+                    "url": "https://vi.wikipedia.org/wiki/T%E1%BA%ADp_%C4%91o%C3%A0n_Vingroup",
+                    "source": "vi.wikipedia.org",
+                    "summary": "và toa xe. Năm 2018: chính thức ra mắt thương hiệu đại học VinUni, thương hiệu dược phẩm VinFa. Khai trương công trình Landmark 81 tại Vinhomes Central"
+                  },
+                  {
+                    "title": "Trường Đại học VinUni",
+                    "url": "https://vi.wikipedia.org/wiki/Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_VinUni",
+                    "source": "vi.wikipedia.org",
+                    "summary": "Trường Đại học VinUni (tên đầy đủ là VinUniversity) là một trường đại học tư thục tại Hà Nội, Việt Nam, trực thuộc Tập đoàn Vingroup. Trường được Thủ"
+                  },
+                  {
+                    "title": "Phạm Nhật Vượng",
+                    "url": "https://vi.wikipedia.org/wiki/Ph%E1%BA%A1m_Nh%E1%BA%ADt_V%C6%B0%E1%BB%A3ng",
+                    "source": "vi.wikipedia.org",
+                    "summary": "với tổng mức đầu tư được VinGroup cho là 9.300 tỉ đồng. Đến năm 2024, VinUni đạt chứng nhận QS 5 sao. Bên cạnh đó, quỹ VinFuture cũng được ông Vượng"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Trường **VinUni** (tên đầy đủ: **VinUniversity**) là một trường đại học tư thục tại Hà Nội, Việt Nam, trực thuộc Tập đoàn Vingroup. Trường được thành lập với sự hợp tác quốc tế sâu rộng và đạt nhiều thành tựu như chứng nhận QS 5 sao vào năm 2024.\n\n*Nguồn: [Trường Đại học VinUni – Wikipedia](https://vi.wikipedia.org/wiki/Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_VinUni)*",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "wiki",
+          "args": {
+            "query": "VinUni",
+            "lang": "vi"
+          },
+          "result": {
+            "tool": "wiki_search",
+            "query": "VinUni",
+            "lang": "vi",
+            "item_count": 3,
+            "items": [
+              {
+                "title": "Tập đoàn Vingroup",
+                "url": "https://vi.wikipedia.org/wiki/T%E1%BA%ADp_%C4%91o%C3%A0n_Vingroup",
+                "source": "vi.wikipedia.org",
+                "summary": "và toa xe. Năm 2018: chính thức ra mắt thương hiệu đại học VinUni, thương hiệu dược phẩm VinFa. Khai trương công trình Landmark 81 tại Vinhomes Central"
+              },
+              {
+                "title": "Trường Đại học VinUni",
+                "url": "https://vi.wikipedia.org/wiki/Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_VinUni",
+                "source": "vi.wikipedia.org",
+                "summary": "Trường Đại học VinUni (tên đầy đủ là VinUniversity) là một trường đại học tư thục tại Hà Nội, Việt Nam, trực thuộc Tập đoàn Vingroup. Trường được Thủ"
+              },
+              {
+                "title": "Phạm Nhật Vượng",
+                "url": "https://vi.wikipedia.org/wiki/Ph%E1%BA%A1m_Nh%E1%BA%ADt_V%C6%B0%E1%BB%A3ng",
+                "source": "vi.wikipedia.org",
+                "summary": "với tổng mức đầu tư được VinGroup cho là 9.300 tỉ đồng. Đến năm 2024, VinUni đạt chứng nhận QS 5 sao. Bên cạnh đó, quỹ VinFuture cũng được ông Vượng"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "updated_at": "2026-11-10T19:33:56"
+}
