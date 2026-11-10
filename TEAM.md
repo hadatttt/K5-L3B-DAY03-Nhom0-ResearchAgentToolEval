@@ -13,8 +13,8 @@
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 | Hà Văn Khánh Đạt | 2A202604074 |  | hadatttt | UI (Streamlit) + deploy link dùng thử + demo + transcript chat live |
-|   2 | Triệu Tuấn Minh | 2A202604123 |  |  | Viết 10 eval case nhóm (`eval_group.json`) + chạy suite group + báo cáo nhóm Phần A/B |
+|   1 | Hà Văn Khánh Đạt | 2A202604074 |  | hadatttt | Viết 10 eval case nhóm (`eval_group.json`) + chạy suite group + báo cáo nhóm Phần A/B |
+|   2 | Triệu Tuấn Minh | 2A202604123 |  |  | UI (Streamlit) + deploy link dùng thử + demo + transcript chat live |
 |   3 | Nguyễn Văn Minh | 2A202604117 |  |  | Tool mới + unit test + đăng ký tool + giữ pytest xanh; baseline + tối ưu v0–v3 cùng agent AI |
 
 ## Phân công chi tiết
@@ -26,17 +26,19 @@
 - [ ] ≥ 3 unit test cho tool mới trong `tests/test_tools_todo.py`
 - [ ] Giữ `pytest` xanh (0 failed)
 
-### Triệu Tuấn Minh (2A202604123) — Eval & Report
-- [ ] Viết 10 case vào `data/eval_group.json` (5 single turn + 5 multi turn), ít nhất 1 case route tới tool mới
-- [ ] Chạy suite group với `run_eval.py`, lưu run JSON
-- [ ] Viết `report/team/group_report.md` Phần A (trước 16:30) + Phần B (bằng chứng v0–v3, failure analysis)
-- [ ] Báo cáo cá nhân `report/team/2A202604123_TrieuTuanMinh.md`
+### Hà Văn Khánh Đạt (2A202604074) — Eval & Report
+- [x] Viết 10 case vào `data/eval_group.json` (5 single turn + 5 multi turn), G10 route tới tool mới `wiki`
+- [x] Chạy suite group với `run_eval.py`, lưu run JSON (v4 9/10, v3 9/9, đối chứng v0 7/9) — phát hiện regression G06 ở v4
+- [x] Viết `report/team/group_report.md` Phần A (trước 16:30)
+- [ ] Phần B — mục 3, B1 (v0–v4), B2, B3, B5a (tool + test), 5, 7, 8 xong; còn B4 + dòng UI của B5a chờ transcript/UI
+- [x] Báo cáo cá nhân `report/team/2A202604074_HaVanKhanhDat.md` (bản nháp, cập nhật commit sau khi push)
+- [x] Bonus test challenge: viết 14 test stub tool có sẵn → `pytest` 86 passed, 0 skipped
 
-### Hà Văn Khánh Đạt (2A202604074) — UI & Demo
+### Triệu Tuấn Minh (2A202604123) — UI & Demo
 - [ ] UI Streamlit (`app.py`) chạy được với agent
 - [ ] Deploy link dùng thử (Cloudflare Tunnel / Streamlit Cloud / Vercel)
 - [ ] Chat live ≥ 3 lượt qua `chat.py`, lưu transcript
-- [ ] Báo cáo cá nhân `report/team/2A202604074_HaVanKhanhDat.md`
+- [ ] Báo cáo cá nhân `report/team/2A202604123_TrieuTuanMinh.md`
 - [ ] Tổng kiểm checklist SUBMISSION.md trước khi nộp
 
 ## Cá nhân

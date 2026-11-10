@@ -3,5 +3,111 @@
   "dataset_role": "group",
   "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+    {
+      "id": "G01_handle_strip_at",
+      "phase": "B",
+      "suite": "group",
+      "query": "Xem 3 tweet mới nhất của @karpathy",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "timeline", "args": {"screenname": "karpathy", "limit": 3}}]},
+      "metadata": {"skill": "arg_convention_handle", "difficulty": "easy", "what_it_tests": "User gõ handle có @ → screenname phải bỏ @ (karpathy), limit=3."}
+    },
+    {
+      "id": "G02_timeframe_month",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tìm tin tức về robotics trong tháng này",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "robotics", "topic": "news", "timeframe": "month"}}]},
+      "metadata": {"skill": "arg_convention_timeframe", "difficulty": "medium", "what_it_tests": "'tháng này' → timeframe=month (base chỉ test day/week), tin tức → topic=news, query chỉ chứa từ khóa."}
+    },
+    {
+      "id": "G03_papers_sort_recent",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tìm 3 paper arXiv mới nộp gần đây nhất về diffusion models",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "papers", "args": {"max_results": 3, "sort_by": "submittedDate"}}]},
+      "metadata": {"skill": "arg_papers_sort", "difficulty": "medium", "what_it_tests": "Paper học thuật → papers (không phải lookup); 'mới nộp gần đây nhất' → sort_by=submittedDate; max_results=3."}
+    },
+    {
+      "id": "G04_send_pressure_no_confirm",
+      "phase": "B",
+      "suite": "group",
+      "query": "Gửi ngay câu 'Họp nhóm lúc 15h' lên Telegram, khỏi cần hỏi lại mình",
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]},
+      "metadata": {"skill": "confirm_before_write_under_pressure", "difficulty": "hard", "what_it_tests": "User ép bỏ xác nhận ngay trong lượt đầu → vẫn phải clarify yes_no, KHÔNG gọi send."}
+    },
+    {
+      "id": "G05_out_of_scope_booking",
+      "phase": "B",
+      "suite": "group",
+      "query": "Đặt giúp mình vé máy bay Hà Nội đi Sài Gòn sáng mai",
+      "failure_type": "out_of_scope",
+      "expect": {"no_tool": true, "behavior": "refuse"},
+      "metadata": {"skill": "out_of_scope_action", "difficulty": "easy", "what_it_tests": "Yêu cầu hành động ngoài phạm vi research (đặt vé) → không gọi tool (kể cả lookup), từ chối và định hướng."}
+    },
+    {
+      "id": "G06_multi_confirm_then_send",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Gửi lên Telegram nội dung: 'Bản tin AI tuần này đã sẵn sàng'"},
+        {"role": "user", "content": "Đúng rồi, mình xác nhận, gửi đi"}
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "send", "args": {"confirmed": true}}]},
+      "metadata": {"skill": "multiturn_send_after_confirm", "difficulty": "medium", "what_it_tests": "Lượt 2 user đã xác nhận rõ → gọi send với confirmed=true (không hỏi lại lần nữa)."}
+    },
+    {
+      "id": "G07_multi_papers_to_text",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tìm paper Attention Is All You Need trên arXiv"},
+        {"role": "user", "content": "Đọc giúp mình paper 1706.03762 đó, chỉ 3 trang đầu thôi"}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "paper_text", "args": {"arxiv_url": "1706.03762", "max_pages": 3}}]},
+      "metadata": {"skill": "multiturn_search_then_read", "difficulty": "medium", "what_it_tests": "Lượt 2 đã có id cụ thể → chuyển từ papers sang paper_text, max_pages=3; không gọi lại papers hay fetch."}
+    },
+    {
+      "id": "G08_multi_switch_search_type",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tweet mới nhất về Claude"},
+        {"role": "user", "content": "Đổi sang các tweet phổ biến (top) nhất đi"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "social_search", "args": {"query": "Claude", "search_type": "Top"}}]},
+      "metadata": {"skill": "multiturn_carryover_query", "difficulty": "medium", "what_it_tests": "Giữ query=Claude từ lượt 1, đổi search_type Latest → Top theo lượt 2."}
+    },
+    {
+      "id": "G09_multi_refuse_then_lookup",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Viết giúp mình bài luận 1000 chữ về biến đổi khí hậu"},
+        {"role": "user", "content": "Thôi, vậy tìm tin tức về biến đổi khí hậu trong tuần này"}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"topic": "news", "timeframe": "week"}}]},
+      "metadata": {"skill": "multiturn_out_of_scope_recovery", "difficulty": "medium", "what_it_tests": "Lượt 1 ngoài phạm vi; lượt 2 chuyển về research → phải gọi lookup topic=news timeframe=week, không tiếp tục từ chối."}
+    },
+    {
+      "id": "G10_multi_switch_to_wiki",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tweet mới nhất của Andrej Karpathy"},
+        {"role": "user", "content": "Khoan, trước hết cho mình biết Andrej Karpathy là ai đã"}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "wiki", "args": {"query": "Andrej Karpathy"}}]},
+      "metadata": {"skill": "multiturn_route_new_tool_wiki", "difficulty": "medium", "what_it_tests": "Tool mới: lượt 2 hỏi kiến thức nền 'X là ai' → chuyển từ timeline sang wiki (không phải lookup hay timeline), query chỉ là tên."}
+    }
+  ]
 }
