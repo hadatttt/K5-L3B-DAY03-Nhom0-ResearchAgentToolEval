@@ -7,7 +7,7 @@
 - Repo nhóm: `K5-L3B-DAY03-Nhom0-ResearchAgentToolEval`
 - URL repo: https://github.com/hadatttt/K5-L3B-DAY03-Nhom0-ResearchAgentToolEval
 - Nhánh nộp: `main`
-- Commit chốt: _(điền hash commit cuối cùng trước khi nộp)_
+- Commit chốt: `b7bc721` (v6 + bonus 3 tool + UI chọn version + báo cáo hoàn thiện) — commit sau đó chỉ ghi hash này
 - Link UI dùng thử: https://k5-l3b-day03-nhom0-researchagenttooleval-e3h7zcwv24sllsjwahcte.streamlit.app/
 - Provider dùng: Mistral (`mistral-small-latest`, La Plateforme free tier) — adapter tự viết `providers/mistral_provider.py`
 
