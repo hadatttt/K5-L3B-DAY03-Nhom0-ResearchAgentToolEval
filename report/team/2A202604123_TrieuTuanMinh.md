@@ -1,4 +1,4 @@
-# Báo cáo cá nhân — Triệu Tuấn Minh - 2A202604123
+# Báo cáo cá nhân — Triệu Tuấn Minh (2A202604123)
 
 ## 1. Thông tin thành viên
 
@@ -8,33 +8,36 @@
 
 ## 2. Phần việc phụ trách
 
-- Kiểm thử và đảm bảo giao diện demo agent chạy được bằng Streamlit.
-- Hỗ trợ kiểm tra luồng live chat và transcript, đảm bảo có ít nhất 3 lượt tương tác.
-- Hỗ trợ xác minh deployment link và cách chạy thử UI cho đội ngũ demo.
-- Theo dõi chất lượng đầu ra và làm báo cáo cá nhân dựa trên bằng chứng thực tế từ repo và log chạy.
+- Phát triển và kiểm thử UI Streamlit cho Research Agent.
+- Triển khai, kiểm tra giao diện dùng thử trên Streamlit Cloud.
+- Chạy live chat trên UI và kiểm tra transcript được lưu.
+- Chạy test và rà soát các bằng chứng cần thiết trước khi nộp.
 
 ## 3. Đóng góp cụ thể
 
-- Tham gia rà soát file chạy UI và dependency trong `starter_v0/requirements.txt`.
-- Kiểm tra lệnh chạy UI theo hướng dẫn: `streamlit run app.py` / cách chạy app trong `starter_v0/README.md`.
-- Đánh giá luồng live chat trong `starter_v0/chat.py`, đảm bảo yêu cầu người dùng được xử lý qua nhiều lượt và lưu transcript.
-- Hỗ trợ xác nhận công việc cần có link deploy, UI có thể truy cập, và transcript ghi lại cuộc hội thoại thực tế.
-- Soạn báo cáo cá nhân theo format quy định của môn học, gắn với bằng chứng thực tế trong repo.
+- Phát triển/chỉnh sửa giao diện Streamlit tại `starter_v0/app.py`, kết nối UI với luồng chạy agent và hiển thị kết quả tool.
+- Cập nhật dependency Streamlit trong `starter_v0/requirements.txt`; kiểm tra môi trường Python, lệnh chạy UI và xử lý vấn đề khi cổng mặc định 8501 đã được sử dụng.
+- Triển khai và xác minh UI trên Streamlit Cloud để các thành viên có thể truy cập dùng thử.
+- Thực hiện live chat qua UI và lưu transcript trong `starter_v0/transcripts/`; transcript UI có tên theo mẫu `ui_mistral_*`. CLI chat 4 lượt do Đạt thực hiện, không tính là lượt chat cá nhân của tôi.
+- Chạy kiểm thử và rà soát bằng chứng theo checklist: `pytest` có 115 test passed, 0 failed; có 6 run chính hợp lệ với `provider_error_cases=0` và `measured_cases=total_cases`.
+- Tổng hợp các đóng góp và bằng chứng vào báo cáo cá nhân này.
 
 ## 4. Bằng chứng
 
-- File/code tham chiếu:
-  - `starter_v0/README.md` — hướng dẫn chạy eval, chat live và output transcript.
-  - `starter_v0/chat.py` — chat nhiều lượt, lưu transcript JSON.
-  - `starter_v0/requirements.txt` — dependency của UI/demo.
-  - `report/team/group_report.md` — mẫu báo cáo nhóm và checklist UI / live chat.
+- File và kết quả tham chiếu:
+  - `starter_v0/app.py` — mã UI Streamlit.
+  - `starter_v0/requirements.txt` — khai báo dependency cho UI.
+  - `starter_v0/transcripts/ui_mistral_*.transcript.json` — transcript live chat từ UI.
+  - `starter_v0/chat.py` — luồng chat CLI và lưu transcript.
+  - `starter_v0/runs/` và `starter_v0/artifacts/version_log.csv` — kết quả eval và versioning.
+  - Kết quả kiểm thử: `pytest`, 115 passed / 0 failed.
+  - UI dùng thử trên Streamlit Cloud: [Mở Research Agent](https://k5-l3b-day03-nhom0-researchagenttooleval-e3h7zcwy24sllsjwahcte.streamlit.app/).
 - AI/công cụ đã dùng và cách tự kiểm tra kết quả:
-  - Dùng trình trợ giúp AI để rà soát cấu trúc repo và xác minh các file cần thiết cho phần demo UI/live chat.
-  - Tự kiểm tra bằng cách đọc file hướng dẫn và cấu trúc repo, xác nhận có đủ các phần bắt buộc: UI Streamlit, chat live, và transcript.
-  - Đảm bảo thực hiện theo checklist trong README và RUBRIC: `UI chạy được`, `deploy link`, `chat live >= 3 lượt`, `transcript lưu lại`.
+  - Dùng trợ lý AI để hỗ trợ rà soát cấu trúc UI và kiểm tra lỗi khi chạy ứng dụng.
+  - Tự kiểm tra UI local và link Streamlit Cloud; xác nhận transcript UI được lưu, pytest chạy xanh, và các run được dùng làm bằng chứng không có provider error, đo đủ số case.
 
 ## 5. Tự đánh giá
 
-- Mức độ hoàn thành: Ở mức khá tốt trong phần hỗ trợ kiểm thử và báo cáo bằng chứng.
-- Tôi đã đóng góp vào việc đảm bảo mã nguồn và tiến độ demo phù hợp với yêu cầu bài tập: giao diện có thể chạy được, luồng chat được kiểm tra, và báo cáo cá nhân được viết đúng format.
-- Trong tương lai, tôi muốn tiếp tục cải thiện kỹ năng kiểm thử, tự động hóa validation và viết báo cáo dựa trên log thật để tăng độ tin cậy và minh chứng cho sản phẩm.
+- Tôi hoàn thành các phần việc được giao về UI Streamlit, triển khai demo, live chat, transcript và kiểm thử. Các kết quả có thể đối chiếu qua mã nguồn, transcript, log test và link dùng thử nêu ở trên.
+- Qua nhiệm vụ này, tôi cải thiện kỹ năng tích hợp giao diện với agent, kiểm tra môi trường chạy và thu thập bằng chứng để đánh giá hệ thống.
+- Nếu tiếp tục phát triển, tôi sẽ bổ sung kiểm thử tự động cho luồng UI và theo dõi lỗi của bản deploy để việc demo ổn định hơn.
