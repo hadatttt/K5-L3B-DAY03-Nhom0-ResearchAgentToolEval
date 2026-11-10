@@ -309,9 +309,9 @@ with st.sidebar:
         st.warning("v0 là prompt starter cố tình xấu: đoán bừa thay vì hỏi lại. Dùng để so sánh với bản sau.")
     if "v1" not in versions and "v1" in version_log():
         st.caption("v1 không có snapshot (prompt v1 chưa từng được commit).")
-    st.session_state.provider = st.selectbox(
-        "Provider", ["mistral", "openrouter", "openai", "anthropic", "gemini", "ollama"], index=0
-    )
+    # Nhóm chạy toàn bộ eval v0–v6 trên Mistral, UI dùng cố định provider này.
+    st.session_state.provider = "mistral"
+    st.caption("Provider: Mistral (`mistral-small-latest`)")
     st.session_state.model_override = st.text_input("Model override (tuỳ chọn)", value="").strip() or None
     st.session_state.save_transcript = st.toggle("Lưu transcript (thư mục transcripts/)", value=True)
 
